@@ -1,40 +1,57 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import ToDoList from "./ToDoList";
 
 //CRUD
 
 export type TaskType = {
-    id: number;
-    title: string;
-    isDone: boolean;
+    id: number
+    title: string
+    isDone: boolean
 }
+
+export type FilterValuesType = "all" | "active" | "complited"
 
 function App() {
     //BLL:
-    const todoListTitleOne: string = "What to learn";
-    const todoListTitleTwo: string = "What to buy";
-    const todoListTitleThree: string = "What to watch";
+    const todoListTitle: string = "What to learn"
 
-    const task_1: Array<TaskType> = [
+    const initialState = [
         {id: 1, title: "HTML", isDone: true},
         {id: 2, title: "CSS", isDone: true},
-        {id: 2, title: "React", isDone: false},
-    ];
-    const task_2: Array<TaskType> = [
-        {id: 4, title: "Meat", isDone: false},
-        {id: 5, title: "Beer", isDone: false},
-        {id: 6, title: "Milk", isDone: true},
-    ];
+        {id: 3, title: "React", isDone: false},
+    ]
+
+    const [tasks, setTasks] = useState<Array<TaskType>>(initialState)
+    const [filter, setFilter] = useState<FilterValuesType>("all")
+
+    const changeFilter = (filter: FilterValuesType) => {
+        setFilter(filter)
+    }
+
+    const removeTask = (taskID: number) => {
+        const updateTasks = tasks.filter(task => task.id !== taskID)
+        setTasks(updateTasks)
+    }
+
+    let tasksForRander = tasks
+    if (filter === "active") {
+        tasksForRander = tasksForRander.filter(t => t.isDone === false)
+    }
+    if (filter === "complited") {
+        tasksForRander = tasksForRander.filter(t => t.isDone === true)
+    }
+
     //UI:
     return (
         <div className="App">
-            <ToDoList title={todoListTitleOne}
-                      tasks={task_1}/>
-            <ToDoList title={todoListTitleTwo}
-                      tasks={task_2}/>
+            <ToDoList title={todoListTitle}
+                      tasks={tasksForRander}
+                      removeTask={removeTask}
+                      changeFilter={changeFilter}
+            />
         </div>
     );
 }
 
-export default App;
+export default App
