@@ -6,7 +6,7 @@ import {v1} from "uuid";
 //CRUD
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -16,11 +16,10 @@ export type FilterValuesType = "all" | "active" | "complited"
 function App() {
     //BLL:
     const todoListTitle: string = "What to learn"
-v1()
     const initialState = [
-        {id: 1, title: "HTML", isDone: true},
-        {id: 2, title: "CSS", isDone: true},
-        {id: 3, title: "React", isDone: false},
+        {id: v1(), title: "HTML", isDone: true},
+        {id: v1(), title: "CSS", isDone: true},
+        {id: v1(), title: "React", isDone: false},
     ]
 
     const [tasks, setTasks] = useState<Array<TaskType>>(initialState)
@@ -30,9 +29,19 @@ v1()
         setFilter(filter)
     }
 
-    const removeTask = (taskID: number) => {
+    const removeTask = (taskID: string) => {
         const updateTasks = tasks.filter(task => task.id !== taskID)
         setTasks(updateTasks)
+    }
+
+    const addTask = () => {
+        const newTaskTitle: string = "New task"
+        const newTask: TaskType = {
+            id: v1(),
+            title: newTaskTitle,
+            isDone: false
+        }
+        setTasks([newTask, ...tasks])
     }
 
     let tasksForRander = tasks
@@ -50,6 +59,7 @@ v1()
                       tasks={tasksForRander}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
+                      addTask={addTask}
             />
         </div>
     );

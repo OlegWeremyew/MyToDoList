@@ -4,8 +4,9 @@ import {FilterValuesType, TaskType} from "./App";
 type PropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskID: number) => void
+    removeTask: (taskID: string) => void
     changeFilter: (filter: FilterValuesType) => void
+    addTask: () => void
 };
 
 const ToDoList = (props: PropsType) => {
@@ -26,7 +27,7 @@ const ToDoList = (props: PropsType) => {
             <h3>{props.title}</h3>
             <div>
                 <input/>
-                <button>+</button>
+                <button onClick={() => props.addTask()}>+</button>
             </div>
             <ul>
                 {tasksJSX}
