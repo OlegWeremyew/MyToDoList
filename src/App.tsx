@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import ToDoList from "./ToDoList";
+import {v1} from "uuid";
 
 //CRUD
 
@@ -15,7 +16,7 @@ export type FilterValuesType = "all" | "active" | "complited"
 function App() {
     //BLL:
     const todoListTitle: string = "What to learn"
-
+v1()
     const initialState = [
         {id: 1, title: "HTML", isDone: true},
         {id: 2, title: "CSS", isDone: true},

@@ -9,13 +9,14 @@ type PropsType = {
 };
 
 const ToDoList = (props: PropsType) => {
-    const tasksJSX = props.tasks.map(t => {
+    const tasksJSX = props.tasks.map(task => {
         return (
-            <li key={t.id}>
-                <input type="checkbox" checked={t.isDone}/>
-                <span>{t.title}</span>
-                <button onClick={ () => {
-                    props.removeTask(t.id) } }>Del
+            <li key={task.id}>
+                <input type="checkbox" checked={task.isDone}/>
+                <span>{task.title}</span>
+                <button onClick={() => {
+                    props.removeTask(task.id)
+                }}>Del
                 </button>
             </li>
         )
