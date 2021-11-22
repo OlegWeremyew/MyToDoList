@@ -34,8 +34,8 @@ function App() {
         setTasks(updateTasks)
     }
 
-    const addTask = () => {
-        const newTaskTitle: string = "New task"
+    const addTask = (newTaskTitle: string) => {
+        /*const newTaskTitle: string = "New task"*/
         const newTask: TaskType = {
             id: v1(),
             title: newTaskTitle,
