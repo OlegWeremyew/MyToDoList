@@ -12,6 +12,11 @@ type PropsType = {
 const ToDoList = (props: PropsType) => {
     console.log("render")
     const [title, setTitle] = useState<string>("")
+    const addTask = ()  => {
+        props.addTask(title)
+        setTitle("")
+    }
+
     const tasksJSX = props.tasks.map(task => {
         return (
             <li key={task.id}>
@@ -29,7 +34,7 @@ const ToDoList = (props: PropsType) => {
             <h3>{props.title}</h3>
             <div>
                 <input onChange={e => setTitle(e.currentTarget.value)} value={title}/>
-                <button onClick={() => props.addTask(title)}>+</button>
+                <button onClick={addTask}>+</button>
             </div>
             <ul>
                 {tasksJSX}
