@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 
 type PropsType = {
@@ -10,11 +10,20 @@ type PropsType = {
 };
 
 const ToDoList = (props: PropsType) => {
-    console.log("render")
     const [title, setTitle] = useState<string>("")
-    const addTask = ()  => {
+    const addTask = () => {
         props.addTask(title)
         setTitle("")
+    }
+
+    const setChangeTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const setAllFilterValue = () => props.changeFilter("all")
+    const setActiveValue = () => props.changeFilter("active")
+    const setComplitedValue = () => props.changeFilter("complited")
+    const setOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            addTask()
+        }
     }
 
     const tasksJSX = props.tasks.map(task => {
@@ -24,7 +33,8 @@ const ToDoList = (props: PropsType) => {
                 <span>{task.title}</span>
                 <button onClick={() => {
                     props.removeTask(task.id)
-                }}>Del
+                }}>
+                    Del
                 </button>
             </li>
         )
@@ -33,16 +43,20 @@ const ToDoList = (props: PropsType) => {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input onChange={e => setTitle(e.currentTarget.value)} value={title}/>
+                <input
+                    value={title}
+                    onChange={setChangeTitle}
+                    onKeyPress={setOnEnter}
+                />
                 <button onClick={addTask}>+</button>
             </div>
             <ul>
                 {tasksJSX}
             </ul>
             <div>
-                <button onClick={() => props.changeFilter("all")}>All</button>
-                <button onClick={() => props.changeFilter("active")}>Active</button>
-                <button onClick={() => props.changeFilter("complited")}>Completed</button>
+                <button onClick={setAllFilterValue}>All</button>
+                <button onClick={setActiveValue}>Active</button>
+                <button onClick={setComplitedValue}>Completed</button>
             </div>
         </div>
 
