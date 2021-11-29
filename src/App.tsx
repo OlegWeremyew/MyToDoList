@@ -19,7 +19,11 @@ function App() {
     const initialState = [
         {id: v1(), title: "HTML", isDone: true},
         {id: v1(), title: "CSS", isDone: true},
-        {id: v1(), title: "React", isDone: false},
+        {id: v1(), title: "JavaScrips", isDone: false},
+        {id: v1(), title: "React", isDone: true},
+        {id: v1(), title: "Angular", isDone: false},
+        {id: v1(), title: "Ruby", isDone: true},
+        {id: v1(), title: "NoteJS", isDone: true},
     ]
 
     const [tasks, setTasks] = useState<Array<TaskType>>(initialState)
