@@ -11,10 +11,18 @@ type PropsType = {
 };
 
 const ToDoList = (props: PropsType) => {
+
     const [title, setTitle] = useState<string>("")
+    let [error, setError] = useState<string | null>(null)
+
+
     const addTask = () => {
-        title.trim() && props.addTask(title)
-        setTitle("")
+        if (title.trim()) {
+            props.addTask(title)
+            setTitle("")
+        } else {
+            setError("title is required")
+        }
     }
 
     const setChangeTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
@@ -51,16 +59,22 @@ const ToDoList = (props: PropsType) => {
                     value={title}
                     onChange={setChangeTitle}
                     onKeyPress={setOnEnter}
+                    className={error ? "error" : ""}
                 />
                 <button onClick={addTask}>+</button>
+                {error && <div className="error-message">{error}</div>}
             </div>
             <ul>
                 {tasksJSX}
             </ul>
             <div>
-                <button className={props.filter === "all" ? "active-filter" : ""} onClick={setAllFilterValue}>All</button>
-                <button className={props.filter === "active" ? "active-filter" : ""} onClick={setActiveValue}>Active</button>
-                <button className={props.filter === "complited" ? "active-filter" : ""} onClick={setComplitedValue}>Completed</button>
+                <button className={props.filter === "all" ? "active-filter" : ""} onClick={setAllFilterValue}>All
+                </button>
+                <button className={props.filter === "active" ? "active-filter" : ""} onClick={setActiveValue}>Active
+                </button>
+                <button className={props.filter === "complited" ? "active-filter" : ""}
+                        onClick={setComplitedValue}>Completed
+                </button>
             </div>
         </div>
 
