@@ -7,6 +7,7 @@ type PropsType = {
     removeTask: (taskID: string) => void
     changeFilter: (filter: FilterValuesType) => void
     addTask: (newTaskTitle: string) => void
+    filter: FilterValuesType
 };
 
 const ToDoList = (props: PropsType) => {
@@ -27,8 +28,11 @@ const ToDoList = (props: PropsType) => {
     }
 
     const tasksJSX = props.tasks.map(task => {
+
+        /*const getClasses = () => task.isDone ? "is-done" : ""*/
+
         return (
-            <li key={task.id}>
+            <li key={task.id} className={task.isDone ? "is-done" : ""}>
                 <input type="checkbox" checked={task.isDone}/>
                 <span>{task.title} </span>
                 <button onClick={() => {
@@ -54,9 +58,9 @@ const ToDoList = (props: PropsType) => {
                 {tasksJSX}
             </ul>
             <div>
-                <button onClick={setAllFilterValue}>All</button>
-                <button onClick={setActiveValue}>Active</button>
-                <button onClick={setComplitedValue}>Completed</button>
+                <button className={props.filter === "all" ? "active-filter" : ""} onClick={setAllFilterValue}>All</button>
+                <button className={props.filter === "active" ? "active-filter" : ""} onClick={setActiveValue}>Active</button>
+                <button className={props.filter === "complited" ? "active-filter" : ""} onClick={setComplitedValue}>Completed</button>
             </div>
         </div>
 
