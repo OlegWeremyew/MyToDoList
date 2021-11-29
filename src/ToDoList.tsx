@@ -47,19 +47,23 @@ const ToDoList = (props: PropsType) => {
 
     const tasksJSX = props.tasks.map(task => {
 
-        /*const getClasses = () => task.isDone ? "is-done" : ""*/
+        const changeStatus = (e:ChangeEvent<HTMLInputElement>) => {
+            props.changeTaskStatus(task.id, e.currentTarget.checked)
+        }
+
+        const removeTask =() => {
+            props.removeTask(task.id)
+        }
 
         return (
             <li key={task.id} className={task.isDone ? "is-done" : ""}>
                 <input
                     type="checkbox"
                     checked={task.isDone}
-                    onClick={(e) => props.changeTaskStatus(task.id, e.currentTarget.checked)}
+                    onChange={changeStatus}
                 />
                 <span>{task.title} </span>
-                <button onClick={() => {
-                    props.removeTask(task.id)
-                }}>
+                <button onClick={() => {removeTask()}}>
                     Del
                 </button>
             </li>
