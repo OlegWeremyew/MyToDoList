@@ -17,11 +17,12 @@ const ToDoList = (props: PropsType) => {
 
 
     const addTask = () => {
-        if (title.trim()) {
+        const trimTitle = title.trim()
+        if (trimTitle) {
             props.addTask(title)
             setTitle("")
         } else {
-            setError("title is required")
+            setError("empty input is blocked")
         }
     }
 
@@ -30,7 +31,8 @@ const ToDoList = (props: PropsType) => {
     const setActiveValue = () => props.changeFilter("active")
     const setComplitedValue = () => props.changeFilter("complited")
     const setOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && title) {
+        setError(null)
+        if (e.key === "Enter") {
             addTask()
         }
     }
