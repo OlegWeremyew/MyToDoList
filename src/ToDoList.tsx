@@ -30,7 +30,7 @@ const ToDoList = (props: PropsType) => {
         return (
             <li key={task.id}>
                 <input type="checkbox" checked={task.isDone}/>
-                <span>{task.title}</span>
+                <span>{task.title} </span>
                 <button onClick={() => {
                     props.removeTask(task.id)
                 }}>
