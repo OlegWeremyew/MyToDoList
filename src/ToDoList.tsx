@@ -13,7 +13,7 @@ type PropsType = {
 const ToDoList = (props: PropsType) => {
     const [title, setTitle] = useState<string>("")
     const addTask = () => {
-        title && props.addTask(title)
+        title.trim() && props.addTask(title)
         setTitle("")
     }
 
