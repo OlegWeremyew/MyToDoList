@@ -12,7 +12,7 @@ type PropsType = {
 const ToDoList = (props: PropsType) => {
     const [title, setTitle] = useState<string>("")
     const addTask = () => {
-        props.addTask(title)
+        title && props.addTask(title)
         setTitle("")
     }
 
@@ -21,7 +21,7 @@ const ToDoList = (props: PropsType) => {
     const setActiveValue = () => props.changeFilter("active")
     const setComplitedValue = () => props.changeFilter("complited")
     const setOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && title) {
             addTask()
         }
     }
