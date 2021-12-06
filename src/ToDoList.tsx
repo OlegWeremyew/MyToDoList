@@ -31,9 +31,11 @@ const ToDoList = (props: PropsType) => {
         setTitle(e.currentTarget.value)
         setError(false)
     }
+
     const setAllFilterValue = () => props.changeFilter("all")
     const setActiveValue = () => props.changeFilter("active")
     const setComplitedValue = () => props.changeFilter("complited")
+
     const setOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             addTask()
@@ -47,11 +49,11 @@ const ToDoList = (props: PropsType) => {
 
     const tasksJSX = props.tasks.map(task => {
 
-        const changeStatus = (e:ChangeEvent<HTMLInputElement>) => {
+        const changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
             props.changeTaskStatus(task.id, e.currentTarget.checked)
         }
 
-        const removeTask =() => {
+        const removeTask = () => {
             props.removeTask(task.id)
         }
 
@@ -63,7 +65,9 @@ const ToDoList = (props: PropsType) => {
                     onChange={changeStatus}
                 />
                 <span>{task.title} </span>
-                <button onClick={() => {removeTask()}}>
+                <button onClick={() => {
+                    removeTask()
+                }}>
                     Del
                 </button>
             </li>

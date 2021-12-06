@@ -54,6 +54,7 @@ function App() {
     }
 
     let tasksForRander = tasks
+
     if (filter === "active") {
         tasksForRander = tasksForRander.filter(t => t.isDone === false)
     }
