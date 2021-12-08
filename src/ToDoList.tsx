@@ -48,7 +48,6 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter(props.todolistID, "active");
     const onCompletedClickHandler = () => props.changeFilter(props.todolistID, "completed");
 
-
     return <div>
         <h3>{props.title} <button onClick={()=>props.removeTodolist(props.todolistID)}>x</button></h3>
         <div>
