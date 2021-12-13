@@ -33,6 +33,7 @@ export function Todolist(props: PropsType) {
         }
     }
 
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
