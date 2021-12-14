@@ -19,6 +19,7 @@ type PropsType = {
     changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
     removeTodolist: (id: string) => void
     filter: FilterValuesType
+    updateTask: (todolistId: string, id: string, title: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -49,9 +50,13 @@ export function Todolist(props: PropsType) {
                         props.changeTaskStatus(t.id, newIsDoneValue, props.id);
                     }
 
+                    const callBackInputHandler = (title: string) => {
+                        props.updateTask(props.id, t.id, title)
+                    }
+
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
-                        <Span title={t.title}/>
+                        <Span title={t.title} callBack={callBackInputHandler}/>
                         <button onClick={onClickHandler}>x</button>
                     </li>
                 })
