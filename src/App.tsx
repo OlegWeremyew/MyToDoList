@@ -6,8 +6,8 @@ import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typogr
 import {AddItemForm} from "./AddItemForm";
 import {Menu} from "@material-ui/icons";
 
-
 export type FilterValuesType = "all" | "active" | "completed";
+
 type TodolistType = {
     id: string
     title: string
@@ -17,7 +17,6 @@ type TodolistType = {
 type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-
 
 function App() {
     function removeTask(id: string, todolistId: string) {

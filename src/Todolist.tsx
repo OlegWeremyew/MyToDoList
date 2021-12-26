@@ -33,6 +33,7 @@ export function Todolist(props: PropsType) {
     const removeTodolist = () => {
         props.removeTodolist(props.id);
     }
+
     const changeTodolistTitle = (title: string) => {
         props.changeTodolistTitle(props.id, title);
     }
@@ -59,7 +60,6 @@ export function Todolist(props: PropsType) {
                     const onTitleChangeHandler = (newValue: string) => {
                         props.changeTaskTitle(t.id, newValue, props.id);
                     }
-
 
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
