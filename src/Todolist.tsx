@@ -12,6 +12,7 @@ export type TaskType = {
 }
 
 type PropsType = {
+    todolistId: string
     title: string
     tasks: Array<TaskType>
     removeTask: (todolistId: string, taskId: string) => void
@@ -19,25 +20,13 @@ type PropsType = {
     addTask: (todolistId: string, title: string) => void
     changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
     filter: FilterValuesType
-    todolistId: string
     removeTodolist: (todolistId: string) => void
     renameTask: (todolistId: string, idTask: string, title: string) => void
     renameTodoList: (todolistId: string, title: string) => void
 }
 
-export function Todolist({
-                             title,
-                             tasks,
-                             removeTask,
-                             changeFilter,
-                             addTask,
-                             changeTaskStatus,
-                             filter,
-                             todolistId,
-                             removeTodolist,
-                             renameTask,
-                             renameTodoList
-                         }: PropsType) {
+export function Todolist({title, tasks, removeTask, changeFilter, addTask, changeTaskStatus, filter,
+                             todolistId, removeTodolist, renameTask, renameTodoList,...props}: PropsType) {
 
     const addTaskHandler = (title: string) => {
         addTask(todolistId, title);
@@ -49,6 +38,7 @@ export function Todolist({
     const renameTodoListHandler = (title: string) => {
         renameTodoList(todolistId, title)
     }
+
     return <div>
         <h3 style={{display:'flex', justifyContent:'space-between'}}>
             <EditableSpan title={title} rename={renameTodoListHandler}/>
@@ -71,7 +61,6 @@ export function Todolist({
                     return <div style={{height: '60px'}} key={t.id} className={t.isDone ? "is-done" : ""}>
                         <Grid container alignItems="center" justifyContent="space-between" spacing={1}>
                             <Grid item><Checkbox
-
 
                                 inputProps={{'aria-label': 'controlled'}}
                                 size={"small"}

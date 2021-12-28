@@ -1,31 +1,38 @@
 import {FilterValuesType, TodoListsType} from "../App";
 
 
-export const TodoListsReducer = (state: TodoListsType[], action: ActionType) => {
+export const TodoListsReducer = (state: Array<TodoListsType>, action: ActionType) => {
     switch (action.type) {
-        case "CHANGE-FILTER":
+        case "CHANGE-FILTER": {
             return state.map(tl => tl.id === action.payload.todolistId
                 ? {...tl, filter: action.payload.value}
                 : tl)
-        case "REMOVE-TODOLIST":
+        }
+        case "REMOVE-TODOLIST": {
             return state.filter(tl => tl.id !== action.payload.todolistId)
-        case "ADD-TODOLIST":
+        }
+        case "ADD-TODOLIST": {
             const newTodoList: TodoListsType = {
                 id: action.payload.todolistId,
                 title: action.payload.title,
                 filter: 'all'
             }
             return [newTodoList, ...state]
-        case "RENAME-TODOLIST":
+        }
+        case "RENAME-TODOLIST": {
             return state.map(tl => tl.id === action.payload.todolistId
                 ? {...tl, title: action.payload.title}
                 : tl)
+        }
         default:
             return state
     }
 }
 
-type ActionType = changeFilterACType | removeTodolistACType | addTodoListACType | renameTodoListACType
+type ActionType = changeFilterACType
+    | removeTodolistACType
+    | addTodoListACType
+    | renameTodoListACType
 
 export type changeFilterACType = ReturnType<typeof changeFilterAC>
 export type removeTodolistACType = ReturnType<typeof removeTodolistAC>
@@ -41,6 +48,7 @@ export const changeFilterAC = (todolistId: string, value: FilterValuesType) => {
         }
     } as const
 }
+
 export const removeTodolistAC = (todolistId: string) => {
     return {
         type: 'REMOVE-TODOLIST',
@@ -49,6 +57,7 @@ export const removeTodolistAC = (todolistId: string) => {
         }
     } as const
 }
+
 export const addTodoListAC = (todolistId: string, title: string) => {
     return {
         type: 'ADD-TODOLIST',
@@ -58,6 +67,7 @@ export const addTodoListAC = (todolistId: string, title: string) => {
         }
     } as const
 }
+
 export const renameTodoListAC = (todolistId: string, title: string) => {
     return {
         type: 'RENAME-TODOLIST',

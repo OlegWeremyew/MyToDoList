@@ -3,24 +3,25 @@ import {v1} from "uuid";
 
 export const TasksReducer = (state: TasksStateType, action: ActionType) => {
     switch (action.type) {
-        case "ADD-TASK":
+        case "ADD-TASK": {
             const newTask = {id: v1(), title: action.payload.title, isDone: false};
             return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
-        case "REMOVE-TASK":
+        }
+        case "REMOVE-TASK": {
             return {
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId]
                     .filter(t => t.id !== action.payload.taskId)
             }
-        case "CHANGE-STATUS-TASK":
+        }
+        case "CHANGE-STATUS-TASK": {
             return {
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId]
-                    .map(t => t.id === action.payload.taskId
-                        ? {...t, isDone: action.payload.isDone}
-                        : t)
+                    .filter(t => t.id !== action.payload.taskId)
             }
-        case "RENAME-TASK":
+        }
+        case "RENAME-TASK": {
             return {
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId]
@@ -28,18 +29,21 @@ export const TasksReducer = (state: TasksStateType, action: ActionType) => {
                         ? {...t, title: action.payload.title}
                         : t)
             }
-        case "REMOVE-TASKS":
+        }
+        case "REMOVE-TASKS": {
             const newState = {...state}
             delete newState[action.payload.todolistId]
             return newState
-        case "ADD-TODOLIST-TASKS":
+        }
+        case "ADD-TODOLIST-TASKS": {
             return {...state, [action.payload.todolistId]: []}
+        }
         default:
             return state
     }
 }
-type ActionType =
-    addTaskACType
+
+type ActionType = addTaskACType
     | removeTaskACType
     | changeStatusACType
     | renameTaskACType
