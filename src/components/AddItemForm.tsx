@@ -1,19 +1,18 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button, TextField} from "@material-ui/core";
 
-
 type AddItemFormPropsType = {
-    addItem: (title: string) => void
+    addTask: (title: string) => void
+    label: string
+
 }
-
-export function AddItemForm(props: AddItemFormPropsType) {
-
+export const AddItemForm = ({addTask, label}: AddItemFormPropsType) => {
     let [title, setTitle] = useState("")
-    let [error, setError] = useState(false)
+    let [error, setError] = useState<boolean>(false)
 
-    const addItem = () => {
+    const addTaskHandler = () => {
         if (title.trim() !== "") {
-            props.addItem(title);
+            addTask(title.trim());
             setTitle("");
         } else {
             setError(true);
@@ -22,29 +21,30 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-        setError(false);
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(false);
-        if (e.charCode === 13) {
-            addItem();
+        if (e.key === 'Enter') {
+            addTaskHandler();
         }
     }
-
-    return <div>
-        <TextField
-            value={title}
-            error={error}
-            onChange={onChangeHandler}
-            onKeyPress={onKeyPressHandler}
-            className={error ? "error" : ""}
-            id="outlined-basic"
-            label="title is requred"
-            variant="outlined"
-            size="small"
-        />
-        <Button color='primary' variant="contained" onClick={addItem}
-                style={{maxWidth: '40px', maxHeight: '40px', minWidth: '30px', minHeight: '30px'}}>+</Button>
-    </div>
+    return (
+        <div>
+            <TextField
+                       label={error ? "Title is required" : label}
+                       error={error}
+                       variant="outlined"
+                       value={title}
+                       size="small"
+                       onChange={onChangeHandler}
+                       onKeyPress={onKeyPressHandler}
+            />
+            <Button style={{
+                marginLeft: '10px', maxWidth: '40px',
+                maxHeight: '40px', minWidth: '40px', minHeight: '40px'
+            }}
+                    variant="contained" onClick={addTaskHandler} disabled={error}>+</Button>
+        </div>
+    )
 }

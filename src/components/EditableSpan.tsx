@@ -1,27 +1,46 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from "react";
+import {TextField} from "@material-ui/core";
 
 type EditableSpanPropsType = {
-    value: string
-    onChange: (newValue: string) => void
+    title: string
+    rename: (title: string) => void
 }
 
-export function EditableSpan(props: EditableSpanPropsType) {
-    let [editMode, setEditMode] = useState(false);
-    let [title, setTitle] = useState(props.value);
+export const EditableSpan = ({title, rename}: EditableSpanPropsType) => {
+    const [edit, setEdit] = useState(true)
+    const [newTitle, setNewTitle] = useState('')
 
-    const activateEditMode = () => {
-        setEditMode(true);
-        setTitle(props.value);
+    const activeViewMode = () => {
+        setEdit(true)
+        rename(newTitle)
     }
-    const activateViewMode = () => {
-        setEditMode(false);
-        props.onChange(title);
-    }
-    const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
+    const onChangeNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(e.currentTarget.value)
 
-    return editMode
-        ? <input value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
-        : <span onDoubleClick={activateEditMode}>{props.value}</span>
+    }
+    const onClickSpan = () => {
+        setEdit(false)
+        setNewTitle(title)
+    }
+    const onKeyPress= (e: React.KeyboardEvent<HTMLDivElement>)=> {
+        if (e.key === 'Enter') {
+            activeViewMode();
+        }
+    }
+    return (
+        edit
+            ? <p style={{whiteSpace:'pre-wrap', maxWidth: '200px' }} onDoubleClick={onClickSpan}>{title}</p>
+            : <TextField id="outlined-basic"
+                         variant="outlined"
+                         value={newTitle}
+                         size="small"
+                         onChange={onChangeNameHandler}
+                         onBlur={activeViewMode}
+                         autoFocus
+                         onKeyPress={onKeyPress}
+                         sx={{ width: '170px' }}
+
+            />
+
+    )
 }
