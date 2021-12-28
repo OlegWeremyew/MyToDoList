@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
-import {AddItemForm} from './AddItemForm';
-import {EditableSpan} from './EditableSpan';
+import {AddItemForm} from './components/AddItemForm';
+import {EditableSpan} from './components/EditableSpan';
 import {Delete} from "@material-ui/icons";
 import {Button, IconButton} from "@material-ui/core";
 
