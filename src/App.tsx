@@ -8,6 +8,7 @@ import {addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, removeTodo
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasksReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
+import {ButtonAppBar} from "./components/ButtonAppBar";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -27,61 +28,43 @@ const App = () => {
     const dispatch = useDispatch();
 
     const removeTask = (id: string, todolistId: string) => {
-        const action = removeTaskAC(id, todolistId);
-        dispatch(action);
+        dispatch(removeTaskAC(id, todolistId));
     }
 
     const addTask = (title: string, todolistId: string) => {
-        const action = addTaskAC(title, todolistId);
-        dispatch(action);
+        dispatch(addTaskAC(title, todolistId));
     }
 
     const changeStatus = (id: string, isDone: boolean, todolistId: string) => {
-        const action = changeTaskStatusAC(id, isDone, todolistId);
-        dispatch(action);
+        dispatch(changeTaskStatusAC(id, isDone, todolistId));
     }
 
     const changeTaskTitle = (id: string, newTitle: string, todolistId: string) => {
-        const action = changeTaskTitleAC(id, newTitle, todolistId);
-        dispatch(action);
+        dispatch(changeTaskTitleAC(id, newTitle, todolistId));
     }
 
     const changeFilter = (value: FilterValuesType, todolistId: string) => {
-        const action = changeTodolistFilterAC(todolistId, value);
-        dispatch(action);
+        dispatch(changeTodolistFilterAC(todolistId, value));
     }
 
     const removeTodolist = (id: string) => {
-        const action = removeTodolistAC(id);
-        dispatch(action);
+        dispatch(removeTodolistAC(id));
     }
 
     const changeTodolistTitle = (id: string, title: string) => {
-        const action = changeTodolistTitleAC(id, title);
-        dispatch(action);
+        dispatch(changeTodolistTitleAC(id, title));
     }
 
     const addTodolist = (title: string) => {
-        const action = addTodolistAC(title);
-        dispatch(action);
+        dispatch(addTodolistAC(title));
     }
 
     return (
         <div className="App">
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
-                    </IconButton>
-                    <Typography variant="h6">
-                        News
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar>
+            <ButtonAppBar/>
             <Container fixed>
                 <Grid container style={{padding: "20px"}}>
-                    <AddItemForm addItem={addTodolist}/>
+                    <AddItemForm label={'Name todolist'} addItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {
@@ -90,10 +73,10 @@ const App = () => {
                             let tasksForTodolist = allTodolistTasks;
 
                             if (tl.filter === "active") {
-                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
+                                tasksForTodolist = allTodolistTasks.filter(t => !t.isDone);
                             }
                             if (tl.filter === "completed") {
-                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
                             }
 
                             return <Grid item key={tl.id}>

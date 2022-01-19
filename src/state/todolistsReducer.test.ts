@@ -17,9 +17,9 @@ beforeEach(() => {
     todolistId2 = v1();
     startState = [
         {id: todolistId1, title: "What to learn", filter: "all"},
-        {id: todolistId2, title: "What to buy", filter: "all"}
+        {id: todolistId2, title: "What to buy", filter: "all"},
     ]
-})
+});
 
 test('correct todolist should be removed', () => {
     const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))

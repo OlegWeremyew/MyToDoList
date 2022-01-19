@@ -4,18 +4,19 @@ import {AddBox} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    label: string
 }
 
 export function AddItemForm(props: AddItemFormPropsType) {
     let [title, setTitle] = useState("")
-    let [error, setError] = useState<string | null>(null)
+    let [error, setError] = useState<boolean>(false)
 
     const addItem = () => {
         if (title.trim() !== "") {
             props.addItem(title);
             setTitle("");
         } else {
-            setError("Title is required");
+            setError(true);
         }
     }
 
@@ -24,7 +25,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        setError(false);
         if (e.key === "Enter") {
             addItem();
         }
@@ -32,12 +33,11 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     return <div>
         <TextField variant="outlined"
-                   error={!!error}
+                   error={error}
                    value={title}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
-                   label="Title"
-                   helperText={error}
+                   label={error ? "Title is required" : props.label}
         />
         <IconButton color="primary" onClick={addItem}>
             <AddBox/>

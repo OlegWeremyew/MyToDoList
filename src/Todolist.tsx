@@ -47,7 +47,7 @@ export function Todolist(props: PropsType) {
                 <Delete/>
             </IconButton>
         </h3>
-        <AddItemForm addItem={addTask}/>
+        <AddItemForm label={'Name task'} addItem={addTask}/>
         <div>
             {
                 props.tasks.map(t => {
