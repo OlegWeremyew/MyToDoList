@@ -34,12 +34,13 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return stateCopy;
         }
         case 'CHANGE-TASK-STATUS': {
-            let todolistTasks = state[action.payload.todolistId];
-            let task = todolistTasks.find(t => t.id === action.payload.taskId);
-            if (task) {
-                task.isDone = action.payload.isDone;
+            return {
+                ...state,
+                [action.payload.todolistId]: state[action.payload.todolistId]
+                    .map(t => (t.id === action.payload.taskId)
+                        ? {...t, isDone: action.payload.isDone}
+                        : t)
             }
-            return ({...state});
         }
         case 'CHANGE-TASK-TITLE': {
             let todolistTasks = state[action.payload.todolistId];
