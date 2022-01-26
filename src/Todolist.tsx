@@ -1,10 +1,10 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType} from './App';
-import {AddItemForm} from './components/AddItemForm';
-import {EditableSpan} from './components/EditableSpan';
+import {AddItemForm} from './components/AddItemForm/AddItemForm';
+import {EditableSpan} from './components/EditableSpan/EditableSpan';
 import {Button, IconButton} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
-import {Task} from "./components/Task";
+import {Task} from "./components/Task/Task";
 
 export type TaskType = {
     id: string

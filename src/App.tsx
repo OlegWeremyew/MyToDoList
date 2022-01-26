@@ -1,13 +1,13 @@
 import React, {useCallback} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
-import {AddItemForm} from './components/AddItemForm';
+import {AddItemForm} from './components/AddItemForm/AddItemForm';
 import {Container, Grid, Paper} from '@material-ui/core';
 import {addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, removeTodolistAC} from './state/todolistsReducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasksReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-import {ButtonAppBar} from "./components/ButtonAppBar";
+import {ButtonAppBar} from "./components/ButtonAppBar/ButtonAppBar";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -90,6 +90,6 @@ const App = () => {
                 </Grid>
             </Container>
         </div>
-    );
+    )
 }
-export default App;
+export default App
