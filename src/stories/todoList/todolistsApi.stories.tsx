@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import axios from "axios";
 import {todolistAPI} from "../../api/todolistApi";
 
 export default {
-    title: 'API',
+    title: 'API/Todolist',
 }
 
 const settings = {
@@ -42,7 +41,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = 'fe737155-16e3-46a5-927f-07279279ae8b';
+        const todolistId = '6c55e13a-db8f-484b-bcca-67a0e78c601d';
         todolistAPI.deleteTodo(todolistId)
             .then((res) => {
                 setState(res.data);
@@ -56,8 +55,8 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '22411bd6-c367-4068-abdc-fed196cbc621'
-        todolistAPI.updateTodosTitle(todolistId, 'OLEGOLEGOLEG')
+        const todolistId = '8cb36594-ed01-424d-9298-893227e9a9dc'
+        todolistAPI.updateTodoTitle(todolistId, 'OLEGOLEGOLEG')
             .then((res) => {
                 setState(res.data)
             })

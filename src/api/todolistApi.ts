@@ -1,5 +1,4 @@
-import axios from "axios";
-import {GetTodolists} from "../stories/todoList/todolistsApi.stories";
+import axios, {Axios, AxiosResponse} from "axios";
 
 const instance = axios.create({
     withCredentials: true,
@@ -10,19 +9,35 @@ const instance = axios.create({
 })
 
 export const todolistAPI = {
-    getTodos() {
-        return instance.get(`todo-lists/`)
+    // как пример типизации
+    getTodos(): Promise<AxiosResponse<TodoType[]>> {
+        return instance.get<TodoType[]>(`todo-lists/`)
     },
 
     createTodo(title: string) {
-        return instance.post(`todo-lists/`, {title})
+        return instance.post<BaseResponseType<{ item: TodoType }>>(`todo-lists/`, {title})
     },
 
-    updateTodosTitle(todolistId: string, title: string) {
-       return instance.put(`todo-lists/${todolistId}`, {title})
+    updateTodoTitle(todolistId: string, title: string) {
+        return instance.put<BaseResponseType>(`todo-lists/${todolistId}`, {title})
     },
 
     deleteTodo(todolistId: string) {
-        return instance.delete(`todo-lists/${todolistId}`)
+        return instance.delete<BaseResponseType>(`todo-lists/${todolistId}`)
     },
 }
+
+export type TodoType = {
+    addedDate: string
+    id: string
+    order: number
+    title: string
+}
+
+export type BaseResponseType<D = {}> = {
+    data: D
+    fieldsErrors: string[]
+    messages: string[]
+    resultCode: number
+}
+
