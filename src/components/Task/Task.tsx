@@ -20,18 +20,16 @@ export const Task = React.memo(({
                                     changeTaskTitle
                                 }: TaskPropsType) => {
 
-    console.log("Task")
-
     const onClickHandler = useCallback(() => {
         removeTask(task.id, todolistId)
-    },[task.id,removeTask,todolistId])
+    }, [task.id, todolistId, removeTask])
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = e.currentTarget.checked;
         changeTaskStatus(task.id, newIsDoneValue, todolistId);
-    },[task.id,changeTaskStatus,todolistId])
+    }, [task.id, todolistId, changeTaskStatus])
     const onTitleChangeHandler = useCallback((newValue: string) => {
         changeTaskTitle(task.id, newValue, todolistId);
-    },[task.id,changeTaskTitle,todolistId])
+    }, [task.id, todolistId, changeTaskTitle])
 
 
     return (

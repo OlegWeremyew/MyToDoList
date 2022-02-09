@@ -22,7 +22,7 @@ export type TasksStateType = {
 
 const App = () => {
 
-    const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
+    const todoLists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch();
 
@@ -67,7 +67,7 @@ const App = () => {
                 </Grid>
                 <Grid container spacing={3}>
                     {
-                        todolists.map(tl => {
+                        todoLists.map(tl => {
                             return <Grid item key={tl.id}>
                                 <Paper style={{padding: "10px"}}>
                                     <Todolist
