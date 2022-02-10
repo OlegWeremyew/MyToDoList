@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react'
+ import React, {useEffect, useState} from 'react'
 import {todolistAPI} from "../../api/todolistApi";
 
 export default {
-    title: 'API/Todolist',
+    title: 'API/Tasks',
 }
 
-export const GetTodolists = () => {
+export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.getTodos()
+        const todolistId =""
+        const taskId = ""
+        todolistAPI.getTasks(todolistId)
             .then((res) => {
                 setState(res.data);
             })
@@ -17,40 +19,45 @@ export const GetTodolists = () => {
     return <div> {JSON.stringify(state)}</div>
 }
 
-export const CreateTodolist = () => {
+export const CreateTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.createTodo("OlegNEWTODO111111111111111111111111111111")
+        const todolistId =""
+        const title = ""
+        todolistAPI.createTask(todolistId, title)
             .then((res) => {
                 setState(res.data);
             })
-
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
 }
 
-export const DeleteTodolist = () => {
+export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '65d8576c-d62b-4db0-a8de-e928ff0fac22';
-        todolistAPI.deleteTodo(todolistId)
+        const todolistId =""
+        const taskId = ""
+        const model = {}
+        //@ts-ignore
+        todolistAPI.updateTask(todolistId, taskId, model)
             .then((res) => {
                 setState(res.data);
             })
-
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
 }
 
-export const UpdateTodolistTitle = () => {
+export const DeleteTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '8cb36594-ed01-424d-9298-893227e9a9dc'
-        todolistAPI.updateTodoTitle(todolistId, 'OLEGOLEGOLEG')
+        const todolistId =""
+        const taskId = ""
+        const title = ""
+        todolistAPI.deleteTask(todolistId, taskId)
             .then((res) => {
-                setState(res.data)
+                setState(res.data);
             })
     }, [])
 
