@@ -24,7 +24,6 @@ export const CreateTodolist = () => {
             .then((res) => {
                 setState(res.data);
             })
-
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
@@ -38,7 +37,6 @@ export const DeleteTodolist = () => {
             .then((res) => {
                 setState(res.data);
             })
-
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
