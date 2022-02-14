@@ -11,9 +11,7 @@ import {
     removeTodolistAC, TodolistDomainType
 } from './state/todolistsReducer';
 import {
-    addTaskAC,
     addTaskTC,
-    changeTaskStatusAC,
     changeTaskTitleAC,
     removeTaskTC,
     updateTaskStatusTC
@@ -46,7 +44,7 @@ const App = () => {
     }, [dispatch])
 
     const changeStatus = useCallback((id: string, status: TaskStatuses, todolistId: string) => {
-        dispatch(updateTaskStatusTC(todolistId, id, status))
+        dispatch(updateTaskStatusTC(id, todolistId, status))
     }, [dispatch])
 
     const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {

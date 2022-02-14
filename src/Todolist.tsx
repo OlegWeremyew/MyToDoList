@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {AddItemForm} from './components/AddItemForm/AddItemForm';
 import {EditableSpan} from './components/EditableSpan/EditableSpan';
 import {Button, IconButton} from '@material-ui/core';
@@ -24,7 +24,8 @@ type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
-    let dispatch = useDispatch()
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchTasksTC(props.id))

@@ -2,7 +2,8 @@ import {v1} from 'uuid';
 import {todolistAPI, TodolistType} from "../api/todolistApi";
 import {Dispatch} from "redux";
 
-type ActionsType = RemoveTodolistActionType
+type ActionsType =
+    | RemoveTodolistActionType
     | AddTodolistActionType
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType
@@ -20,37 +21,28 @@ const initialState: Array<TodolistDomainType> = []
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
-            return state.filter(tl => tl.id != action.payload.id)
+            return state.filter(tl => tl.id !== action.payload.id)
         }
         case 'ADD-TODOLIST': {
-            return [{
-                id: action.payload.todolistId,
-                title: action.payload.title,
-                filter: 'all',
-                addedDate: "",
-                order: 0,
-            }, ...state]
+            return [
+                {
+                    id: action.payload.todolistId,
+                    title: action.payload.title,
+                    filter: 'all',
+                    addedDate: "",
+                    order: 0,
+                }
+                , ...state]
         }
         case 'CHANGE-TODOLIST-TITLE': {
-            const todolist = state.find(tl => tl.id === action.payload.id);
-            if (todolist) {
-                todolist.title = action.payload.title;
-            }
-            return [...state]
+            return state.map(m => m.id === action.payload.id ? {...m, title: action.payload.title} : m)
         }
         case 'CHANGE-TODOLIST-FILTER': {
-            const todolist = state.find(tl => tl.id === action.payload.id);
-            if (todolist) {
-                todolist.filter = action.payload.filter;
-            }
-            return [...state]
+            return state.map(m => m.id === action.payload.id ? {...m, filter: action.payload.filter} : m)
         }
         case "SET-TODOS": {
-            return action.payload.todos.map(m => {
-                return {...m, filter: "all"}
-            })
+            return action.payload.todos.map(m => ({...m, filter: "all"}))
         }
-
         default:
             return state;
     }
