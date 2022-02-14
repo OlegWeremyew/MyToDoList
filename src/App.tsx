@@ -4,11 +4,10 @@ import {Todolist} from './Todolist';
 import {AddItemForm} from './components/AddItemForm/AddItemForm';
 import {Container, Grid, Paper} from '@material-ui/core';
 import {
-    addTodolistAC,
+    addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC, fetchTodolistsThunk,
-    FilterValuesType,
-    removeTodolistAC, TodolistDomainType
+    changeTodolistTitleAC, fetchTodolistsTC,
+    FilterValuesType, removeTodolistTC, TodolistDomainType
 } from './state/todolistsReducer';
 import {
     addTaskTC,
@@ -28,7 +27,7 @@ export type TasksStateType = {
 const App = () => {
 
     useEffect(() => {
-        dispatch(fetchTodolistsThunk())
+        dispatch(fetchTodolistsTC())
     }, [])
 
     const todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
@@ -56,7 +55,7 @@ const App = () => {
     }, [dispatch])
 
     const removeTodolist = useCallback((id: string) => {
-        dispatch(removeTodolistAC(id));
+        dispatch(removeTodolistTC(id));
     }, [dispatch])
 
     const changeTodolistTitle = useCallback((id: string, title: string) => {
@@ -64,7 +63,7 @@ const App = () => {
     }, [dispatch])
 
     const addTodolist = useCallback((title: string) => {
-        dispatch(addTodolistAC(title));
+        dispatch(addTodolistTC(title));
     }, [dispatch])
 
     return (
