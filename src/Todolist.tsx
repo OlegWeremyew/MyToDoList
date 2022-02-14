@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback} from 'react';
+import React, {ChangeEvent, useCallback, useEffect} from 'react';
 import {AddItemForm} from './components/AddItemForm/AddItemForm';
 import {EditableSpan} from './components/EditableSpan/EditableSpan';
 import {Button, IconButton} from '@material-ui/core';
@@ -6,6 +6,8 @@ import {Delete} from '@material-ui/icons';
 import {Task} from "./components/Task/Task";
 import {TaskStatuses, TaskType} from "./api/todolistApi";
 import {FilterValuesType} from "./state/todolistsReducer";
+import {useDispatch} from "react-redux";
+import {fetchTasksTC} from "./state/tasksReducer";
 
 type PropsType = {
     id: string
@@ -22,6 +24,11 @@ type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
+    let dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchTasksTC(props.id))
+    }, [])
 
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id);
@@ -29,7 +36,7 @@ export const Todolist = React.memo((props: PropsType) => {
 
     const removeTodolist = useCallback(() => {
         props.removeTodolist(props.id);
-    },[props.removeTodolist,props.id])
+    }, [props.removeTodolist, props.id])
 
     const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
@@ -45,7 +52,7 @@ export const Todolist = React.memo((props: PropsType) => {
         tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.New);
     }
     if (props.filter === "completed") {
-        tasksForTodolist = tasksForTodolist.filter(t => t.status ===  TaskStatuses.Completed);
+        tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.Completed);
     }
 
     return <div>
