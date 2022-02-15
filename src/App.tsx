@@ -5,15 +5,12 @@ import {AddItemForm} from './components/AddItemForm/AddItemForm';
 import {Container, Grid, Paper} from '@material-ui/core';
 import {
     addTodolistTC,
-    changeTodolistFilterAC,
-    changeTodolistTitleAC, fetchTodolistsTC,
+    changeTodolistFilterAC, ChangeTodolistTitleTC, fetchTodolistsTC,
     FilterValuesType, removeTodolistTC, TodolistDomainType
 } from './state/todolistsReducer';
 import {
     addTaskTC,
-    changeTaskTitleAC,
-    removeTaskTC,
-    updateTaskStatusTC
+    removeTaskTC, updateTaskTC
 } from './state/tasksReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
@@ -43,11 +40,11 @@ const App = () => {
     }, [dispatch])
 
     const changeStatus = useCallback((id: string, status: TaskStatuses, todolistId: string) => {
-        dispatch(updateTaskStatusTC(id, todolistId, status))
+        dispatch(updateTaskTC(id, todolistId, {status}))
     }, [dispatch])
 
     const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {
-        dispatch(changeTaskTitleAC(id, newTitle, todolistId));
+        dispatch(updateTaskTC(id, todolistId, {title: newTitle}));
     }, [dispatch])
 
     const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
@@ -59,7 +56,7 @@ const App = () => {
     }, [dispatch])
 
     const changeTodolistTitle = useCallback((id: string, title: string) => {
-        dispatch(changeTodolistTitleAC(id, title));
+        dispatch(ChangeTodolistTitleTC(id, title));
     }, [dispatch])
 
     const addTodolist = useCallback((title: string) => {

@@ -1,4 +1,3 @@
-import {v1} from 'uuid';
 import {todolistAPI, TodolistType} from "../api/todolistApi";
 import {Dispatch} from "redux";
 
@@ -92,7 +91,7 @@ export const setTodosAC = (todos: Array<TodolistType>) => {
     } as const
 }
 
-// Thunk
+// Thunk=============================================================
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
     todolistAPI.getTodos()
         .then(res => {
@@ -111,5 +110,12 @@ export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
     todolistAPI.createTodo(title)
         .then(res => {
             dispatch(addTodolistAC(res.data.data.item))
+        })
+}
+
+export const ChangeTodolistTitleTC = (id: string, title: string) => (dispatch: Dispatch) => {
+    todolistAPI.updateTodoTitle(id, title)
+        .then(res => {
+            dispatch(changeTodolistTitleAC(id, title))
         })
 }
