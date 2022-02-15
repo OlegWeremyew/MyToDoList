@@ -1,6 +1,6 @@
 import {todolistAPI, TodolistType} from "../api/todolistApi";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC, setStatusActionType} from "../App/AppReducer";
+import {RequestStatusType, setAppStatusAC, setAppStatusActionType} from "../App/AppReducer";
 
 type ActionsType =
     | RemoveTodolistActionType
@@ -158,4 +158,4 @@ export const ChangeTodolistTitleTC = (id: string, title: string) => (dispatch: T
         })
 }
 
-export type ThunkDispatchType = Dispatch<ActionsType | setStatusActionType>
+export type ThunkDispatchType = Dispatch<ActionsType | setAppStatusActionType>
