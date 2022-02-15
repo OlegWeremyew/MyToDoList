@@ -3,7 +3,7 @@ import {AlertProps, Snackbar, Stack} from "@material-ui/core";
 import MuiAlert from '@material-ui/core/Alert';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../App/store";
-import {setErrorAC} from "../../App/AppReducer";
+import {setAppErrorAC} from "../../App/AppReducer";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -21,7 +21,7 @@ export function ErrorSnackbar() {
         if (reason === 'clickaway') {
             return;
         }
-        dispatch(setErrorAC(null))
+        dispatch(setAppErrorAC(null))
     };
 
     const isOpen = error !== null
