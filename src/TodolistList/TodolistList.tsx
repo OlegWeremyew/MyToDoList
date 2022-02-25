@@ -13,18 +13,7 @@ import {TaskStatuses, TaskType} from "../api/todolistApi";
 import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
-
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
-}
-
-type PropsType = {
-    demo?: boolean
-}
-
-function Navigate(props: { to: string }) {
-    return null;
-}
+import { Navigate } from "react-router-dom";
 
 export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
 
@@ -73,7 +62,7 @@ export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
     }, [dispatch])
 
     if (!isLoggedIn) {
-        return <Navigate to="/login"/>
+        return <Navigate to={"/login"}/>
     }
 
     return (
@@ -105,4 +94,15 @@ export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
             </Grid>
         </>)
 }
+
+//Types
+
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
+
+type PropsType = {
+    demo?: boolean
+}
+
 
