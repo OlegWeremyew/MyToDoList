@@ -7,11 +7,11 @@ import {
 } from "./todolistsReducer";
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../App/store";
+import {AppRootStateType} from "../../App/store";
 import {addTaskTC, removeTaskTC, updateTaskTC} from "./tasksReducer";
-import {TaskStatuses, TaskType} from "../api/todolistApi";
+import {TaskStatuses, TaskType} from "../../api/todolistApi";
 import {Grid, Paper} from "@material-ui/core";
-import {AddItemForm} from "../components/AddItemForm/AddItemForm";
+import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 import { Navigate } from "react-router-dom";
 

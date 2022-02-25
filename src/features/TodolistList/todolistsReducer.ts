@@ -1,6 +1,6 @@
-import {todolistAPI, TodolistType} from "../api/todolistApi";
+import {todolistAPI, TodolistType} from "../../api/todolistApi";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC, setAppStatusActionType} from "../App/AppReducer";
+import {RequestStatusType, setAppStatusAC, setAppStatusActionType} from "../../App/AppReducer";
 
 type ActionsType =
     | RemoveTodolistActionType
