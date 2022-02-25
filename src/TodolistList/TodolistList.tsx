@@ -22,18 +22,23 @@ type PropsType = {
     demo?: boolean
 }
 
+function Navigate(props: { to: string }) {
+    return null;
+}
+
 export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
 
+    const todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
+    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        if (demo) {
+        if ( demo || !isLoggedIn) {
             return
         }
         dispatch(fetchTodolistsTC())
     }, [])
-
-    const todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
-    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    const dispatch = useDispatch();
 
     const removeTask = useCallback((id: string, todolistId: string) => {
         dispatch(removeTaskTC(id, todolistId));
@@ -66,6 +71,10 @@ export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
     const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistTC(title));
     }, [dispatch])
+
+    if (!isLoggedIn) {
+        return <Navigate to="/login"/>
+    }
 
     return (
         <>
