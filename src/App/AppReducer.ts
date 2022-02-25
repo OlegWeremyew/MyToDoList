@@ -1,6 +1,11 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/todolistApi";
+import {setIsLoggedInAC} from "../features/Login/authReducer";
+
 export const initialState = {
     status: 'idle'as RequestStatusType,
     error: null,
+    isInitialized: false,
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -9,6 +14,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
             return {...state, status: action.payload.status}
         case 'APP/SET-ERROR':
             return {...state, error: action.payload.error}
+        case 'APP/SET-INITIALIZED':
+            return {...state, isInitialized: action.payload.isInitialized}
         default:
             return state
     }
@@ -35,12 +42,39 @@ export const setAppStatusAC = (status: RequestStatusType) => {
     } as const
 }
 
+export type setInitializedActionType = ReturnType<typeof setInitializedAC>
+export const setInitializedAC = (isInitialized: boolean) => {
+    return {
+        type: 'APP/SET-INITIALIZED',
+        payload: {
+            isInitialized,
+        },
+    } as const
+}
+
+//thunk
+export const initializeAppTC = () => (dispatch: Dispatch) => {
+    authAPI.me()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(true));
+            } else {
+
+            }
+        })
+        .finally(() => {
+            dispatch(setInitializedAC(true))
+        })
+}
+
 //Types ========================================================
+
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export type InitialStateType = {
     status: RequestStatusType,
-    error: string | null
+    error: string | null,
+    isInitialized: boolean,
 }
 
-type ActionsType = setAppStatusActionType | setAppErrorActionType
+type ActionsType = setAppStatusActionType | setAppErrorActionType | setInitializedActionType

@@ -1,10 +1,10 @@
 import {Dispatch} from 'redux'
-import {setAppErrorActionType, setAppStatusAC, setAppStatusActionType} from "../../App/AppReducer";
+import {setAppErrorActionType, setAppStatusAC, setAppStatusActionType, setInitializedAC} from "../../App/AppReducer";
 import {authAPI, LoginParamsType} from "../../api/todolistApi";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/errorUtils";
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
 }
 type InitialStateType = typeof initialState
 
@@ -16,7 +16,6 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
             return state
     }
 }
-
 
 // actions
 export type setIsLoggedInType = ReturnType<typeof setIsLoggedInAC>
@@ -30,6 +29,21 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true))
+                dispatch(setAppStatusAC("succeeded"))
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch((err) => {
+            handleServerNetworkError(err, dispatch)
+        })
+}
+
+export const logoutTC = () => (dispatch: Dispatch) => {
+    authAPI.logout()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(false))
                 dispatch(setAppStatusAC("succeeded"))
             } else {
                 handleServerAppError(res.data, dispatch)

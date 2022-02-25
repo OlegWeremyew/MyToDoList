@@ -14,13 +14,6 @@ import {Navigate} from 'react-router-dom';
 import {loginTC} from "./authReducer";
 import {LoginParamsType} from "../../api/todolistApi";
 
-/*type FormikErrorType = {
-    email?: string
-    password?: string
-    rememberMe?: boolean
-}*/
-
-
 export const Login = () => {
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
