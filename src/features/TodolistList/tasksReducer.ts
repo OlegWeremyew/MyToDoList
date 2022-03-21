@@ -20,8 +20,8 @@ export const slice = createSlice({
                 tasks.splice(index, 1)
             }
         },
-        addTaskAC(state, action: PayloadAction<{ task: TaskType }>) {
-            state[action.payload.task.todoListId].unshift(action.payload.task)
+        addTaskAC(state, action: PayloadAction<TaskType>) {
+            state[action.payload.todoListId].unshift(action.payload)
         },
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, todolistId: string }>) {
             const tasks = state[action.payload.todolistId]
@@ -38,9 +38,9 @@ export const slice = createSlice({
         builder.addCase(addTodolistAC, (state, action) => {
             state[action.payload.todolist.id] = []
         });
-        builder.addCase(removeTodolistAC, (state, action) => {
+/*        builder.addCase(removeTodolistAC, (state, action) => {
             delete state[action.payload.todolistId]
-        });
+        });*/
         builder.addCase(setTodosAC, (state, action) => {
             action.payload.todos.forEach(f => {
                 state[f.id] = []
@@ -67,7 +67,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
 export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC({status: "loading"}))
     todolistAPI.deleteTask(todolistId, taskId)
-        .then(() => {
+        .then(res => {
             dispatch(removeTaskAC({taskId, todolistId}))
             dispatch(setAppStatusAC({status: "succeeded"}))
         })
@@ -79,7 +79,7 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
         .then(res => {
             if (res.data.resultCode === 0) {
                 let task = res.data.data.item
-                dispatch(addTaskAC({task}))
+                dispatch(addTaskAC(task))
                 dispatch(setAppStatusAC({status: "succeeded"}))
             } else {
                 handleServerAppError(res.data, dispatch)

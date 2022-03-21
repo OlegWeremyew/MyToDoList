@@ -3,7 +3,8 @@ import {addTodolistAC, removeTodolistAC, setTodosAC} from './todolistsReducer';
 import {TaskPriorities, TaskStatuses} from "../../api/todolistApi";
 import {TasksStateType} from "./TodolistList";
 
-let startState: TasksStateType = {};
+let startState: TasksStateType = {}
+
 beforeEach(() => {
     startState = {
         "todolistId1": [
@@ -93,23 +94,23 @@ test('correct task should be deleted from correct array', () => {
     expect(endState["todolistId1"].length).toBe(3);
     expect(endState["todolistId2"].length).toBe(2);
     expect(endState["todolistId2"].every(t => t.id != "2")).toBeTruthy()
-});
+})
 test('correct task should be added to correct array', () => {
-    const action = addTaskAC({
-            task: {
-                todoListId: "todolistId2",
-                title: "juice",
-                status: TaskStatuses.New,
-                addedDate: "",
-                deadline: "",
-                order: 0,
-                description: "",
-                priority: 0,
-                startDate: "",
-                id: "dddddddddddddddddd",
-            }
-        }
-    )
+
+    const task = {
+        todoListId: "todolistId2",
+        title: "juice",
+        status: TaskStatuses.New,
+        addedDate: "",
+        deadline: "",
+        order: 0,
+        description: "",
+        priority: 0,
+        startDate: "",
+        id: "dddddddddddddddddd",
+    }
+
+    const action = addTaskAC(task)
 
     const endState = tasksReducer(startState, action)
 
@@ -161,7 +162,7 @@ test('new array should be added when new todolist is added', () => {
     expect(endState[newKey]).toEqual([]);
 })
 test('property with todolistId should be deleted', () => {
-    const action = removeTodolistAC({todolistId: "todolistId2"});
+    const action = removeTodolistAC({todolistId: "todolistId2"})
 
     const endState = tasksReducer(startState, action)
 

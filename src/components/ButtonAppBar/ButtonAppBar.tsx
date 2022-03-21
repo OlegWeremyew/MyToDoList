@@ -39,7 +39,6 @@ export const ButtonAppBar = () => {
                     status === "loading" &&
                     <>
                         <LinearProgress/>
-                        <LinearProgress variant="buffer"/>
                     </>}
             </AppBar>
         </Box>
