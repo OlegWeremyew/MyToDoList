@@ -7,11 +7,13 @@ test('ids should be equals', () => {
     const startTodolistsState: Array<TodolistDomainType> = [];
 
     const action = addTodolistAC({
-        id: "dfdf",
-        title: "New Todolist",
-        addedDate: "",
-        order: 0
-    });
+        todolist: {
+            id: "dfdf",
+            title: "New Todolist",
+            addedDate: "",
+            order: 0
+        }
+    })
 
     const endTasksState = tasksReducer(startTasksState, action)
     const endTodolistsState = todolistsReducer(startTodolistsState, action)
