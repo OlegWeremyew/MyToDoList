@@ -11,19 +11,18 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {initializeAppTC} from "./AppReducer";
+import {PATH} from "../utils/RouterPATH";
+import {PageNotFound} from "../components/PageNotFound/PageNotFound";
+import {getIsInitializedSelector} from "../utils/appSelectors";
 
-type PropsType = {
-    demo?: boolean
-}
+export const App: React.FC<PropsType> = ({demo = false}) => {
 
-export const App = ({demo = false}: PropsType) => {
-
-    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
     const dispatch = useDispatch()
+    const isInitialized = useSelector<AppRootStateType, boolean>(getIsInitializedSelector)
 
     useEffect(() => {
         dispatch(initializeAppTC())
-    },[])
+    }, [dispatch, isInitialized])
 
     if (!isInitialized) {
         return (
@@ -40,15 +39,21 @@ export const App = ({demo = false}: PropsType) => {
             <ButtonAppBar/>
             <Container fixed>
                 <Routes>
-                    <Route path="/" element={<TodolistList demo={demo}/>}/>
-                    <Route path="login" element={<Login/>}/>
+                    <Route path={PATH.MAIN_WINDOW} element={<TodolistList demo={demo}/>}/>
+                    <Route path={PATH.LOGIN} element={<Login/>}/>
 
-                    <Route path="404" element={<h1 style={{textAlign: "center"}}>404. Page not found</h1>}/>
-                    <Route path="*" element={<Navigate to={"404"}/>}/>
+                    <Route path={PATH.PAGE_NOT_FOUND} element={<PageNotFound/>}/>
+                    <Route path={PATH.ERROR} element={<Navigate to={PATH.PAGE_NOT_FOUND}/>}/>
                 </Routes>
             </Container>
         </div>
     )
+}
+
+//type
+
+type PropsType = {
+    demo?: boolean
 }
 
 

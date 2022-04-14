@@ -1,4 +1,14 @@
 import React from 'react'
+import {useFormik} from "formik";
+import {useDispatch, useSelector} from "react-redux";
+import {Navigate} from 'react-router-dom';
+
+import {AppRootStateType} from "../../App/store";
+import {loginTC} from "./authReducer";
+import {LoginParamsType} from "../../api/todolistApi";
+import {PATH} from "../../utils/RouterPATH";
+import {getIsLoggedInSelector} from "../../utils/appSelectors";
+
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
@@ -7,35 +17,29 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../App/store";
-import {Navigate} from 'react-router-dom';
-import {loginTC} from "./authReducer";
-import {LoginParamsType} from "../../api/todolistApi";
 
-export const Login = () => {
+export const Login: React.FC = () => {
 
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(getIsLoggedInSelector)
     const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: false,
         },
         validate: (values) => {
-            const errors: Partial<Omit<LoginParamsType, "captcha">> = {};
+            const errors: Partial<Omit<LoginParamsType, "captcha">> = {}
             if (!values.email) {
-                errors.email = 'Email is required';
+                errors.email = 'Email is required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
+                errors.email = 'Invalid email address'
             }
             if (!values.password) {
-                errors.password = 'Password is required';
+                errors.password = 'Password is required'
             } else if (values.password.length < 3) {
-                errors.password = 'Password is too short';
+                errors.password = 'Password is too short'
             }
             return errors;
         },
@@ -46,7 +50,7 @@ export const Login = () => {
     })
 
     if (isLoggedIn) {
-        return <Navigate to="/"/>
+        return <Navigate to={PATH.MAIN_WINDOW}/>
     }
 
     return (
@@ -56,7 +60,10 @@ export const Login = () => {
                     <FormLabel>
                         <p>To log in get registered
                             <a href={'https://social-network.samuraijs.com/'}
-                               target={'_blank'}> here
+                               target={'_blank'}
+                               rel="noreferrer"
+                            >
+                                here
                             </a>
                         </p>
                         <p>or use common test account credentials:</p>
