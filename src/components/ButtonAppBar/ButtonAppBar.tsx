@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {AppBar, Box, Button, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core";
-import {Menu} from '@material-ui/icons';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../App/store";
 import {RequestStatusType} from "../../App/AppReducer";
@@ -28,18 +27,21 @@ export const ButtonAppBar = () => {
                         aria-label="menu"
                         sx={{mr: 2}}
                     >
-                        <Menu/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        News
+                        Todolist
                     </Typography>
-                    {isLoggedIn && <Button onClick={logoutHandler} color="inherit">Logout</Button>}
+                    {
+                        isLoggedIn
+                        && <Button variant="outlined" onClick={logoutHandler} color="inherit">Logout</Button>
+                    }
                 </Toolbar>
                 {
-                    status === "loading" &&
-                    <>
+                    status === "loading"
+                    && <>
                         <LinearProgress/>
-                    </>}
+                    </>
+                }
             </AppBar>
         </Box>
     );

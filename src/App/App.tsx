@@ -26,10 +26,12 @@ export const App = ({demo = false}: PropsType) => {
     },[])
 
     if (!isInitialized) {
-        return <div
-            style={{position: 'fixed', top: '40%', textAlign: 'center', width: '100%'}}>
-            <CircularProgress/>
-        </div>
+        return (
+            <div
+                style={{position: 'fixed', top: '40%', textAlign: 'center', width: '100%'}}>
+                <CircularProgress/>
+            </div>
+        )
     }
 
     return (

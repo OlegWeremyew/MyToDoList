@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AlertProps, Snackbar} from "@material-ui/core";
+import {AlertProps, Snackbar, Stack} from "@material-ui/core";
 import MuiAlert from '@material-ui/core/Alert';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../App/store";
@@ -21,7 +21,7 @@ export function ErrorSnackbar() {
         if (reason === 'clickaway') {
             return;
         }
-        dispatch(setAppErrorAC({error: null}))
+        dispatch(setAppErrorAC(null))
     };
 
     const isOpen = error !== null
