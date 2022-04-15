@@ -2,53 +2,45 @@ import {todolistAPI, TodolistType} from "../../api/todolistApi";
 import {Dispatch} from "redux";
 import {RequestStatusType, setAppStatusAC, setAppStatusActionType} from "../../App/AppReducer";
 
-type ActionsType =
-    | RemoveTodolistActionType
-    | AddTodolistActionType
-    | ChangeTodolistTitleActionType
-    | ChangeTodolistFilterActionType
-    | setTodosActionType
-    | changeTodolistEntityStatusType
-
-
-export type FilterValuesType = "all" | "active" | "completed";
-
-export type TodolistDomainType = TodolistType & {
-    filter: FilterValuesType
-    entityStatus: RequestStatusType
-}
-
-
 const initialState: Array<TodolistDomainType> = []
+
+export enum todolistEnumReducer {
+    REMOVE_TODOLIST = 'TODOLIST/TODOLIST_REDUCER/REMOVE-TODOLIST',
+    ADD_TODOLIST = 'TODOLIST/TODOLIST_REDUCER/ADD_TODOLIST',
+    CHANGE_TODOLIST_TITLE = 'TODOLIST/TODOLIST_REDUCER/CHANGE-TODOLIST-TITLE',
+    CHANGE_TODOLIST_FILTER = 'TODOLIST/TODOLIST_REDUCER/CHANGE_TODOLIST_FILTER',
+    CHANGE_TODOLIST_ENTITY_STATUS = 'TODOLIST/TODOLIST_REDUCER/CHANGE_TODOLIST_ENTITY_STATUS',
+    SET_TODOS = 'TODOLIST/TODOLIST_REDUCER/SET_TODOS',
+}
 
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
-        case 'REMOVE-TODOLIST': {
+        case todolistEnumReducer.REMOVE_TODOLIST: {
             return state
                 .filter(tl => tl.id !== action.payload.id)
         }
-        case 'ADD-TODOLIST': {
+        case todolistEnumReducer.ADD_TODOLIST: {
             return [{...action.payload.todolist, filter: 'all', entityStatus: "idle"}, ...state]
         }
-        case 'CHANGE-TODOLIST-TITLE': {
+        case todolistEnumReducer.CHANGE_TODOLIST_TITLE: {
             return state
                 .map(m => m.id === action.payload.id
                     ? {...m, title: action.payload.title}
                     : m)
         }
-        case 'CHANGE-TODOLIST-FILTER': {
+        case todolistEnumReducer.CHANGE_TODOLIST_FILTER: {
             return state
                 .map(m => m.id === action.payload.id
                     ? {...m, filter: action.payload.filter}
                     : m)
         }
-        case "CHANGE_TODOLIST_ENTITY_STATUS": {
+        case todolistEnumReducer.CHANGE_TODOLIST_ENTITY_STATUS: {
             return state
                 .map(m => m.id === action.payload.id
                     ? {...m, entityStatus: action.payload.status}
                     : m)
         }
-        case "SET-TODOS": {
+        case todolistEnumReducer.SET_TODOS: {
             return action.payload.todos
                 .map(m => ({...m, filter: "all", entityStatus: "idle"}))
         }
@@ -60,7 +52,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
 export const removeTodolistAC = (todolistId: string) => {
     return {
-        type: 'REMOVE-TODOLIST',
+        type: todolistEnumReducer.REMOVE_TODOLIST,
         payload: {
             id: todolistId,
         }
@@ -70,7 +62,7 @@ export const removeTodolistAC = (todolistId: string) => {
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export const addTodolistAC = (todolist: TodolistType) => {
     return {
-        type: 'ADD-TODOLIST',
+        type: todolistEnumReducer.ADD_TODOLIST,
         payload: {
             todolist,
         }
@@ -80,7 +72,7 @@ export const addTodolistAC = (todolist: TodolistType) => {
 export type ChangeTodolistTitleActionType = ReturnType<typeof changeTodolistTitleAC>
 export const changeTodolistTitleAC = (id: string, title: string) => {
     return {
-        type: 'CHANGE-TODOLIST-TITLE',
+        type: todolistEnumReducer.CHANGE_TODOLIST_TITLE,
         payload: {
             id: id,
             title: title,
@@ -91,7 +83,7 @@ export const changeTodolistTitleAC = (id: string, title: string) => {
 export type ChangeTodolistFilterActionType = ReturnType<typeof changeTodolistFilterAC>
 export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => {
     return {
-        type: 'CHANGE-TODOLIST-FILTER',
+        type: todolistEnumReducer.CHANGE_TODOLIST_FILTER,
         payload: {
             id: id,
             filter: filter,
@@ -102,7 +94,7 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType) => 
 export type setTodosActionType = ReturnType<typeof setTodosAC>
 export const setTodosAC = (todos: Array<TodolistType>) => {
     return {
-        type: "SET-TODOS",
+        type: todolistEnumReducer.SET_TODOS,
         payload: {
             todos,
         },
@@ -112,7 +104,7 @@ export const setTodosAC = (todos: Array<TodolistType>) => {
 export type changeTodolistEntityStatusType = ReturnType<typeof changeTodolistEntityStatusAC>
 export const changeTodolistEntityStatusAC = (id: string, status: RequestStatusType) => {
     return {
-        type: "CHANGE_TODOLIST_ENTITY_STATUS",
+        type: todolistEnumReducer.CHANGE_TODOLIST_ENTITY_STATUS,
         payload: {
             id,
             status,
@@ -156,6 +148,24 @@ export const ChangeTodolistTitleTC = (id: string, title: string) => (dispatch: T
             dispatch(changeTodolistTitleAC(id, title))
             dispatch(setAppStatusAC("succeeded"))
         })
+}
+
+//types
+
+type ActionsType =
+    | RemoveTodolistActionType
+    | AddTodolistActionType
+    | ChangeTodolistTitleActionType
+    | ChangeTodolistFilterActionType
+    | setTodosActionType
+    | changeTodolistEntityStatusType
+
+
+export type FilterValuesType = "all" | "active" | "completed";
+
+export type TodolistDomainType = TodolistType & {
+    filter: FilterValuesType
+    entityStatus: RequestStatusType
 }
 
 export type ThunkDispatchType = Dispatch<ActionsType | setAppStatusActionType>

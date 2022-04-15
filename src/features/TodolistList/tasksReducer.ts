@@ -1,4 +1,9 @@
-import {AddTodolistActionType, RemoveTodolistActionType, setTodosActionType} from './todolistsReducer';
+import {
+    AddTodolistActionType,
+    RemoveTodolistActionType,
+    setTodosActionType,
+    todolistEnumReducer
+} from './todolistsReducer';
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../../api/todolistApi";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../App/store";
@@ -8,22 +13,29 @@ import {handleServerAppError, handleServerNetworkError} from "../../utils/errorU
 
 const initialState: TasksStateType = {}
 
+export enum taskEnumReducer {
+    REMOVE_TASK = 'TODOLIST/TASK_REDUCER/REMOVE_TASK',
+    ADD_TASK = 'TODOLIST/TASK_REDUCER/ADD_TASK',
+    UPDATE_TASK = 'TODOLIST/TASK_REDUCER/UPDATE_TASK',
+    SET_TASKS = 'TODOLIST/TASK_REDUCER/SET-TASKS',
+}
+
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
-        case 'REMOVE-TASK': {
+        case taskEnumReducer.REMOVE_TASK: {
             return {
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId]
                     .filter(f => f.id !== action.payload.taskId)
             }
         }
-        case 'ADD-TASK': {
+        case taskEnumReducer.ADD_TASK: {
             return {
                 ...state,
                 [action.payload.task.todoListId]: [action.payload.task, ...state[action.payload.task.todoListId]]
             }
         }
-        case 'UPDATE-TASK': {
+        case taskEnumReducer.UPDATE_TASK: {
             return {
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId]
@@ -32,24 +44,24 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
                         : m)
             }
         }
-        case 'ADD-TODOLIST': {
+        case todolistEnumReducer.ADD_TODOLIST: {
             return {
                 ...state,
                 [action.payload.todolist.id]: []
             }
         }
-        case 'REMOVE-TODOLIST': {
+        case todolistEnumReducer.REMOVE_TODOLIST: {
             const copyState = {...state};
             delete copyState[action.payload.id];
             return copyState;
         }
-        case "SET-TODOS": {
+        case todolistEnumReducer.SET_TODOS: {
             let stateCopy = {...state}
             action.payload.todos
                 .forEach(f => stateCopy[f.id] = [])
             return stateCopy
         }
-        case 'SET-TASKS': {
+        case taskEnumReducer.SET_TASKS: {
             return {...state, [action.payload.todolistId]: action.payload.tasks}
         }
         default:
@@ -60,7 +72,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (taskId: string, todolistId: string) => {
     return {
-        type: 'REMOVE-TASK',
+        type: taskEnumReducer.REMOVE_TASK,
         payload: {
             taskId: taskId,
             todolistId: todolistId,
@@ -71,7 +83,7 @@ export const removeTaskAC = (taskId: string, todolistId: string) => {
 export type AddTaskActionType = ReturnType<typeof addTaskAC>
 export const addTaskAC = (task: TaskType) => {
     return {
-        type: 'ADD-TASK',
+        type: taskEnumReducer.ADD_TASK,
         payload: {
             task,
         }
@@ -81,7 +93,7 @@ export const addTaskAC = (task: TaskType) => {
 export type updateTaskActionType = ReturnType<typeof updateTaskAC>
 export const updateTaskAC = (taskId: string, model: UpdateDomainTaskModelType, todolistId: string) => {
     return {
-        type: 'UPDATE-TASK',
+        type: taskEnumReducer.UPDATE_TASK,
         payload: {
             model,
             todolistId,
@@ -93,7 +105,7 @@ export const updateTaskAC = (taskId: string, model: UpdateDomainTaskModelType, t
 export type SetTasksActionType = ReturnType<typeof setTasksAC>
 export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) => {
     return {
-        type: 'SET-TASKS',
+        type: taskEnumReducer.SET_TASKS,
         payload: {
             tasks,
             todolistId,

@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from "axios";
+import {Nullable} from "../types/Nullable";
 
 const instance = axios.create({
     withCredentials: true,
@@ -124,7 +125,7 @@ export type UpdateTaskModelType = {
 }
 
 export type GetTasksResponse = {
-    error: string | null
+    error: Nullable<string>
     totalCount: number
     items: TaskType[]
 }
