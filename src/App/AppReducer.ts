@@ -2,9 +2,10 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/todolistApi";
 import {setIsLoggedInAC} from "../features/Login/authReducer";
 import {Nullable} from "../types/Nullable";
+import {InferActionTypes} from "./store";
 
 export const initialState = {
-    status: 'idle'as RequestStatusType,
+    status: 'idle' as RequestStatusType,
     error: null,
     isInitialized: false,
 }
@@ -15,7 +16,7 @@ export enum appEnumReducer {
     SET_INITIALIZED = 'TODOLIST/APP_REDUCER/SET_INITIALIZED',
 }
 
-export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const appReducer = (state: InitialStateType = initialState, action: ActionAppTypes): InitialStateType => {
     switch (action.type) {
         case appEnumReducer.SET_STATUS:
             return {...state, status: action.payload.status}
@@ -29,35 +30,35 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 }
 
 //ActionCreators=============================
-export type setAppErrorActionType = ReturnType<typeof setAppErrorAC>
-export const setAppErrorAC = (error: Nullable<string>) => {
-    return {
-        type: appEnumReducer.SET_ERROR,
-        payload: {
-            error,
-        },
-    } as const
+export const AppAction = {
+    setAppErrorAC(error: Nullable<string>) {
+        return {
+            type: appEnumReducer.SET_ERROR,
+            payload: {
+                error,
+            },
+        } as const
+    },
+    setAppStatusAC(status: RequestStatusType) {
+        return {
+            type: appEnumReducer.SET_STATUS,
+            payload: {
+                status,
+            },
+        } as const
+    },
+    setInitializedAC(isInitialized: boolean){
+        return {
+            type: appEnumReducer.SET_INITIALIZED,
+            payload: {
+                isInitialized,
+            },
+        } as const
+    },
 }
 
-export type setAppStatusActionType = ReturnType<typeof setAppStatusAC>
-export const setAppStatusAC = (status: RequestStatusType) => {
-    return {
-        type: appEnumReducer.SET_STATUS,
-        payload: {
-            status,
-        },
-    } as const
-}
 
-export type setInitializedActionType = ReturnType<typeof setInitializedAC>
-export const setInitializedAC = (isInitialized: boolean) => {
-    return {
-        type: appEnumReducer.SET_INITIALIZED,
-        payload: {
-            isInitialized,
-        },
-    } as const
-}
+
 
 //thunk
 export const initializeAppTC = () => (dispatch: Dispatch) => {
@@ -70,7 +71,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
             }
         })
         .finally(() => {
-            dispatch(setInitializedAC(true))
+            dispatch(AppAction.setInitializedAC(true))
         })
 }
 
@@ -84,4 +85,4 @@ export type InitialStateType = {
     isInitialized: boolean,
 }
 
-type ActionsType = setAppStatusActionType | setAppErrorActionType | setInitializedActionType
+export type ActionAppTypes = InferActionTypes<typeof AppAction>
