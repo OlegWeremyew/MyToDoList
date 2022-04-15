@@ -1,4 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
+import style from './TodolistList.module.css'
+
 import {AddItemForm} from '../../../components/AddItemForm/AddItemForm';
 import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
 import {Button, IconButton} from '@material-ui/core';
@@ -52,60 +54,63 @@ export const Todolist: React.FC<PropsType> = React.memo(({
     if (todolist.filter === "active") {
         tasksForTodolist = tasksForTodolist.filter(task => task.status === TaskStatuses.New);
     }
+
     if (todolist.filter === "completed") {
         tasksForTodolist = tasksForTodolist.filter(task => task.status === TaskStatuses.Completed);
     }
 
-    return <div>
-        <h3>
-            <EditableSpan value={todolist.title} onChange={changeTodolistTitle}/>
-            <IconButton onClick={removeTodolist} disabled={todolist.entityStatus === "loading"}>
-                <Delete/>
-            </IconButton>
-        </h3>
-        <AddItemForm
-            label={'Name task'}
-            addItem={addTask}
-            disabled={todolist.entityStatus === "loading"}/>
+    return (
         <div>
-            {
-                tasksForTodolist.map(task => {
-                    return (
-                        <Task
-                            key={task.id}
-                            todolistId={todolist.id}
-                            task={task}
-                            removeTask={removeTask}
-                            changeTaskStatus={changeTaskStatus}
-                            changeTaskTitle={changeTaskTitle}
-                        />
-                    )
-                })
-            }
+            <div className={style.todolist__title}>
+                <EditableSpan value={todolist.title} onChange={changeTodolistTitle}/>
+                <IconButton onClick={removeTodolist} disabled={todolist.entityStatus === "loading"}>
+                    <Delete/>
+                </IconButton>
+            </div>
+            <AddItemForm
+                label={'Name task'}
+                addItem={addTask}
+                disabled={todolist.entityStatus === "loading"}/>
+            <div>
+                {
+                    tasksForTodolist.map(task => {
+                        return (
+                            <Task
+                                key={task.id}
+                                todolistId={todolist.id}
+                                task={task}
+                                removeTask={removeTask}
+                                changeTaskStatus={changeTaskStatus}
+                                changeTaskTitle={changeTaskTitle}
+                            />
+                        )
+                    })
+                }
+            </div>
+            <div style={{paddingTop: "10px"}}>
+                <Button
+                    variant={todolist.filter === 'all' ? 'outlined' : 'text'}
+                    onClick={() => onClickHandler('all')}
+                    color={'success'}
+                >
+                    All
+                </Button>
+                <Button variant={todolist.filter === 'active' ? 'outlined' : 'text'}
+                        onClick={() => onClickHandler('active')}
+                        color={'primary'}
+                >
+                    Active
+                </Button>
+                <Button
+                    variant={todolist.filter === 'completed' ? 'outlined' : 'text'}
+                    onClick={() => onClickHandler('completed')}
+                    color={'secondary'}
+                >
+                    Completed
+                </Button>
+            </div>
         </div>
-        <div style={{paddingTop: "10px"}}>
-            <Button
-                variant={todolist.filter === 'all' ? 'outlined' : 'text'}
-                onClick={() => onClickHandler('all')}
-                color={'success'}
-            >
-                All
-            </Button>
-            <Button variant={todolist.filter === 'active' ? 'outlined' : 'text'}
-                    onClick={() => onClickHandler('active')}
-                    color={'primary'}
-            >
-                Active
-            </Button>
-            <Button
-                variant={todolist.filter === 'completed' ? 'outlined' : 'text'}
-                onClick={() => onClickHandler('completed')}
-                color={'secondary'}
-            >
-                Completed
-            </Button>
-        </div>
-    </div>
+    )
 })
 
 //type

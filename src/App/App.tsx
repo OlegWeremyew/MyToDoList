@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './App.css';
+import style from './App.module.css';
 
 import {CircularProgress, Container} from '@material-ui/core';
 
@@ -26,15 +26,14 @@ export const App: React.FC<PropsType> = ({demo = false}) => {
 
     if (!isInitialized) {
         return (
-            <div
-                style={{position: 'fixed', top: '40%', textAlign: 'center', width: '100%'}}>
+            <div className={style.preloader}>
                 <CircularProgress/>
             </div>
         )
     }
 
     return (
-        <div className="App">
+        <div>
             <ErrorSnackbar/>
             <ButtonAppBar/>
             <Container fixed>

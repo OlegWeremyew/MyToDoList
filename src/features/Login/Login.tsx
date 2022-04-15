@@ -41,7 +41,7 @@ export const Login: React.FC = () => {
             } else if (values.password.length < 3) {
                 errors.password = 'Password is too short'
             }
-            return errors;
+            return errors
         },
         onSubmit: values => {
             dispatch(loginTC(values))
@@ -59,9 +59,10 @@ export const Login: React.FC = () => {
                 <FormControl>
                     <FormLabel>
                         <p>To log in get registered
-                            <a href={'https://social-network.samuraijs.com/'}
-                               target={'_blank'}
-                               rel="noreferrer"
+                            <a
+                                href={'https://social-network.samuraijs.com/'}
+                                target={'_blank'}
+                                rel="noreferrer"
                             >
                                 here
                             </a>
@@ -99,7 +100,9 @@ export const Login: React.FC = () => {
                                 type={'submit'}
                                 variant={'contained'}
                                 color={'primary'}
-                            >Login</Button>
+                            >
+                                Login
+                            </Button>
                         </FormGroup>
                     </form>
                 </FormControl>
