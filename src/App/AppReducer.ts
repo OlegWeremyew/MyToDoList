@@ -1,8 +1,8 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/todolistApi";
-import {setIsLoggedInAC} from "../features/Login/authReducer";
 import {Nullable} from "../types/Nullable";
 import {InferActionTypes} from "./store";
+import {authAction} from "../features/Login/authReducer";
 
 export const initialState = {
     status: 'idle' as RequestStatusType,
@@ -65,7 +65,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
     authAPI.me()
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setIsLoggedInAC(true));
+                dispatch(authAction.setIsLoggedInAC(true));
             } else {
 
             }

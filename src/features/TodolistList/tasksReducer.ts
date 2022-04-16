@@ -1,12 +1,10 @@
 import {
-    AddTodolistActionType,
-    RemoveTodolistActionType,
-    setTodosActionType,
+    ActionTodolistTypes,
     todolistEnumReducer
 } from './todolistsReducer';
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../../api/todolistApi";
 import {Dispatch} from "redux";
-import {AppRootStateType} from "../../App/store";
+import {AppRootStateType, InferActionTypes} from "../../App/store";
 import {TasksStateType} from "./TodolistList";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/errorUtils";
 import {ActionAppTypes, AppAction} from "../../App/AppReducer";
@@ -20,7 +18,7 @@ export enum taskEnumReducer {
     SET_TASKS = 'TODOLIST/TASK_REDUCER/SET-TASKS',
 }
 
-export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
+export const tasksReducer = (state: TasksStateType = initialState, action: ActionsTaskAllType): TasksStateType => {
     switch (action.type) {
         case taskEnumReducer.REMOVE_TASK: {
             return {
@@ -69,48 +67,43 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
     }
 }
 
-export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
-export const removeTaskAC = (taskId: string, todolistId: string) => {
-    return {
-        type: taskEnumReducer.REMOVE_TASK,
-        payload: {
-            taskId: taskId,
-            todolistId: todolistId,
-        }
-    } as const
-}
-
-export type AddTaskActionType = ReturnType<typeof addTaskAC>
-export const addTaskAC = (task: TaskType) => {
-    return {
-        type: taskEnumReducer.ADD_TASK,
-        payload: {
-            task,
-        }
-    } as const
-}
-
-export type updateTaskActionType = ReturnType<typeof updateTaskAC>
-export const updateTaskAC = (taskId: string, model: UpdateDomainTaskModelType, todolistId: string) => {
-    return {
-        type: taskEnumReducer.UPDATE_TASK,
-        payload: {
-            model,
-            todolistId,
-            taskId,
-        }
-    } as const
-}
-
-export type SetTasksActionType = ReturnType<typeof setTasksAC>
-export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) => {
-    return {
-        type: taskEnumReducer.SET_TASKS,
-        payload: {
-            tasks,
-            todolistId,
-        }
-    } as const
+export const taskAction = {
+    removeTaskAC(taskId: string, todolistId: string) {
+        return {
+            type: taskEnumReducer.REMOVE_TASK,
+            payload: {
+                taskId: taskId,
+                todolistId: todolistId,
+            }
+        } as const
+    },
+    addTaskAC(task: TaskType) {
+        return {
+            type: taskEnumReducer.ADD_TASK,
+            payload: {
+                task,
+            }
+        } as const
+    },
+    updateTaskAC(taskId: string, model: UpdateDomainTaskModelType, todolistId: string) {
+        return {
+            type: taskEnumReducer.UPDATE_TASK,
+            payload: {
+                model,
+                todolistId,
+                taskId,
+            }
+        } as const
+    },
+    setTasksAC(tasks: Array<TaskType>, todolistId: string) {
+        return {
+            type: taskEnumReducer.SET_TASKS,
+            payload: {
+                tasks,
+                todolistId,
+            }
+        } as const
+    },
 }
 
 //Thunk===================================================================================
@@ -119,7 +112,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType
     todolistAPI.getTasks(todolistId)
         .then((res) => {
             const tasks = res.data.items
-            dispatch(setTasksAC(tasks, todolistId))
+            dispatch(taskAction.setTasksAC(tasks, todolistId))
             dispatch(AppAction.setAppStatusAC("succeeded"))
         })
 }
@@ -128,7 +121,7 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: T
     dispatch(AppAction.setAppStatusAC("loading"))
     todolistAPI.deleteTask(todolistId, taskId)
         .then(res => {
-            dispatch(removeTaskAC(taskId, todolistId))
+            dispatch(taskAction.removeTaskAC(taskId, todolistId))
             dispatch(AppAction.setAppStatusAC("succeeded"))
         })
 }
@@ -139,7 +132,7 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Thunk
         .then(res => {
             if (res.data.resultCode === 0) {
                 let task = res.data.data.item
-                dispatch(addTaskAC(task))
+                dispatch(taskAction.addTaskAC(task))
                 dispatch(AppAction.setAppStatusAC("succeeded"))
             } else {
                 handleServerAppError(res.data, dispatch)
@@ -172,7 +165,7 @@ export const updateTaskTC = (taskId: string, todolistId: string, domainModel: Up
             todolistAPI.updateTask(todolistId, taskId, apiModel)
                 .then((res) => {
                     if (res.data.resultCode === 0) {
-                        dispatch(updateTaskAC(taskId, domainModel, todolistId))
+                        dispatch(taskAction.updateTaskAC(taskId, domainModel, todolistId))
                     } else {
                         handleServerAppError(res.data, dispatch)
                     }
@@ -184,16 +177,11 @@ export const updateTaskTC = (taskId: string, todolistId: string, domainModel: Up
     }
 
 //types===============================================
-export type ThunkDispatchType = Dispatch<ActionsType | ActionAppTypes>
+export type ThunkDispatchType = Dispatch<ActionsTaskAllType | ActionAppTypes>
 
-type ActionsType =
-    | RemoveTaskActionType
-    | AddTaskActionType
-    | updateTaskActionType
-    | AddTodolistActionType
-    | RemoveTodolistActionType
-    | setTodosActionType
-    | SetTasksActionType
+type ActionsTaskAllType =
+    | ActionTaskTypes
+    | ActionTodolistTypes
 
 export type UpdateDomainTaskModelType = {
     title?: string
@@ -203,3 +191,5 @@ export type UpdateDomainTaskModelType = {
     startDate?: string
     deadline?: string
 }
+
+export type ActionTaskTypes = InferActionTypes<typeof taskAction>
