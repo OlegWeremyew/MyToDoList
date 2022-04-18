@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import style from './App.module.css';
+import style from './App.module.scss';
 
 import {CircularProgress, Container} from '@material-ui/core';
 

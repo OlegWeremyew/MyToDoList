@@ -1,0 +1,20 @@
+.gridForm {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gridTodolist {
+  display: flex;
+  justify-content: center;
+
+  .paperStyle {
+    padding: 10px;
+  }
+
+  .paperStyle:hover {
+    background-color: #f8f7f7;
+  }
+
+}
+

@@ -1,4 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
+import style from './EditableSpan.module.scss'
+
 import {TextField} from '@material-ui/core';
 
 type EditableSpanPropsType = {
@@ -33,7 +35,10 @@ export const EditableSpan = React.memo(({value, onChange}: EditableSpanPropsType
                     autoFocus onBlur={activateViewMode}
                 />
             ) : (
-                <span onDoubleClick={activateEditMode}>
+                <span
+                    onDoubleClick={activateEditMode}
+                className={style.text}
+                >
                     {value}
                 </span>
             )

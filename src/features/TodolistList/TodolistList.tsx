@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect} from "react";
+import style from './TodolistList.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import {
@@ -71,15 +72,15 @@ export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
 
     return (
         <>
-            <Grid container style={{padding: "20px"}} justifyContent={'center'}>
+            <Grid container className={style.gridForm}>
                 <AddItemForm label={'Name todolist'} addItem={addTodolist}/>
             </Grid>
-            <Grid container spacing={3} justifyContent={'center'}>
+            <Grid container spacing={3} className={style.gridTodolist}>
                 {
                     todoLists.map(tl => {
                         return (
                             <Grid item key={tl.id}>
-                                <Paper style={{padding: "10px"}}>
+                                <Paper className={style.paperStyle}>
                                     <Todolist
                                         todolist={tl}
                                         tasks={tasks[tl.id]}
