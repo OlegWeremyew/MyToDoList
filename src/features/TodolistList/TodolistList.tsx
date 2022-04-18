@@ -17,6 +17,7 @@ import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 import {PATH} from "../../utils/RouterPATH";
 import {getIsLoggedInSelector, getTaskSelector, getTodoLists} from "../../utils/appSelectors";
+
 import {Grid, Paper} from "@material-ui/core";
 
 export const TodolistList: React.FC<PropsType> = ({demo = false}) => {
@@ -112,5 +113,4 @@ export type TasksStateType = {
 type PropsType = {
     demo?: boolean
 }
-
 

@@ -8,9 +8,10 @@ export default {
     component: EditableSpan,
 } as ComponentMeta<typeof EditableSpan>;
 
-const Template: ComponentStory<typeof EditableSpan> = (args) => <EditableSpan {...args} />;
+const Template: ComponentStory<typeof EditableSpan> = (args) => <EditableSpan {...args} />
 
-export const EditableSpanStory = Template.bind({});
+export const EditableSpanStory = Template.bind({})
+
 EditableSpanStory.args = {
     value: "value",
     onChange: action("change title"),

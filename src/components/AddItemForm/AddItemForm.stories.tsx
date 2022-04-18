@@ -16,11 +16,10 @@ export default {
     },
 } as ComponentMeta<typeof AddItemForm>;
 
-const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args} />;
+const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args} />
 
-export const AddItemFormStory = Template.bind({});
+export const AddItemFormStory = Template.bind({})
 AddItemFormStory.args = {
     addItem: action("AddItemForm"),
     label: "Start input text",
 }
-

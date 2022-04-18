@@ -3,12 +3,7 @@ import style from './EditableSpan.module.scss'
 
 import {TextField} from '@material-ui/core';
 
-type EditableSpanPropsType = {
-    value: string
-    onChange: (newValue: string) => void
-}
-
-export const EditableSpan = React.memo(({value, onChange}: EditableSpanPropsType) => {
+export const EditableSpan:React.FC<EditableSpanPropsType> = React.memo(({value, onChange}) => {
 
     let [editMode, setEditMode] = useState(false)
     let [title, setTitle] = useState(value)
@@ -44,3 +39,10 @@ export const EditableSpan = React.memo(({value, onChange}: EditableSpanPropsType
             )
     )
 })
+
+//type
+
+type EditableSpanPropsType = {
+    value: string
+    onChange: (newValue: string) => void
+}

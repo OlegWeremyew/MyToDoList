@@ -1,10 +1,11 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import classes from './Task.module.css'
 
-import {Checkbox, IconButton} from "@material-ui/core";
 import {EditableSpan} from "../../../../components/EditableSpan/EditableSpan";
-import {Delete} from "@material-ui/icons";
 import {TaskStatuses, TaskType} from "../../../../api/todolistApi";
+
+import {Delete} from "@material-ui/icons";
+import {Checkbox, IconButton} from "@material-ui/core";
 
 export const Task: React.FC<TaskPropsType> = React.memo(({
                                                              task,
@@ -19,12 +20,12 @@ export const Task: React.FC<TaskPropsType> = React.memo(({
     }, [task.id, todolistId, removeTask])
 
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        let newIsDoneValue = e.currentTarget.checked;
-        changeTaskStatus(task.id, newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New, todolistId);
+        let newIsDoneValue = e.currentTarget.checked
+        changeTaskStatus(task.id, newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New, todolistId)
     }, [task.id, todolistId, changeTaskStatus])
 
     const onTitleChangeHandler = useCallback((newValue: string) => {
-        changeTaskTitle(task.id, newValue, todolistId);
+        changeTaskTitle(task.id, newValue, todolistId)
     }, [task.id, todolistId, changeTaskTitle])
 
     return (

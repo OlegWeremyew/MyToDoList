@@ -1,24 +1,19 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+
 import {IconButton, TextField} from '@material-ui/core';
 import {AddBox} from '@material-ui/icons';
 
-type AddItemFormPropsType = {
-    addItem: (title: string) => void
-    label: string
-    disabled?: boolean
-}
-
-export const AddItemForm = React.memo(({addItem, label, disabled = false}: AddItemFormPropsType) => {
+export const AddItemForm:React.FC<AddItemFormPropsType> = React.memo(({addItem, label, disabled = false}) => {
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<boolean>(false)
 
     const addItemHandler = () => {
         if (title.trim() !== "") {
-            addItem(title);
-            setTitle("");
+            addItem(title)
+            setTitle("")
         } else {
-            setError(true);
+            setError(true)
         }
     }
 
@@ -27,9 +22,9 @@ export const AddItemForm = React.memo(({addItem, label, disabled = false}: AddIt
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(false);
+        setError(false)
         if (e.key === "Enter") {
-            addItemHandler();
+            addItemHandler()
         }
     }
 
@@ -49,3 +44,11 @@ export const AddItemForm = React.memo(({addItem, label, disabled = false}: AddIt
         </IconButton>
     </div>
 })
+
+//type
+
+type AddItemFormPropsType = {
+    addItem: (title: string) => void
+    label: string
+    disabled?: boolean
+}

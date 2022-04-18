@@ -1,16 +1,17 @@
 import * as React from 'react';
-import {AppBar, Box, Button, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../App/store";
 import {RequestStatusType} from "../../App/AppReducer";
 import {logoutTC} from "../../features/Login/authReducer";
 
+import {AppBar, Box, Button, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core";
 
 export const ButtonAppBar = () => {
 
+    const dispatch = useDispatch()
+
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useDispatch()
 
     const logoutHandler = () => {
         dispatch(logoutTC())
@@ -44,5 +45,5 @@ export const ButtonAppBar = () => {
                 }
             </AppBar>
         </Box>
-    );
+    )
 }
