@@ -1,17 +1,19 @@
 import React from 'react';
-import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {action} from "@storybook/addon-actions";
-import {App} from "./App";
-import {ReduxStoreProviderDecorator} from "../stories/ReduxStoreProviderDecorator";
+
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import { ReduxStoreProviderDecorator } from '../stories/ReduxStoreProviderDecorator';
+
+import { App } from './App';
 
 export default {
-    title: 'TODOLIST/App',
-    component: App,
-    argTypes: {},
-    decorators: [ReduxStoreProviderDecorator],
-} as ComponentMeta<typeof App>
+  title: 'TODOLIST/App',
+  component: App,
+  argTypes: {},
+  decorators: [ReduxStoreProviderDecorator],
+} as ComponentMeta<typeof App>;
 
-const Template: ComponentStory<typeof App> = (args) => <App demo={true}/>
+const Template: ComponentStory<typeof App> = () => <App demo />;
 
-export const AppStory = Template.bind({})
-AppStory.args = {}
+export const AppStory = Template.bind({});
+AppStory.args = {};

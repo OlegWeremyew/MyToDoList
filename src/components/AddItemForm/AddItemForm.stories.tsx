@@ -1,25 +1,27 @@
 import React from 'react';
-import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {AddItemForm} from "./AddItemForm";
-import {action} from "@storybook/addon-actions";
+
+import { action } from '@storybook/addon-actions';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import { AddItemForm } from './AddItemForm';
 
 export default {
-    title: 'TODOLIST/AddItemForm',
-    component: AddItemForm,
-    argTypes: {
-        addItem: {
-            description: "Callback clicked inside form",
-        },
-        label: {
-            description: "Start text inside input",
-        },
+  title: 'TODOLIST/AddItemForm',
+  component: AddItemForm,
+  argTypes: {
+    addItem: {
+      description: 'Callback clicked inside form',
     },
+    label: {
+      description: 'Start text inside input',
+    },
+  },
 } as ComponentMeta<typeof AddItemForm>;
 
-const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args} />
+const Template: ComponentStory<typeof AddItemForm> = args => <AddItemForm {...args} />;
 
-export const AddItemFormStory = Template.bind({})
+export const AddItemFormStory = Template.bind({});
 AddItemFormStory.args = {
-    addItem: action("AddItemForm"),
-    label: "Start input text",
-}
+  addItem: action('AddItemForm'),
+  label: 'Start input text',
+};

@@ -1,49 +1,57 @@
 import * as React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../App/store";
-import {RequestStatusType} from "../../App/AppReducer";
-import {logoutTC} from "../../features/Login/authReducer";
 
-import {AppBar, Box, Button, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  LinearProgress,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ButtonAppBar = () => {
+import { RequestStatusType } from '../../App/AppReducer';
+import { AppRootStateType } from '../../App/store';
+import { logoutTC } from '../../features/Login/authReducer';
+import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-    const dispatch = useDispatch()
+export const ButtonAppBar = (): ReturnComponentType => {
+  const dispatch = useDispatch();
 
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+  const status = useSelector<AppRootStateType, RequestStatusType>(
+    state => state.app.status,
+  );
+  const isLoggedIn = useSelector<AppRootStateType, boolean>(
+    state => state.auth.isLoggedIn,
+  );
 
-    const logoutHandler = () => {
-        dispatch(logoutTC())
-    }
+  const logoutHandler = (): void => {
+    dispatch(logoutTC());
+  };
 
-    return (
-        <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 2}}
-                    >
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        Todolist
-                    </Typography>
-                    {
-                        isLoggedIn
-                        && <Button variant="outlined" onClick={logoutHandler} color="inherit">Logout</Button>
-                    }
-                </Toolbar>
-                {
-                    status === "loading"
-                    && <>
-                        <LinearProgress/>
-                    </>
-                }
-            </AppBar>
-        </Box>
-    )
-}
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Todolist
+          </Typography>
+          {isLoggedIn && (
+            <Button variant="outlined" onClick={logoutHandler} color="inherit">
+              Logout
+            </Button>
+          )}
+        </Toolbar>
+        {status === 'loading' && <LinearProgress />}
+      </AppBar>
+    </Box>
+  );
+};

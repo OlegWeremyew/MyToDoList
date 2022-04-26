@@ -1,40 +1,38 @@
 import * as React from 'react';
-import {useDispatch, useSelector} from "react-redux";
 
-import {AppRootStateType} from "../../App/store";
-import {AppAction} from "../../App/AppReducer";
-import {Nullable} from "../../types/Nullable";
-
-import {AlertProps, Snackbar} from "@material-ui/core";
+import { AlertProps, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/core/Alert';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-    props,
-    ref,
-) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
-})
+import { AppAction } from '../../App/AppReducer';
+import { AppRootStateType } from '../../App/store';
+import { Nullable } from '../../types/Nullable';
+import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-export function ErrorSnackbar() {
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+));
 
-    const dispatch = useDispatch()
+export const ErrorSnackbar = (): ReturnComponentType => {
+  const dispatch = useDispatch();
 
-    const error = useSelector<AppRootStateType, Nullable<string>>(state => state.app.error)
+  const error = useSelector<AppRootStateType, Nullable<string>>(state => state.app.error);
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return
-        }
-        dispatch(AppAction.setAppErrorAC(null))
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string): void => {
+    if (reason === 'clickaway') {
+      return;
     }
+    dispatch(AppAction.setAppErrorAC(null));
+  };
 
-    const isOpen = error !== null
+  const isOpen = error !== null;
 
-    return (
-        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
-                {error}
-            </Alert>
-        </Snackbar>
-    )
-}
+  return (
+    <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+        {error}
+      </Alert>
+    </Snackbar>
+  );
+};

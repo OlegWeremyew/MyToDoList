@@ -1,54 +1,57 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
-import {IconButton, TextField} from '@material-ui/core';
-import {AddBox} from '@material-ui/icons';
+import { IconButton, TextField } from '@material-ui/core';
+import { AddBox } from '@material-ui/icons';
 
-export const AddItemForm:React.FC<AddItemFormPropsType> = React.memo(({addItem, label, disabled = false}) => {
+export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(
+  ({ addItem, label, disabled = false }) => {
+    const [title, setTitle] = useState('');
+    const [error, setError] = useState<boolean>(false);
 
-    let [title, setTitle] = useState("")
-    let [error, setError] = useState<boolean>(false)
+    const addItemHandler = (): void => {
+      if (title.trim() !== '') {
+        addItem(title);
+        setTitle('');
+      } else {
+        setError(true);
+      }
+    };
 
-    const addItemHandler = () => {
-        if (title.trim() !== "") {
-            addItem(title)
-            setTitle("")
-        } else {
-            setError(true)
-        }
-    }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+      setTitle(e.currentTarget.value);
+    };
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>): void => {
+      setError(false);
+      if (e.key === 'Enter') {
+        addItemHandler();
+      }
+    };
 
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(false)
-        if (e.key === "Enter") {
-            addItemHandler()
-        }
-    }
-
-    return <div>
+    return (
+      <div>
         <TextField
-            disabled={disabled}
-            variant="standard"
-            error={error}
-            size="small"
-            value={title}
-            onChange={onChangeHandler}
-            onKeyPress={onKeyPressHandler}
-            label={error ? "Title is required" : label}
+          disabled={disabled}
+          variant="standard"
+          error={error}
+          size="small"
+          value={title}
+          onChange={onChangeHandler}
+          onKeyPress={onKeyPressHandler}
+          label={error ? 'Title is required' : label}
         />
         <IconButton color="primary" onClick={addItemHandler} disabled={disabled}>
-            <AddBox/>
+          <AddBox />
         </IconButton>
-    </div>
-})
+      </div>
+    );
+  },
+);
 
-//type
+// type
 
 type AddItemFormPropsType = {
-    addItem: (title: string) => void
-    label: string
-    disabled?: boolean
-}
+  addItem: (title: string) => void;
+  label: string;
+  disabled?: boolean;
+};

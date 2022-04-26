@@ -1,60 +1,57 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+
+import { CircularProgress, Container } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { ButtonAppBar } from '../components/ButtonAppBar/ButtonAppBar';
+import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
+import { PageNotFound } from '../components/PageNotFound/PageNotFound';
+import { Login } from '../features/Login/Login';
+import { TodolistList } from '../features/TodolistList/TodolistList';
+import { ReturnComponentType } from '../types/ReturnComponentType';
+import { getIsInitializedSelector } from '../utils/appSelectors';
+import { PATH } from '../utils/RouterPATH';
+
 import style from './App.module.scss';
-import {Navigate, Route, Routes} from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
+import { initializeAppTC } from './AppReducer';
+import { AppRootStateType } from './store';
 
-import {ButtonAppBar} from "../components/ButtonAppBar/ButtonAppBar";
-import {TodolistList} from "../features/TodolistList/TodolistList";
-import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {Login} from "../features/Login/Login";
-import {AppRootStateType} from "./store";
-import {initializeAppTC} from "./AppReducer";
-import {PATH} from "../utils/RouterPATH";
-import {PageNotFound} from "../components/PageNotFound/PageNotFound";
-import {getIsInitializedSelector} from "../utils/appSelectors";
+export const App: React.FC<PropsType> = ({ demo = false }): ReturnComponentType => {
+  const dispatch = useDispatch();
 
-import {CircularProgress, Container} from '@material-ui/core';
+  const isInitialized = useSelector<AppRootStateType, boolean>(getIsInitializedSelector);
 
+  useEffect(() => {
+    dispatch(initializeAppTC());
+  }, [dispatch, isInitialized]);
 
-export const App: React.FC<PropsType> = ({demo = false}) => {
-
-    const dispatch = useDispatch()
-
-    const isInitialized = useSelector<AppRootStateType, boolean>(getIsInitializedSelector)
-
-    useEffect(() => {
-        dispatch(initializeAppTC())
-    }, [dispatch, isInitialized])
-
-    if (!isInitialized) {
-        return (
-            <div className={style.preloader}>
-                <CircularProgress/>
-            </div>
-        )
-    }
-
+  if (!isInitialized) {
     return (
-        <div>
-            <ErrorSnackbar/>
-            <ButtonAppBar/>
-            <Container fixed>
-                <Routes>
-                    <Route path={PATH.MAIN_WINDOW} element={<TodolistList demo={demo}/>}/>
-                    <Route path={PATH.LOGIN} element={<Login/>}/>
+      <div className={style.preloader}>
+        <CircularProgress />
+      </div>
+    );
+  }
 
-                    <Route path={PATH.PAGE_NOT_FOUND} element={<PageNotFound/>}/>
-                    <Route path={PATH.ERROR} element={<Navigate to={PATH.PAGE_NOT_FOUND}/>}/>
-                </Routes>
-            </Container>
-        </div>
-    )
-}
+  return (
+    <div>
+      <ErrorSnackbar />
+      <ButtonAppBar />
+      <Container fixed>
+        <Routes>
+          <Route path={PATH.MAIN_WINDOW} element={<TodolistList demo={demo} />} />
+          <Route path={PATH.LOGIN} element={<Login />} />
+          <Route path={PATH.PAGE_NOT_FOUND} element={<PageNotFound />} />
+          <Route path={PATH.ERROR} element={<Navigate to={PATH.PAGE_NOT_FOUND} />} />
+        </Routes>
+      </Container>
+    </div>
+  );
+};
 
-//type
+// type
 
 type PropsType = {
-    demo?: boolean
-}
-
-
+  demo: boolean;
+};
