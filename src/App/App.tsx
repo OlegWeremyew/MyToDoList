@@ -53,5 +53,6 @@ export const App: React.FC<PropsType> = ({ demo = false }): ReturnComponentType 
 // type
 
 type PropsType = {
-  demo: boolean;
+  // eslint-disable-next-line react/require-default-props
+  demo?: boolean;
 };

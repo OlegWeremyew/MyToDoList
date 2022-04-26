@@ -1,57 +1,66 @@
-import React, {ChangeEvent, useCallback} from 'react';
-import classes from './Task.module.css'
+import React, { ChangeEvent, useCallback } from 'react';
 
-import {EditableSpan} from "../../../../components/EditableSpan/EditableSpan";
-import {TaskStatuses, TaskType} from "../../../../api/todolistApi";
+import { Checkbox, IconButton } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 
-import {Delete} from "@material-ui/icons";
-import {Checkbox, IconButton} from "@material-ui/core";
+import { TaskStatuses, TaskType } from '../../../../api/todolistApi';
+import { EditableSpan } from '../../../../components/EditableSpan/EditableSpan';
 
-export const Task: React.FC<TaskPropsType> = React.memo(({
-                                                             task,
-                                                             removeTask,
-                                                             todolistId,
-                                                             changeTaskStatus,
-                                                             changeTaskTitle
-                                                         }) => {
+import classes from './Task.module.css';
 
+export const Task: React.FC<TaskPropsType> = React.memo(
+  ({ task, removeTask, todolistId, changeTaskStatus, changeTaskTitle }) => {
     const onClickHandler = useCallback(() => {
-        removeTask(task.id, todolistId)
-    }, [task.id, todolistId, removeTask])
+      removeTask(task.id, todolistId);
+    }, [task.id, todolistId, removeTask]);
 
-    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        let newIsDoneValue = e.currentTarget.checked
-        changeTaskStatus(task.id, newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New, todolistId)
-    }, [task.id, todolistId, changeTaskStatus])
+    const onChangeHandler = useCallback(
+      (e: ChangeEvent<HTMLInputElement>) => {
+        const newIsDoneValue = e.currentTarget.checked;
+        changeTaskStatus(
+          task.id,
+          newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New,
+          todolistId,
+        );
+      },
+      [task.id, todolistId, changeTaskStatus],
+    );
 
-    const onTitleChangeHandler = useCallback((newValue: string) => {
-        changeTaskTitle(task.id, newValue, todolistId)
-    }, [task.id, todolistId, changeTaskTitle])
+    const onTitleChangeHandler = useCallback(
+      (newValue: string) => {
+        changeTaskTitle(task.id, newValue, todolistId);
+      },
+      [task.id, todolistId, changeTaskTitle],
+    );
 
     return (
-        <div key={task.id} className={task.status === TaskStatuses.Completed ? "is-done" : ""}>
-            <div className={classes.containerTask}>
-                <div className={classes.mainBlock}>
-                    <Checkbox
-                        checked={task.status === TaskStatuses.Completed}
-                        color="primary"
-                        onChange={onChangeHandler}
-                    />
-                    <EditableSpan value={task.title} onChange={onTitleChangeHandler}/>
-                </div>
-                <IconButton onClick={onClickHandler} size="small">
-                    <Delete fontSize="inherit"/>
-                </IconButton>
-            </div>
+      <div
+        key={task.id}
+        className={task.status === TaskStatuses.Completed ? 'is-done' : ''}
+      >
+        <div className={classes.containerTask}>
+          <div className={classes.mainBlock}>
+            <Checkbox
+              checked={task.status === TaskStatuses.Completed}
+              color="primary"
+              onChange={onChangeHandler}
+            />
+            <EditableSpan value={task.title} onChange={onTitleChangeHandler} />
+          </div>
+          <IconButton onClick={onClickHandler} size="small">
+            <Delete fontSize="inherit" />
+          </IconButton>
         </div>
-    )
-})
+      </div>
+    );
+  },
+);
 
-//type
+// type
 export type TaskPropsType = {
-    todolistId: string
-    task: TaskType
-    removeTask: (taskID: string, todolistID: string) => void
-    changeTaskStatus: (taskID: string, status: TaskStatuses, todolistId: string) => void
-    changeTaskTitle: (taskID: string, newValue: string, todolistID: string) => void
-}
+  todolistId: string;
+  task: TaskType;
+  removeTask: (taskID: string, todolistID: string) => void;
+  changeTaskStatus: (taskID: string, status: TaskStatuses, todolistId: string) => void;
+  changeTaskTitle: (taskID: string, newValue: string, todolistID: string) => void;
+};
