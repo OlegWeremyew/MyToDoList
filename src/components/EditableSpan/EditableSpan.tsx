@@ -6,8 +6,8 @@ import style from './EditableSpan.module.scss';
 
 export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(
   ({ value, onChange }) => {
-    const [editMode, setEditMode] = useState(false);
-    const [title, setTitle] = useState(value);
+    const [editMode, setEditMode] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>(value);
 
     const activateEditMode = (): void => {
       setEditMode(true);

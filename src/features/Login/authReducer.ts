@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { authAPI, LoginParamsType } from '../../api/todolistApi';
 import { ActionAppTypes, AppAction } from '../../App/AppReducer';
 import { InferActionTypes } from '../../App/store';
+import { ResultCodes } from '../../enums';
 import { handleServerAppError, handleServerNetworkError } from '../../utils/errorUtils';
 
 const initialState = {
@@ -40,7 +41,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
   authAPI
     .login(data)
     .then(res => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCodes.Success) {
         dispatch(authAction.setIsLoggedInAC(true));
         dispatch(AppAction.setAppStatusAC('succeeded'));
       } else {
@@ -56,7 +57,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
   authAPI
     .logout()
     .then(res => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCodes.Success) {
         dispatch(authAction.setIsLoggedInAC(false));
         dispatch(AppAction.setAppStatusAC('succeeded'));
       } else {

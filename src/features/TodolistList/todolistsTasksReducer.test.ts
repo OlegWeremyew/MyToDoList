@@ -1,3 +1,5 @@
+import { FIRST_ELEMENT_IN_ARRAY } from '../../constants';
+
 import { tasksReducer } from './tasksReducer';
 import { TasksStateType } from './TodolistList';
 import { ActionTodolist, TodolistDomainType, todolistsReducer } from './todolistsReducer';
@@ -17,8 +19,8 @@ test('ids should be equals', () => {
   const endToDoListsState = todolistsReducer(startToDoListsState, action);
 
   const keys = Object.keys(endTasksState);
-  const idFromTasks = keys[0];
-  const idFromToDoLists = endToDoListsState[0].id;
+  const idFromTasks = keys[FIRST_ELEMENT_IN_ARRAY];
+  const idFromToDoLists = endToDoListsState[FIRST_ELEMENT_IN_ARRAY].id;
 
   expect(idFromTasks).toBe(action.payload.todolist.id);
   expect(idFromToDoLists).toBe(action.payload.todolist.id);

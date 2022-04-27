@@ -18,6 +18,7 @@ export default {
   },
 } as ComponentMeta<typeof AddItemForm>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof AddItemForm> = args => <AddItemForm {...args} />;
 
 export const AddItemFormStory = Template.bind({});

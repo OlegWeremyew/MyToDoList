@@ -1,14 +1,9 @@
 import { Dispatch } from 'redux';
 
-import {
-  TaskPriorities,
-  TaskStatuses,
-  TaskType,
-  todolistAPI,
-  UpdateTaskModelType,
-} from '../../api/todolistApi';
+import { TaskType, todolistAPI, UpdateTaskModelType } from '../../api/todolistApi';
 import { ActionAppTypes, AppAction } from '../../App/AppReducer';
 import { AppRootStateType, InferActionTypes } from '../../App/store';
+import { ResultCodes, TaskPriorities, TaskStatuses } from '../../enums';
 import { handleServerAppError, handleServerNetworkError } from '../../utils/errorUtils';
 
 import { TasksStateType } from './TodolistList';
@@ -129,7 +124,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType
 export const removeTaskTC =
   (taskId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(AppAction.setAppStatusAC('loading'));
-    todolistAPI.deleteTask(todolistId, taskId).then(res => {
+    todolistAPI.deleteTask(todolistId, taskId).then(() => {
       dispatch(taskAction.removeTaskAC(taskId, todolistId));
       dispatch(AppAction.setAppStatusAC('succeeded'));
     });
@@ -141,7 +136,7 @@ export const addTaskTC =
     todolistAPI
       .createTask(todolistId, title)
       .then(res => {
-        if (res.data.resultCode === 0) {
+        if (res.data.resultCode === ResultCodes.Success) {
           const task = res.data.data.item;
           dispatch(taskAction.addTaskAC(task));
           dispatch(AppAction.setAppStatusAC('succeeded'));
@@ -174,7 +169,7 @@ export const updateTaskTC =
       todolistAPI
         .updateTask(todolistId, taskId, apiModel)
         .then(res => {
-          if (res.data.resultCode === 0) {
+          if (res.data.resultCode === ResultCodes.Success) {
             dispatch(taskAction.updateTaskAC(taskId, domainModel, todolistId));
           } else {
             handleServerAppError(res.data, dispatch);

@@ -1,6 +1,7 @@
 import { v1 } from 'uuid';
 
 import { RequestStatusType } from '../../App/AppReducer';
+import { FIRST_ELEMENT_IN_ARRAY, SECOND_ELEMENT_IN_ARRAY } from '../../constants';
 
 import {
   ActionTodolist,
@@ -41,9 +42,10 @@ test('correct todolist should be removed', () => {
     startState,
     ActionTodolist.removeTodolistAC(todolistId1),
   );
+  const currentLength = 1;
 
-  expect(endState.length).toBe(1);
-  expect(endState[0].id).toBe(todolistId2);
+  expect(endState.length).toBe(currentLength);
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].id).toBe(todolistId2);
 });
 
 test('correct todolist should be added', () => {
@@ -56,10 +58,11 @@ test('correct todolist should be added', () => {
       order: 0,
     }),
   );
+  const currentLength = 3;
 
-  expect(endState.length).toBe(3);
-  expect(endState[0].title).toBe('New Todolist');
-  expect(endState[0].filter).toBe('all');
+  expect(endState.length).toBe(currentLength);
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].title).toBe('New Todolist');
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].filter).toBe('all');
 });
 
 test('correct todolist should change its name', () => {
@@ -69,8 +72,8 @@ test('correct todolist should change its name', () => {
 
   const endState = todolistsReducer(startState, action);
 
-  expect(endState[0].title).toBe('What to learn');
-  expect(endState[1].title).toBe(newTodolistTitle);
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].title).toBe('What to learn');
+  expect(endState[SECOND_ELEMENT_IN_ARRAY].title).toBe(newTodolistTitle);
 });
 
 test('correct filter of todolist should be changed', () => {
@@ -80,16 +83,17 @@ test('correct filter of todolist should be changed', () => {
 
   const endState = todolistsReducer(startState, action);
 
-  expect(endState[0].filter).toBe('all');
-  expect(endState[1].filter).toBe(newFilter);
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].filter).toBe('all');
+  expect(endState[SECOND_ELEMENT_IN_ARRAY].filter).toBe(newFilter);
 });
 
 test('todolist should be set to the correct', () => {
   const action = ActionTodolist.setTodosAC(startState);
 
   const endState = todolistsReducer([], action);
+  const currentLength = 2;
 
-  expect(endState.length).toBe(2);
+  expect(endState.length).toBe(currentLength);
 });
 
 test('correct entity status of todolist should be changed', () => {
@@ -99,6 +103,6 @@ test('correct entity status of todolist should be changed', () => {
 
   const endState = todolistsReducer(startState, action);
 
-  expect(endState[0].entityStatus).toBe('idle');
-  expect(endState[1].entityStatus).toBe(newStatus);
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].entityStatus).toBe('idle');
+  expect(endState[SECOND_ELEMENT_IN_ARRAY].entityStatus).toBe(newStatus);
 });

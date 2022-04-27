@@ -1,3 +1,4 @@
+import { RequestStatusType } from '../App/AppReducer';
 import { AppRootStateType } from '../App/store';
 import { TasksStateType } from '../features/TodolistList/TodolistList';
 import { TodolistDomainType } from '../features/TodolistList/todolistsReducer';
@@ -12,3 +13,5 @@ export const getTaskSelector = (state: AppRootStateType): TasksStateType => stat
 
 export const getTodoLists = (state: AppRootStateType): Array<TodolistDomainType> =>
   state.todolists;
+
+export const getStatus = (state: AppRootStateType): RequestStatusType => state.app.status;

@@ -3,15 +3,17 @@ import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { IconButton, TextField } from '@material-ui/core';
 import { AddBox } from '@material-ui/icons';
 
+import { EMPTY_STRING } from '../../constants';
+
 export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(
   ({ addItem, label, disabled = false }) => {
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState<string>(EMPTY_STRING);
     const [error, setError] = useState<boolean>(false);
 
     const addItemHandler = (): void => {
-      if (title.trim() !== '') {
+      if (title.trim() !== EMPTY_STRING) {
         addItem(title);
-        setTitle('');
+        setTitle(EMPTY_STRING);
       } else {
         setError(true);
       }

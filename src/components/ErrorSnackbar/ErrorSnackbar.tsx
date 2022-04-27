@@ -10,7 +10,6 @@ import { Nullable } from '../../types/Nullable';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 ));
 

@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { authAPI } from '../api/todolistApi';
+import { ResultCodes } from '../enums';
 import { authAction } from '../features/Login/authReducer';
 import { Nullable } from '../types/Nullable';
 
@@ -67,7 +68,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
   authAPI
     .me()
     .then(res => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCodes.Success) {
         dispatch(authAction.setIsLoggedInAC(true));
       }
     })
