@@ -8,7 +8,7 @@ import { ButtonAppBar } from '../components/ButtonAppBar/ButtonAppBar';
 import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
 import { PageNotFound } from '../components/PageNotFound/PageNotFound';
 import { Login } from '../features/Login/Login';
-import { TodolistList } from '../features/TodolistList/TodolistList';
+import { TodolistList } from '../features/TodolistLists/TodolistList';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 import { getIsInitializedSelector } from '../utils/appSelectors';
 import { PATH } from '../utils/RouterPATH';

@@ -5,14 +5,16 @@ import {
   todolistAPI,
   TodolistType,
   UpdateTaskModelType,
-} from '../../api/todolistApi';
-import { ActionAppTypes, AppAction } from '../../App/AppReducer';
-import { AppRootStateType, InferActionTypes } from '../../App/store';
-import { ResultCodes, TaskPriorities, TaskStatuses } from '../../enums';
-import { handleServerAppError, handleServerNetworkError } from '../../utils/errorUtils';
-
-import { TasksStateType } from './TodolistList';
-import { ActionTodolistTypes, todolistEnumReducer } from './todolistsReducer';
+} from '../../../../api/todolistApi';
+import { ActionAppTypes, AppAction } from '../../../../App/AppReducer';
+import { AppRootStateType, InferActionTypes } from '../../../../App/store';
+import { ResultCodes, TaskPriorities, TaskStatuses } from '../../../../enums';
+import {
+  handleServerAppError,
+  handleServerNetworkError,
+} from '../../../../utils/errorUtils';
+import { TasksStateType } from '../../TodolistList';
+import { ActionTodolistTypes, todolistEnumReducer } from '../../todolistsReducer';
 
 const initialState: TasksStateType = {};
 
@@ -66,9 +68,9 @@ export const tasksReducer = (
     }
     case todolistEnumReducer.SET_TODOS: {
       const stateCopy = { ...state };
-      action.payload.todos.forEach(
-        (todolist: TodolistType) => (stateCopy[todolist.id] = []),
-      );
+      action.payload.todos.forEach((todolist: TodolistType) => {
+        stateCopy[todolist.id] = [];
+      });
       return stateCopy;
     }
     case taskEnumReducer.SET_TASKS: {

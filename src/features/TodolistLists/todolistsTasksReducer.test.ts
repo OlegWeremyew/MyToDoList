@@ -1,6 +1,6 @@
 import { FIRST_ELEMENT_IN_ARRAY } from '../../constants';
 
-import { tasksReducer } from './tasksReducer';
+import { tasksReducer } from './Todolist/Task/tasksReducer';
 import { TasksStateType } from './TodolistList';
 import { ActionTodolist, TodolistDomainType, todolistsReducer } from './todolistsReducer';
 

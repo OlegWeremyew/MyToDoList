@@ -1,7 +1,12 @@
 import { v1 } from 'uuid';
 
 import { RequestStatusType } from '../../App/AppReducer';
-import { FIRST_ELEMENT_IN_ARRAY, SECOND_ELEMENT_IN_ARRAY } from '../../constants';
+import {
+  EMPTY_STRING,
+  FIRST_ELEMENT_IN_ARRAY,
+  SECOND_ELEMENT_IN_ARRAY,
+  ZERO_VALUE,
+} from '../../constants';
 
 import {
   ActionTodolist,
@@ -22,15 +27,15 @@ beforeEach(() => {
       id: todolistId1,
       title: 'What to learn',
       filter: 'all',
-      addedDate: '',
-      order: 0,
+      addedDate: EMPTY_STRING,
+      order: ZERO_VALUE,
       entityStatus: 'idle',
     },
     {
       id: todolistId2,
       title: 'What to buy',
       filter: 'all',
-      addedDate: '',
+      addedDate: EMPTY_STRING,
       order: 1,
       entityStatus: 'idle',
     },
@@ -54,8 +59,8 @@ test('correct todolist should be added', () => {
     ActionTodolist.addTodolistAC({
       id: todolistId1,
       title: 'New Todolist',
-      addedDate: '',
-      order: 0,
+      addedDate: EMPTY_STRING,
+      order: ZERO_VALUE,
     }),
   );
   const currentLength = 3;

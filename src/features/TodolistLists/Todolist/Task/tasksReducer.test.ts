@@ -1,9 +1,14 @@
-import { FIRST_ELEMENT_IN_ARRAY, SECOND_ELEMENT_IN_ARRAY } from '../../constants';
-import { TaskPriorities, TaskStatuses } from '../../enums';
+import {
+  EMPTY_STRING,
+  FIRST_ELEMENT_IN_ARRAY,
+  SECOND_ELEMENT_IN_ARRAY,
+  ZERO_VALUE,
+} from '../../../../constants';
+import { TaskPriorities, TaskStatuses } from '../../../../enums';
+import { TasksStateType } from '../../TodolistList';
+import { ActionTodolist } from '../../todolistsReducer';
 
 import { taskAction, tasksReducer } from './tasksReducer';
-import { TasksStateType } from './TodolistList';
-import { ActionTodolist } from './todolistsReducer';
 
 let startState: TasksStateType = {};
 beforeEach(() => {
@@ -14,36 +19,36 @@ beforeEach(() => {
         title: 'CSS',
         status: TaskStatuses.New,
         priority: TaskPriorities.Low,
-        startDate: '',
+        startDate: EMPTY_STRING,
         todoListId: 'todolistId1',
-        addedDate: '',
-        order: 0,
-        deadline: '',
-        description: '',
+        addedDate: EMPTY_STRING,
+        order: ZERO_VALUE,
+        deadline: EMPTY_STRING,
+        description: EMPTY_STRING,
       },
       {
         id: '2',
         title: 'JS',
         status: TaskStatuses.Completed,
         priority: TaskPriorities.Low,
-        startDate: '',
+        startDate: EMPTY_STRING,
         todoListId: 'todolistId1',
-        addedDate: '',
-        order: 0,
-        deadline: '',
-        description: '',
+        addedDate: EMPTY_STRING,
+        order: ZERO_VALUE,
+        deadline: EMPTY_STRING,
+        description: EMPTY_STRING,
       },
       {
         id: '3',
         title: 'React',
         status: TaskStatuses.New,
         priority: TaskPriorities.Low,
-        startDate: '',
+        startDate: EMPTY_STRING,
         todoListId: 'todolistId1',
-        addedDate: '',
-        order: 0,
-        deadline: '',
-        description: '',
+        addedDate: EMPTY_STRING,
+        order: ZERO_VALUE,
+        deadline: EMPTY_STRING,
+        description: EMPTY_STRING,
       },
     ],
     todolistId2: [
@@ -52,36 +57,36 @@ beforeEach(() => {
         title: 'bread',
         status: TaskStatuses.New,
         priority: TaskPriorities.Low,
-        startDate: '',
+        startDate: EMPTY_STRING,
         todoListId: 'todolistId2',
-        addedDate: '',
-        order: 0,
-        deadline: '',
-        description: '',
+        addedDate: EMPTY_STRING,
+        order: ZERO_VALUE,
+        deadline: EMPTY_STRING,
+        description: EMPTY_STRING,
       },
       {
         id: '2',
         title: 'yogurt',
         status: TaskStatuses.Completed,
         priority: TaskPriorities.Low,
-        startDate: '',
+        startDate: EMPTY_STRING,
         todoListId: 'todolistId2',
-        addedDate: '',
-        order: 0,
-        deadline: '',
-        description: '',
+        addedDate: EMPTY_STRING,
+        order: ZERO_VALUE,
+        deadline: EMPTY_STRING,
+        description: EMPTY_STRING,
       },
       {
         id: '3',
         title: 'milk',
         status: TaskStatuses.New,
         priority: TaskPriorities.Low,
-        startDate: '',
+        startDate: EMPTY_STRING,
         todoListId: 'todolistId2',
-        addedDate: '',
-        order: 0,
-        deadline: '',
-        description: '',
+        addedDate: EMPTY_STRING,
+        order: ZERO_VALUE,
+        deadline: EMPTY_STRING,
+        description: EMPTY_STRING,
       },
     ],
   };
@@ -104,12 +109,12 @@ test('correct task should be added to correct array', () => {
     todoListId: 'todolistId2',
     title: 'juice',
     status: TaskStatuses.New,
-    addedDate: '',
-    deadline: '',
-    order: 0,
-    description: '',
-    priority: 0,
-    startDate: '',
+    addedDate: EMPTY_STRING,
+    deadline: EMPTY_STRING,
+    order: ZERO_VALUE,
+    description: EMPTY_STRING,
+    priority: ZERO_VALUE,
+    startDate: EMPTY_STRING,
     id: 'dddddddddddddddddd',
   });
 
@@ -152,8 +157,8 @@ test('new array should be added when new todolist is added', () => {
   const action = ActionTodolist.addTodolistAC({
     id: 'dff',
     title: 'New Todolist',
-    addedDate: '',
-    order: 0,
+    addedDate: EMPTY_STRING,
+    order: ZERO_VALUE,
   });
 
   const endState = tasksReducer(startState, action);
@@ -183,8 +188,8 @@ test('property with todolistId should be deleted', () => {
 
 test('empty arrays should be added when we set todolist', () => {
   const action = ActionTodolist.setTodosAC([
-    { id: '1', title: 'title 1', order: 0, addedDate: '' },
-    { id: '2', title: 'title 2', order: 0, addedDate: '' },
+    { id: '1', title: 'title 1', order: ZERO_VALUE, addedDate: '' },
+    { id: '2', title: 'title 2', order: ZERO_VALUE, addedDate: '' },
   ]);
 
   const endState = tasksReducer({}, action);
@@ -208,7 +213,7 @@ test('task should be added in todolist', () => {
     action,
   );
   const currentLengthTodolistId1 = 3;
-  const currentLengthTodolistId2 = 0;
+  const currentLengthTodolistId2 = ZERO_VALUE;
 
   expect(endState.todolistId1.length).toBe(currentLengthTodolistId1);
   expect(endState.todolistId2.length).toBe(currentLengthTodolistId2);

@@ -18,9 +18,9 @@ export enum ResultCodes {
 }
 
 export enum ErrorValues {
-  Required = 'Password is required',
-  Invalid_Address = 'Invalid email address',
-  Password_Length = 'Password should be more than 3 symbols',
-  Some_Error = 'Some error occurred',
-  Email_Required = 'Email is required',
+  REQUIRED_PASSWORD = 'Password is required',
+  INVALID_ADDRESS = 'Invalid email address',
+  PASSWORD_LENGTH = 'Password should be more than 3 symbols',
+  SOME_ERROR = 'Some error occurred',
+  REQUIRED_EMAIL = 'Email is required',
 }

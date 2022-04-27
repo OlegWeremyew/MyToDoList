@@ -15,7 +15,7 @@ import {
 } from '../../utils/appSelectors';
 import { PATH } from '../../utils/RouterPATH';
 
-import { addTaskTC, removeTaskTC, updateTaskTC } from './tasksReducer';
+import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task/tasksReducer';
 import { Todolist } from './Todolist/Todolist';
 import style from './TodolistList.module.scss';
 import {

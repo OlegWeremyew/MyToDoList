@@ -8,10 +8,10 @@ import { TaskType } from '../../../api/todolistApi';
 import { AddItemForm } from '../../../components/AddItemForm/AddItemForm';
 import { EditableSpan } from '../../../components/EditableSpan/EditableSpan';
 import { TaskStatuses } from '../../../enums';
-import { fetchTasksTC } from '../tasksReducer';
 import { FilterValuesType, TodolistDomainType } from '../todolistsReducer';
 
 import { Task } from './Task/Task';
+import { fetchTasksTC } from './Task/tasksReducer';
 import style from './TodolistList.module.css';
 
 export const Todolist: React.FC<PropsType> = React.memo(
