@@ -5,14 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { TaskType } from '../../api/types';
-import { AppRootStateType } from '../../App/store';
-import { AddItemForm } from '../../components/AddItemForm/AddItemForm';
 import { PATH, TaskStatuses } from '../../enums';
-import {
-  getIsLoggedInSelector,
-  getTaskSelector,
-  getTodoLists,
-} from '../../selectors/appSelectors';
+import { getIsLoggedInSelector } from '../../selectors/authSelectors';
+import { getTaskSelector } from '../../selectors/taskSelectors';
+import { getTodoLists } from '../../selectors/todolistSelectors';
+import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task/tasksReducer';
 import { Todolist } from './Todolist/Todolist';
@@ -27,14 +24,14 @@ import {
   TodolistDomainType,
 } from './todolistsReducer';
 
-export const TodolistList: React.FC = () => {
+import { AddItemForm } from 'components/AddItemForm/AddItemForm';
+
+export const TodolistList = (): ReturnComponentType => {
   const dispatch = useDispatch();
 
-  const todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(
-    getTodoLists,
-  );
-  const tasks = useSelector<AppRootStateType, TasksStateType>(getTaskSelector);
-  const isLoggedIn = useSelector<AppRootStateType, boolean>(getIsLoggedInSelector);
+  const todoLists: TodolistDomainType[] = useSelector(getTodoLists);
+  const tasks: TasksStateType = useSelector(getTaskSelector);
+  const isLoggedIn: boolean = useSelector(getIsLoggedInSelector);
 
   useEffect(() => {
     if (!isLoggedIn) {

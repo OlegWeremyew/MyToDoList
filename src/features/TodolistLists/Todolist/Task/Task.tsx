@@ -4,10 +4,11 @@ import { Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
 import { TaskType } from '../../../../api/types';
-import { EditableSpan } from '../../../../components/EditableSpan/EditableSpan';
 import { TaskStatuses } from '../../../../enums';
 
 import classes from './Task.module.css';
+
+import { EditableSpan } from 'components/EditableSpan/EditableSpan';
 
 export const Task: React.FC<TaskPropsType> = React.memo(
   ({ task, removeTask, todolistId, changeTaskStatus, changeTaskTitle }) => {

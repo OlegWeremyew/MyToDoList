@@ -1,24 +1,23 @@
 import { Dispatch } from 'redux';
 
-import { authAPI } from '../../api/todolistApi';
+import { authAPI } from '../../api/authAPI/authAPI';
 import { LoginParamsType } from '../../api/types';
-import { ActionAppTypes, AppAction } from '../../App/AppReducer';
-import { InferActionTypes } from '../../App/store';
+import { AppAction } from '../../App/AppReducer';
 import { ResultCodes } from '../../enums';
-import { handleServerAppError, handleServerNetworkError } from '../../utils';
 
-const initialState = {
+import { authEnumReducer } from './constants';
+import { AuthReducerActionsType, InitialAuthStateType } from './types';
+
+import { handleServerAppError, handleServerNetworkError } from 'utils';
+
+export const initialAuthState = {
   isLoggedIn: false,
 };
 
-export enum authEnumReducer {
-  SET_IS_LOGGED_IN = 'TODOLIST/AUTH_REDUCER/SET_IS_LOGGED_IN',
-}
-
 export const authReducer = (
-  state: InitialStateType = initialState,
-  action: ActionsType,
-): InitialStateType => {
+  state: InitialAuthStateType = initialAuthState,
+  action: AuthReducerActionsType,
+): InitialAuthStateType => {
   switch (action.type) {
     case authEnumReducer.SET_IS_LOGGED_IN:
       return { ...state, isLoggedIn: action.payload.value };
@@ -37,22 +36,23 @@ export const authAction = {
 };
 
 // thunks
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
-  dispatch(AppAction.setAppStatusAC('loading'));
-  authAPI
-    .login(data)
-    .then(res => {
-      if (res.data.resultCode === ResultCodes.Success) {
-        dispatch(authAction.setIsLoggedInAC(true));
-        dispatch(AppAction.setAppStatusAC('succeeded'));
-      } else {
-        handleServerAppError(res.data, dispatch);
-      }
-    })
-    .catch(err => {
-      handleServerNetworkError(err, dispatch);
-    });
-};
+export const loginTC =
+  (data: LoginParamsType) => (dispatch: Dispatch<AuthReducerActionsType>) => {
+    dispatch(AppAction.setAppStatusAC('loading'));
+    authAPI
+      .login(data)
+      .then(res => {
+        if (res.data.resultCode === ResultCodes.Success) {
+          dispatch(authAction.setIsLoggedInAC(true));
+          dispatch(AppAction.setAppStatusAC('succeeded'));
+        } else {
+          handleServerAppError(res.data, dispatch);
+        }
+      })
+      .catch(err => {
+        handleServerNetworkError(err, dispatch);
+      });
+  };
 
 export const logoutTC = () => (dispatch: Dispatch) => {
   authAPI
@@ -69,11 +69,3 @@ export const logoutTC = () => (dispatch: Dispatch) => {
       handleServerNetworkError(err, dispatch);
     });
 };
-
-// types
-
-type InitialStateType = typeof initialState;
-
-type ActionsType = ActionAuthTypes | ActionAppTypes;
-
-export type ActionAuthTypes = InferActionTypes<typeof authAction>;

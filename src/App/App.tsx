@@ -4,9 +4,6 @@ import { CircularProgress, Container } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ButtonAppBar } from '../components/ButtonAppBar/ButtonAppBar';
-import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
-import { PageNotFound } from '../components/PageNotFound/PageNotFound';
 import { PATH } from '../enums';
 import { Login } from '../features/Login/Login';
 import { TodolistList } from '../features/TodolistLists/TodolistList';
@@ -15,12 +12,15 @@ import { ReturnComponentType } from '../types/ReturnComponentType';
 
 import style from './App.module.scss';
 import { initializeAppTC } from './AppReducer';
-import { AppRootStateType } from './store';
+
+import { ButtonAppBar } from 'components/ButtonAppBar/ButtonAppBar';
+import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
+import { PageNotFound } from 'components/PageNotFound/PageNotFound';
 
 export const App: React.FC = (): ReturnComponentType => {
   const dispatch = useDispatch();
 
-  const isInitialized = useSelector<AppRootStateType, boolean>(getIsInitializedSelector);
+  const isInitialized: boolean = useSelector(getIsInitializedSelector);
 
   useEffect(() => {
     dispatch(initializeAppTC());

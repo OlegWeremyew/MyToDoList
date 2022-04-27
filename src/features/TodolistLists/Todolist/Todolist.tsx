@@ -5,14 +5,15 @@ import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 
 import { TaskType } from '../../../api/types';
-import { AddItemForm } from '../../../components/AddItemForm/AddItemForm';
-import { EditableSpan } from '../../../components/EditableSpan/EditableSpan';
 import { TaskStatuses } from '../../../enums';
 import { FilterValuesType, TodolistDomainType } from '../todolistsReducer';
 
 import { Task } from './Task/Task';
 import { fetchTasksTC } from './Task/tasksReducer';
 import style from './TodolistList.module.css';
+
+import { AddItemForm } from 'components/AddItemForm/AddItemForm';
+import { EditableSpan } from 'components/EditableSpan/EditableSpan';
 
 export const Todolist: React.FC<PropsType> = React.memo(
   ({

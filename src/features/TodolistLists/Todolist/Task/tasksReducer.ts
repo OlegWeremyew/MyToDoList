@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { todolistAPI } from '../../../../api/todolistApi';
+import { todolistAPI } from '../../../../api/todolistAPI/todolistApi';
 import { TaskType, TodolistType, UpdateTaskModelType } from '../../../../api/types';
 import { ActionAppTypes, AppAction } from '../../../../App/AppReducer';
 import { AppRootStateType, InferActionTypes } from '../../../../App/store';

@@ -13,16 +13,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { LoginParamsType } from '../../api/types';
-import { AppRootStateType } from '../../App/store';
 import { EMPTY_STRING, MIN_PASSWORD_LENGTH } from '../../constants';
 import { ErrorValues, PATH } from '../../enums';
-import { getIsLoggedInSelector } from '../../selectors/appSelectors';
+import { getIsLoggedInSelector } from '../../selectors/authSelectors';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { loginTC } from './authReducer';
 
 export const Login: React.FC = (): ReturnComponentType => {
-  const isLoggedIn = useSelector<AppRootStateType, boolean>(getIsLoggedInSelector);
+  const isLoggedIn: boolean = useSelector(getIsLoggedInSelector);
   const dispatch = useDispatch();
 
   const formik = useFormik({

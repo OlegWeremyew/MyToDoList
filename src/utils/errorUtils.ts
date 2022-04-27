@@ -7,7 +7,7 @@ import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
 export const handleServerAppError = <D>(
   data: ResponseType<D>,
   dispatch: Dispatch<ActionAppTypes>,
-): any => {
+): void => {
   if (data.messages.length) {
     dispatch(AppAction.setAppErrorAC(data.messages[FIRST_ELEMENT_IN_ARRAY]));
   } else {
@@ -19,7 +19,7 @@ export const handleServerAppError = <D>(
 export const handleServerNetworkError = (
   err: { message: string },
   dispatch: Dispatch<ActionAppTypes>,
-): any => {
+): void => {
   dispatch(AppAction.setAppErrorAC(err.message ? err.message : 'Some error'));
   dispatch(AppAction.setAppStatusAC('failed'));
 };

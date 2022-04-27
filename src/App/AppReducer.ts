@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { authAPI } from '../api/todolistApi';
+import { authAPI } from '../api/authAPI/authAPI';
 import { ResultCodes } from '../enums';
 import { authAction } from '../features/Login/authReducer';
 import { Nullable } from '../types/Nullable';

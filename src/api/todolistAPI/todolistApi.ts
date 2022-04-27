@@ -1,15 +1,13 @@
 import { AxiosResponse } from 'axios';
 
-import { instance } from './apiConfig';
+import { instance } from '../apiConfig';
 import {
   GetTasksResponse,
-  LoginParamsType,
   TaskType,
   TodolistType,
   UpdateTaskModelType,
   ResponseType,
-  ResponseMeType,
-} from './types';
+} from '../types';
 
 export const todolistAPI = {
   // todolist =============================
@@ -58,23 +56,5 @@ export const todolistAPI = {
       UpdateTaskModelType,
       AxiosResponse<ResponseType<{ item: TaskType }>>
     >(endPoint, model);
-  },
-};
-
-export const authAPI = {
-  login(data: LoginParamsType) {
-    const endPoint = '/auth/login';
-    return instance.post<
-      LoginParamsType,
-      AxiosResponse<ResponseType<{ userId: number }>>
-    >(endPoint, data);
-  },
-  me() {
-    const endPoint = '/auth/me';
-    return instance.get<ResponseType<{ data: ResponseMeType }>>(endPoint);
-  },
-  logout() {
-    const endPoint = '/auth/login';
-    return instance.delete<ResponseType>(endPoint);
   },
 };
