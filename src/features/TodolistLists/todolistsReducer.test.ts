@@ -7,6 +7,7 @@ import {
   SECOND_ELEMENT_IN_ARRAY,
   ZERO_VALUE,
 } from '../../constants';
+import { LoadingStatuses } from '../enums';
 
 import {
   ActionTodolist,
@@ -29,7 +30,7 @@ beforeEach(() => {
       filter: 'all',
       addedDate: EMPTY_STRING,
       order: ZERO_VALUE,
-      entityStatus: 'idle',
+      entityStatus: LoadingStatuses.Idle,
     },
     {
       id: todolistId2,
@@ -37,7 +38,7 @@ beforeEach(() => {
       filter: 'all',
       addedDate: EMPTY_STRING,
       order: 1,
-      entityStatus: 'idle',
+      entityStatus: LoadingStatuses.Idle,
     },
   ];
 });
@@ -102,12 +103,12 @@ test('todolist should be set to the correct', () => {
 });
 
 test('correct entity status of todolist should be changed', () => {
-  const newStatus: RequestStatusType = 'loading';
+  const newStatus: RequestStatusType = LoadingStatuses.Loading;
 
   const action = ActionTodolist.changeTodolistEntityStatusAC(todolistId2, newStatus);
 
   const endState = todolistsReducer(startState, action);
 
-  expect(endState[FIRST_ELEMENT_IN_ARRAY].entityStatus).toBe('idle');
+  expect(endState[FIRST_ELEMENT_IN_ARRAY].entityStatus).toBe(LoadingStatuses.Idle);
   expect(endState[SECOND_ELEMENT_IN_ARRAY].entityStatus).toBe(newStatus);
 });

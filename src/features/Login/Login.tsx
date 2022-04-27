@@ -15,10 +15,11 @@ import { Navigate } from 'react-router-dom';
 import { LoginParamsType } from '../../api/types';
 import { EMPTY_STRING, MIN_PASSWORD_LENGTH } from '../../constants';
 import { ErrorValues, PATH } from '../../enums';
-import { getIsLoggedInSelector } from '../../selectors/authSelectors';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-import { loginTC } from './authReducer';
+import { loginTC } from './loginThunk';
+
+import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
 
 export const Login: React.FC = (): ReturnComponentType => {
   const isLoggedIn: boolean = useSelector(getIsLoggedInSelector);
@@ -60,7 +61,7 @@ export const Login: React.FC = (): ReturnComponentType => {
         <FormControl>
           <FormLabel>
             <p>
-              To log in get registered
+              <span>To log in get registered </span>
               <a
                 href="https://social-network.samuraijs.com/"
                 target="_blank"

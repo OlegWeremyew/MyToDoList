@@ -1,11 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
-import { authReducer } from '../features/Login/authReducer';
 import { tasksReducer } from '../features/TodolistLists/Todolist/Task/tasksReducer';
 import { todolistsReducer } from '../features/TodolistLists/todolistsReducer';
 
 import { appReducer } from './AppReducer';
+
+import { authReducer } from 'features/Login/loginReducer/authReducer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>;
 

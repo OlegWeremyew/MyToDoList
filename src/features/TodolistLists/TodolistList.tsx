@@ -6,9 +6,6 @@ import { Navigate } from 'react-router-dom';
 
 import { TaskType } from '../../api/types';
 import { PATH, TaskStatuses } from '../../enums';
-import { getIsLoggedInSelector } from '../../selectors/authSelectors';
-import { getTaskSelector } from '../../selectors/taskSelectors';
-import { getTodoLists } from '../../selectors/todolistSelectors';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task/tasksReducer';
@@ -25,6 +22,9 @@ import {
 } from './todolistsReducer';
 
 import { AddItemForm } from 'components/AddItemForm/AddItemForm';
+import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
+import { getTaskSelector } from 'selectors/taskSelectors/taskSelectors';
+import { getTodoLists } from 'selectors/todolistSelectors/todolistSelectors';
 
 export const TodolistList = (): ReturnComponentType => {
   const dispatch = useDispatch();

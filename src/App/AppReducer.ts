@@ -2,10 +2,12 @@ import { Dispatch } from 'redux';
 
 import { authAPI } from '../api/authAPI/authAPI';
 import { ResultCodes } from '../enums';
-import { authAction } from '../features/Login/authReducer';
+import { LoadingStatuses } from '../features/enums';
 import { Nullable } from '../types/Nullable';
 
 import { InferActionTypes } from './store';
+
+import { authAction } from 'features/Login';
 
 export const initialState = {
   status: 'idle' as RequestStatusType,
@@ -79,7 +81,11 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
 
 // Types ========================================================
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
+export type RequestStatusType =
+  | LoadingStatuses.Succeeded
+  | LoadingStatuses.Idle
+  | LoadingStatuses.Failed
+  | LoadingStatuses.Loading;
 
 export type InitialStateType = {
   status: RequestStatusType;

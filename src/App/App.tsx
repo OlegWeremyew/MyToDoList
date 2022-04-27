@@ -7,7 +7,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { PATH } from '../enums';
 import { Login } from '../features/Login/Login';
 import { TodolistList } from '../features/TodolistLists/TodolistList';
-import { getIsInitializedSelector } from '../selectors/appSelectors';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 
 import style from './App.module.scss';
@@ -16,6 +15,7 @@ import { initializeAppTC } from './AppReducer';
 import { ButtonAppBar } from 'components/ButtonAppBar/ButtonAppBar';
 import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
 import { PageNotFound } from 'components/PageNotFound/PageNotFound';
+import { getIsInitializedSelector } from 'selectors/appSelectors/appSelectors';
 
 export const App: React.FC = (): ReturnComponentType => {
   const dispatch = useDispatch();

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { TaskType } from '../../../api/types';
 import { TaskStatuses } from '../../../enums';
+import { LoadingStatuses } from '../../enums';
 import { FilterValuesType, TodolistDomainType } from '../todolistsReducer';
 
 import { Task } from './Task/Task';
@@ -78,7 +79,7 @@ export const Todolist: React.FC<PropsType> = React.memo(
           <EditableSpan value={todolist.title} onChange={changeTodolistTitle} />
           <IconButton
             onClick={removeTodolist}
-            disabled={todolist.entityStatus === 'loading'}
+            disabled={todolist.entityStatus === LoadingStatuses.Loading}
           >
             <Delete />
           </IconButton>
@@ -86,7 +87,7 @@ export const Todolist: React.FC<PropsType> = React.memo(
         <AddItemForm
           label="Name task"
           addItem={addTask}
-          disabled={todolist.entityStatus === 'loading'}
+          disabled={todolist.entityStatus === LoadingStatuses.Loading}
         />
         <div>
           {tasksForTodolist.map(task => (

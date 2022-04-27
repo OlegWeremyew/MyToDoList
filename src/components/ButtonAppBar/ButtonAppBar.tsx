@@ -12,10 +12,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RequestStatusType } from '../../App/AppReducer';
-import { logoutTC } from '../../features/Login/authReducer';
-import { getStatus } from '../../selectors/appSelectors';
-import { getIsLoggedInSelector } from '../../selectors/authSelectors';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
+
+import { logoutTC } from 'features/Login';
+import { getStatus } from 'selectors/appSelectors/appSelectors';
+import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
 
 export const ButtonAppBar = (): ReturnComponentType => {
   const dispatch = useDispatch();

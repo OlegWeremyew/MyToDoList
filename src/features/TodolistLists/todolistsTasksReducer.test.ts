@@ -1,4 +1,4 @@
-import { FIRST_ELEMENT_IN_ARRAY } from '../../constants';
+import { EMPTY_STRING, FIRST_ELEMENT_IN_ARRAY } from '../../constants';
 
 import { tasksReducer } from './Todolist/Task/tasksReducer';
 import { TasksStateType } from './TodolistList';
@@ -9,9 +9,9 @@ test('ids should be equals', () => {
   const startToDoListsState: Array<TodolistDomainType> = [];
 
   const action = ActionTodolist.addTodolistAC({
-    id: 'dfdf',
+    id: 'up',
     title: 'New Todolist',
-    addedDate: '',
+    addedDate: EMPTY_STRING,
     order: 0,
   });
 

@@ -6,7 +6,7 @@ import { Delete } from '@material-ui/icons';
 import { TaskType } from '../../../../api/types';
 import { TaskStatuses } from '../../../../enums';
 
-import classes from './Task.module.css';
+import style from './Task.module.css';
 
 import { EditableSpan } from 'components/EditableSpan/EditableSpan';
 
@@ -40,8 +40,8 @@ export const Task: React.FC<TaskPropsType> = React.memo(
         key={task.id}
         className={task.status === TaskStatuses.Completed ? 'is-done' : ''}
       >
-        <div className={classes.containerTask}>
-          <div className={classes.mainBlock}>
+        <div className={style.containerTask}>
+          <div className={style.mainBlock}>
             <Checkbox
               checked={task.status === TaskStatuses.Completed}
               color="primary"
