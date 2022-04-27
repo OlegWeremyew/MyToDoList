@@ -3,7 +3,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { TaskPriorities, TaskStatuses } from '../../../../api/todolistApi';
+import { TaskPriorities, TaskStatuses } from '../../../../enums';
 
 import { Task } from './Task';
 
@@ -18,6 +18,7 @@ export default {
   },
 } as ComponentMeta<typeof Task>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Task> = args => <Task {...args} />;
 
 export const TaskIsDoneStory = Template.bind({});

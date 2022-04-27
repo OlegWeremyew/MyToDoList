@@ -3,8 +3,9 @@ import React, { ChangeEvent, useCallback } from 'react';
 import { Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
-import { TaskStatuses, TaskType } from '../../../../api/todolistApi';
+import { TaskType } from '../../../../api/todolistApi';
 import { EditableSpan } from '../../../../components/EditableSpan/EditableSpan';
+import { TaskStatuses } from '../../../../enums';
 
 import classes from './Task.module.css';
 

@@ -4,9 +4,10 @@ import { Button, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 
-import { TaskStatuses, TaskType } from '../../../api/todolistApi';
+import { TaskType } from '../../../api/todolistApi';
 import { AddItemForm } from '../../../components/AddItemForm/AddItemForm';
 import { EditableSpan } from '../../../components/EditableSpan/EditableSpan';
+import { TaskStatuses } from '../../../enums';
 import { fetchTasksTC } from '../tasksReducer';
 import { FilterValuesType, TodolistDomainType } from '../todolistsReducer';
 

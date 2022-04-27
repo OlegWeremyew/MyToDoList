@@ -4,9 +4,10 @@ import { Grid, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { TaskStatuses, TaskType } from '../../api/todolistApi';
+import { TaskType } from '../../api/todolistApi';
 import { AppRootStateType } from '../../App/store';
 import { AddItemForm } from '../../components/AddItemForm/AddItemForm';
+import { TaskStatuses } from '../../enums';
 import {
   getIsLoggedInSelector,
   getTaskSelector,

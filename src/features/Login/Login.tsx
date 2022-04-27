@@ -14,6 +14,8 @@ import { Navigate } from 'react-router-dom';
 
 import { LoginParamsType } from '../../api/todolistApi';
 import { AppRootStateType } from '../../App/store';
+import { EMPTY_STRING, MIN_PASSWORD_LENGTH } from "../../constants";
+import { ErrorValues } from '../../enums';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 import { getIsLoggedInSelector } from '../../utils/appSelectors';
 import { PATH } from '../../utils/RouterPATH';
@@ -26,21 +28,21 @@ export const Login: React.FC = (): ReturnComponentType => {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: EMPTY_STRING,
+      password: EMPTY_STRING,
       rememberMe: false,
     },
     validate: values => {
       const errors: Partial<Omit<LoginParamsType, 'captcha'>> = {};
       if (!values.email) {
-        errors.email = 'Email is required';
+        errors.email = ErrorValues.Email_Required;
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
+        errors.email = ErrorValues.Invalid_Address;
       }
       if (!values.password) {
-        errors.password = 'Password is required';
-      } else if (values.password.length < 3) {
-        errors.password = 'Password is too short';
+        errors.password = ErrorValues.Required;
+      } else if (values.password.length < MIN_PASSWORD_LENGTH) {
+        errors.password = ErrorValues.Password_Length;
       }
       return errors;
     },
