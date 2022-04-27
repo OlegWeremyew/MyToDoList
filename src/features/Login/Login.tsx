@@ -1,19 +1,23 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { LoginParamsType } from '../../api/todolistApi';
+import { LoginParamsType } from '../../api/types';
 import { AppRootStateType } from '../../App/store';
 import { EMPTY_STRING, MIN_PASSWORD_LENGTH } from '../../constants';
-import { ErrorValues } from '../../enums';
+import { ErrorValues, PATH } from '../../enums';
+import { getIsLoggedInSelector } from '../../selectors/appSelectors';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
-import { getIsLoggedInSelector } from '../../utils/appSelectors';
-import { PATH } from '../../utils/RouterPATH';
 
 import { loginTC } from './authReducer';
 
@@ -71,7 +75,7 @@ export const Login: React.FC = (): ReturnComponentType => {
             <p>Password: free</p>
           </FormLabel>
           <form onSubmit={formik.handleSubmit}>
-            {/* <FormGroup>
+            <FormGroup>
               <TextField
                 label="Email"
                 margin="normal"
@@ -96,7 +100,7 @@ export const Login: React.FC = (): ReturnComponentType => {
               <Button type="submit" variant="contained" color="primary">
                 Login
               </Button>
-            </FormGroup> */}
+            </FormGroup>
           </form>
         </FormControl>
       </Grid>

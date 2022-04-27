@@ -4,7 +4,7 @@ import { Button, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 
-import { TaskType } from '../../../api/todolistApi';
+import { TaskType } from '../../../api/types';
 import { AddItemForm } from '../../../components/AddItemForm/AddItemForm';
 import { EditableSpan } from '../../../components/EditableSpan/EditableSpan';
 import { TaskStatuses } from '../../../enums';
@@ -16,7 +16,6 @@ import style from './TodolistList.module.css';
 
 export const Todolist: React.FC<PropsType> = React.memo(
   ({
-    demo = false,
     changeTaskStatus,
     addTaskCallBack,
     todolist,
@@ -30,11 +29,8 @@ export const Todolist: React.FC<PropsType> = React.memo(
     const dispatch = useDispatch();
 
     useEffect(() => {
-      if (demo) {
-        return;
-      }
       dispatch(fetchTasksTC(todolist.id));
-    }, [demo, dispatch, todolist.id]);
+    }, [dispatch, todolist.id]);
 
     const addTask = useCallback(
       (title: string) => {
@@ -143,5 +139,4 @@ type PropsType = {
   removeTodolistCallBack: (id: string) => void;
   changeTodolistTitleCallBack: (id: string, newTitle: string) => void;
   changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void;
-  demo: boolean;
 };

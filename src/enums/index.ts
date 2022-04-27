@@ -24,3 +24,10 @@ export enum ErrorValues {
   SOME_ERROR = 'Some error occurred',
   REQUIRED_EMAIL = 'Email is required',
 }
+
+export enum PATH {
+  MAIN_WINDOW = '/',
+  LOGIN = 'login',
+  PAGE_NOT_FOUND = '404',
+  ERROR = '*',
+}

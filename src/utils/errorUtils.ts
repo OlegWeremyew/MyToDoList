@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { ResponseType } from '../api/todolistApi';
+import { ResponseType } from '../api/types';
 import { ActionAppTypes, AppAction } from '../App/AppReducer';
 import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
 

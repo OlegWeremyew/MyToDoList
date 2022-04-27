@@ -1,20 +1,14 @@
 import { Dispatch } from 'redux';
 
-import {
-  TaskType,
-  todolistAPI,
-  TodolistType,
-  UpdateTaskModelType,
-} from '../../../../api/todolistApi';
+import { todolistAPI } from '../../../../api/todolistApi';
+import { TaskType, TodolistType, UpdateTaskModelType } from '../../../../api/types';
 import { ActionAppTypes, AppAction } from '../../../../App/AppReducer';
 import { AppRootStateType, InferActionTypes } from '../../../../App/store';
 import { ResultCodes, TaskPriorities, TaskStatuses } from '../../../../enums';
-import {
-  handleServerAppError,
-  handleServerNetworkError,
-} from '../../../../utils/errorUtils';
 import { TasksStateType } from '../../TodolistList';
 import { ActionTodolistTypes, todolistEnumReducer } from '../../todolistsReducer';
+
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 const initialState: TasksStateType = {};
 

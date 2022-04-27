@@ -7,17 +7,17 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ButtonAppBar } from '../components/ButtonAppBar/ButtonAppBar';
 import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
 import { PageNotFound } from '../components/PageNotFound/PageNotFound';
+import { PATH } from '../enums';
 import { Login } from '../features/Login/Login';
 import { TodolistList } from '../features/TodolistLists/TodolistList';
+import { getIsInitializedSelector } from '../selectors/appSelectors';
 import { ReturnComponentType } from '../types/ReturnComponentType';
-import { getIsInitializedSelector } from '../utils/appSelectors';
-import { PATH } from '../utils/RouterPATH';
 
 import style from './App.module.scss';
 import { initializeAppTC } from './AppReducer';
 import { AppRootStateType } from './store';
 
-export const App: React.FC<PropsType> = ({ demo = false }): ReturnComponentType => {
+export const App: React.FC = (): ReturnComponentType => {
   const dispatch = useDispatch();
 
   const isInitialized = useSelector<AppRootStateType, boolean>(getIsInitializedSelector);
@@ -40,7 +40,7 @@ export const App: React.FC<PropsType> = ({ demo = false }): ReturnComponentType 
       <ButtonAppBar />
       <Container fixed>
         <Routes>
-          <Route path={PATH.MAIN_WINDOW} element={<TodolistList demo={demo} />} />
+          <Route path={PATH.MAIN_WINDOW} element={<TodolistList />} />
           <Route path={PATH.LOGIN} element={<Login />} />
           <Route path={PATH.PAGE_NOT_FOUND} element={<PageNotFound />} />
           <Route path={PATH.ERROR} element={<Navigate to={PATH.PAGE_NOT_FOUND} />} />
@@ -48,11 +48,4 @@ export const App: React.FC<PropsType> = ({ demo = false }): ReturnComponentType 
       </Container>
     </div>
   );
-};
-
-// type
-
-type PropsType = {
-  // eslint-disable-next-line react/require-default-props
-  demo?: boolean;
 };

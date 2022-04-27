@@ -4,16 +4,15 @@ import { Grid, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { TaskType } from '../../api/todolistApi';
+import { TaskType } from '../../api/types';
 import { AppRootStateType } from '../../App/store';
 import { AddItemForm } from '../../components/AddItemForm/AddItemForm';
-import { TaskStatuses } from '../../enums';
+import { PATH, TaskStatuses } from '../../enums';
 import {
   getIsLoggedInSelector,
   getTaskSelector,
   getTodoLists,
-} from '../../utils/appSelectors';
-import { PATH } from '../../utils/RouterPATH';
+} from '../../selectors/appSelectors';
 
 import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task/tasksReducer';
 import { Todolist } from './Todolist/Todolist';
@@ -28,7 +27,7 @@ import {
   TodolistDomainType,
 } from './todolistsReducer';
 
-export const TodolistList: React.FC<PropsType> = ({ demo = false }) => {
+export const TodolistList: React.FC = () => {
   const dispatch = useDispatch();
 
   const todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(
@@ -38,11 +37,11 @@ export const TodolistList: React.FC<PropsType> = ({ demo = false }) => {
   const isLoggedIn = useSelector<AppRootStateType, boolean>(getIsLoggedInSelector);
 
   useEffect(() => {
-    if (demo || !isLoggedIn) {
+    if (!isLoggedIn) {
       return;
     }
     dispatch(fetchTodolistsTC());
-  }, [demo, isLoggedIn, dispatch]);
+  }, [isLoggedIn, dispatch]);
 
   const removeTask = useCallback(
     (id: string, todolistId: string) => {
@@ -110,12 +109,12 @@ export const TodolistList: React.FC<PropsType> = ({ demo = false }) => {
         <AddItemForm label="Name todolist" addItem={addTodolist} />
       </Grid>
       <Grid container spacing={3} className={style.gridTodolist}>
-        {todoLists.map(tl => (
-          <Grid item key={tl.id}>
+        {todoLists.map(todo => (
+          <Grid item key={todo.id}>
             <Paper className={style.paperStyle}>
               <Todolist
-                todolist={tl}
-                tasks={tasks[tl.id]}
+                todolist={todo}
+                tasks={tasks[todo.id]}
                 removeTask={removeTask}
                 changeFilterCallBack={changeFilter}
                 addTaskCallBack={addTask}
@@ -123,7 +122,6 @@ export const TodolistList: React.FC<PropsType> = ({ demo = false }) => {
                 removeTodolistCallBack={removeTodolist}
                 changeTaskTitle={changeTaskTitle}
                 changeTodolistTitleCallBack={changeTodolistTitle}
-                demo={demo}
               />
             </Paper>
           </Grid>
@@ -137,8 +135,4 @@ export const TodolistList: React.FC<PropsType> = ({ demo = false }) => {
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
-};
-
-type PropsType = {
-  demo: boolean;
 };
