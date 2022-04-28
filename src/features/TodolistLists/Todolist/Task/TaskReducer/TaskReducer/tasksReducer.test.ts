@@ -3,12 +3,13 @@ import {
   FIRST_ELEMENT_IN_ARRAY,
   SECOND_ELEMENT_IN_ARRAY,
   ZERO_VALUE,
-} from '../../../../constants';
-import { TaskPriorities, TaskStatuses } from '../../../../enums';
-import { TasksStateType } from '../../TodolistList';
-import { ActionTodolist } from '../../todolistsReducer';
+} from '../../../../../../constants';
+import { TaskPriorities, TaskStatuses } from '../../../../../../enums';
+import { TasksStateType } from '../../../../TodolistList';
+import { ActionTodolist } from '../../../../todolistsReducer';
+import { taskAction } from '../TaskAction/TaskAction';
 
-import { taskAction, tasksReducer } from './tasksReducer';
+import { tasksReducer } from './tasksReducer';
 
 let startState: TasksStateType = {};
 beforeEach(() => {

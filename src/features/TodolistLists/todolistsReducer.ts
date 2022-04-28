@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import { todolistAPI } from '../../api/todolistAPI/todolistApi';
 import { TodolistType } from '../../api/types';
-import { AppAction } from '../../App/AppReducer/AppAction/AppAction';
+import { AppAction } from '../../App/AppReducer';
 import { ActionAppTypes, RequestStatusType } from '../../App/AppReducer/types';
 import { InferActionTypes } from '../../App/store';
 import { LoadingStatuses } from '../enums';

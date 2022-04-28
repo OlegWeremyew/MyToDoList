@@ -8,7 +8,7 @@ import { TaskType } from '../../api/types';
 import { PATH, TaskStatuses } from '../../enums';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task/tasksReducer';
+import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task';
 import { Todolist } from './Todolist/Todolist';
 import style from './TodolistList.module.scss';
 import {
