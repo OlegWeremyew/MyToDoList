@@ -4,7 +4,7 @@ import { AlertProps, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/core/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppAction } from '../../App/AppReducer';
+import { AppAction } from '../../App';
 import { Nullable } from '../../types/Nullable';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 

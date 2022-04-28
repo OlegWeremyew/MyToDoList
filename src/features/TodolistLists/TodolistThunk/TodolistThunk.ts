@@ -1,5 +1,5 @@
-import { todolistAPI } from '../../../api/todolistAPI/todolistApi';
-import { AppAction } from '../../../App/AppReducer';
+import { todolistAPI } from '../../../api';
+import { AppAction } from '../../../App';
 import { LoadingStatuses } from '../../enums';
 import { ActionTodolist } from '../TodolistAction';
 import { ThunkDispatchType } from '../types';

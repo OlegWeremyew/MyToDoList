@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { PATH } from '../enums';
-import { Login } from '../features/Login/Login';
-import { TodolistList } from '../features/TodolistLists/TodolistList';
+import { Login, TodolistList } from '../features';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 
 import style from './App.module.scss';
