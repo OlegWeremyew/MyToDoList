@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 
-import { RequestStatusType } from '../../App/AppReducer';
+import { RequestStatusType } from '../../App/AppReducer/AppReducer';
 import {
   EMPTY_STRING,
   FIRST_ELEMENT_IN_ARRAY,

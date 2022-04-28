@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { ResponseType } from '../api/types';
-import { ActionAppTypes, AppAction } from '../App/AppReducer';
+import { ActionAppTypes, AppAction } from '../App/AppReducer/AppReducer';
 import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
 import { LoadingStatuses } from '../features/enums';
 

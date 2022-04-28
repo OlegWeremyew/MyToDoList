@@ -1,11 +1,10 @@
 import { Dispatch } from 'redux';
 
-import { authAPI } from '../api/authAPI/authAPI';
-import { ResultCodes } from '../enums';
-import { LoadingStatuses } from '../features/enums';
-import { Nullable } from '../types/Nullable';
-
-import { InferActionTypes } from './store';
+import { authAPI } from '../../api/authAPI/authAPI';
+import { ResultCodes } from '../../enums';
+import { LoadingStatuses } from '../../features/enums';
+import { Nullable } from '../../types/Nullable';
+import { InferActionTypes } from '../store';
 
 import { authAction } from 'features/Login';
 
