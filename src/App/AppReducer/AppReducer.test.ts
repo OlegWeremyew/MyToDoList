@@ -1,6 +1,6 @@
 import { LoadingStatuses } from '../../features/enums';
 
-import { AppAction, appReducer, InitialStateType } from './AppReducer';
+import { AppAction, appReducer, InitialStateType } from './AppReducer/AppReducer';
 
 let startState: InitialStateType;
 beforeEach(() => {

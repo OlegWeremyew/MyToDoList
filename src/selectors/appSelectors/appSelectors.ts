@@ -1,4 +1,4 @@
-import { RequestStatusType } from '../../App/AppReducer/AppReducer';
+import { RequestStatusType } from '../../App/AppReducer/types';
 import { AppRootStateType } from '../../App/store';
 import { Nullable } from '../../types/Nullable';
 

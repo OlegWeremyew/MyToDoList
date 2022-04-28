@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RequestStatusType } from '../../App/AppReducer/AppReducer';
+import { RequestStatusType } from '../../App/AppReducer/types';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { logoutTC } from 'features/Login';

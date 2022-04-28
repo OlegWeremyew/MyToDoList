@@ -10,7 +10,7 @@ import { TodolistList } from '../features/TodolistLists/TodolistList';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 
 import style from './App.module.scss';
-import { initializeAppTC } from './AppReducer/AppReducer';
+import { initializeAppTC } from './AppReducer/AppThunk/AppThunk';
 
 import { ButtonAppBar } from 'components/ButtonAppBar/ButtonAppBar';
 import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';

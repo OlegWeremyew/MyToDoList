@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import { authAPI } from '../../../api/authAPI/authAPI';
 import { LoginParamsType } from '../../../api/types';
-import { AppAction } from '../../../App/AppReducer/AppReducer';
+import { AppAction } from '../../../App/AppReducer/AppAction/AppAction';
 import { ResultCodes } from '../../../enums';
 import { handleServerAppError, handleServerNetworkError } from '../../../utils';
 import { LoadingStatuses } from '../../enums';
