@@ -5,7 +5,7 @@ import { AppRootStateType } from '../../../../../../App/store';
 import { ResultCodes } from '../../../../../../enums';
 import { handleServerAppError, handleServerNetworkError } from '../../../../../../utils';
 import { LoadingStatuses } from '../../../../../enums';
-import { taskAction } from '../TaskAction/TaskAction';
+import { taskAction } from '../TaskAction';
 import { ThunkDispatchType, UpdateDomainTaskModelType } from '../types';
 
 export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType) => {

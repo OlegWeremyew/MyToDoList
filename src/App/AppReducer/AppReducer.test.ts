@@ -1,8 +1,10 @@
 import { LoadingStatuses } from '../../features/enums';
 
-import { AppAction, appReducer, InitialStateType } from './AppReducer/AppReducer';
+import { AppAction } from './AppAction';
+import { appReducer } from './AppReducer';
+import { InitialAppStateType } from './types';
 
-let startState: InitialStateType;
+let startState: InitialAppStateType;
 beforeEach(() => {
   startState = {
     error: null,

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { TaskType } from '../../../api/types';
 import { TaskStatuses } from '../../../enums';
 import { LoadingStatuses } from '../../enums';
-import { FilterValuesType, TodolistDomainType } from '../todolistsReducer';
+import { FilterValuesType, TodolistDomainType } from '../types';
 
 import { fetchTasksTC, Task } from './Task';
 import style from './TodolistList.module.css';

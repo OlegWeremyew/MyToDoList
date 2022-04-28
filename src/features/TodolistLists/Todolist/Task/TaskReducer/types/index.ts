@@ -3,8 +3,8 @@ import { Dispatch } from 'redux';
 import { ActionAppTypes } from '../../../../../../App/AppReducer/types';
 import { InferActionTypes } from '../../../../../../App/store';
 import { TaskPriorities, TaskStatuses } from '../../../../../../enums';
-import { ActionTodolistTypes } from '../../../../todolistsReducer';
-import { taskAction } from '../TaskAction/TaskAction';
+import { ActionTodolistTypes } from '../../../../types';
+import { taskAction } from '../TaskAction';
 
 export type ThunkDispatchType = Dispatch<ActionsTaskAllType | ActionAppTypes>;
 

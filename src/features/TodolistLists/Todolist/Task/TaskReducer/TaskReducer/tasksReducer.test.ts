@@ -5,9 +5,9 @@ import {
   ZERO_VALUE,
 } from '../../../../../../constants';
 import { TaskPriorities, TaskStatuses } from '../../../../../../enums';
+import { ActionTodolist } from '../../../../TodolistAction';
 import { TasksStateType } from '../../../../TodolistList';
-import { ActionTodolist } from '../../../../todolistsReducer';
-import { taskAction } from '../TaskAction/TaskAction';
+import { taskAction } from '../TaskAction';
 
 import { tasksReducer } from './tasksReducer';
 
@@ -189,8 +189,8 @@ test('property with todolistId should be deleted', () => {
 
 test('empty arrays should be added when we set todolist', () => {
   const action = ActionTodolist.setTodosAC([
-    { id: '1', title: 'title 1', order: ZERO_VALUE, addedDate: '' },
-    { id: '2', title: 'title 2', order: ZERO_VALUE, addedDate: '' },
+    { id: '1', title: 'title 1', order: ZERO_VALUE, addedDate: EMPTY_STRING },
+    { id: '2', title: 'title 2', order: ZERO_VALUE, addedDate: EMPTY_STRING },
   ]);
 
   const endState = tasksReducer({}, action);

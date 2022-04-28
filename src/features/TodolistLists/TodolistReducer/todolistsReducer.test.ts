@@ -1,20 +1,17 @@
 import { v1 } from 'uuid';
 
-import { RequestStatusType } from '../../App/AppReducer/AppReducer/AppReducer';
+import { RequestStatusType } from '../../../App/AppReducer/types';
 import {
   EMPTY_STRING,
   FIRST_ELEMENT_IN_ARRAY,
   SECOND_ELEMENT_IN_ARRAY,
   ZERO_VALUE,
-} from '../../constants';
-import { LoadingStatuses } from '../enums';
+} from '../../../constants';
+import { LoadingStatuses } from '../../enums';
+import { ActionTodolist } from '../TodolistAction';
+import { FilterValuesType, TodolistDomainType } from '../types';
 
-import {
-  ActionTodolist,
-  FilterValuesType,
-  TodolistDomainType,
-  todolistsReducer,
-} from './todolistsReducer';
+import { todolistsReducer } from './todolistsReducer';
 
 let todolistId1: string;
 let todolistId2: string;

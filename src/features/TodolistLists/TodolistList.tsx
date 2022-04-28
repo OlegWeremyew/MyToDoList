@@ -8,18 +8,16 @@ import { TaskType } from '../../api/types';
 import { PATH, TaskStatuses } from '../../enums';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-import { addTaskTC, removeTaskTC, updateTaskTC } from './Todolist/Task';
-import { Todolist } from './Todolist/Todolist';
+import { addTaskTC, removeTaskTC, Todolist, updateTaskTC } from './Todolist';
+import { ActionTodolist } from './TodolistAction';
 import style from './TodolistList.module.scss';
 import {
-  ActionTodolist,
   addTodolistTC,
   ChangeTodolistTitleTC,
   fetchTodolistsTC,
-  FilterValuesType,
   removeTodolistTC,
-  TodolistDomainType,
-} from './todolistsReducer';
+} from './TodolistThunk';
+import { FilterValuesType, TodolistDomainType } from './types';
 
 import { AddItemForm } from 'components/AddItemForm/AddItemForm';
 import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';

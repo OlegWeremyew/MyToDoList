@@ -2,14 +2,14 @@ import { LoadingStatuses } from '../../../features/enums';
 import { appEnumReducer } from '../constants';
 import { ActionAppTypes, InitialAppStateType, RequestStatusType } from '../types';
 
-export const initialState = {
+export const initialAppState = {
   status: LoadingStatuses.Idle as RequestStatusType,
   error: null,
   isInitialized: false,
 };
 
 export const appReducer = (
-  state: InitialAppStateType = initialState,
+  state: InitialAppStateType = initialAppState,
   action: ActionAppTypes,
 ): InitialAppStateType => {
   switch (action.type) {

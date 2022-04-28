@@ -1,7 +1,7 @@
 import { LoadingStatuses } from '../../../features/enums';
 import { Nullable } from '../../../types/Nullable';
 import { InferActionTypes } from '../../store';
-import { AppAction } from '../AppAction/AppAction';
+import { AppAction } from '../AppAction';
 
 export type RequestStatusType =
   | LoadingStatuses.Succeeded

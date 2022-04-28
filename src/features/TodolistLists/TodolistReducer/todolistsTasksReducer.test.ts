@@ -1,8 +1,10 @@
-import { EMPTY_STRING, FIRST_ELEMENT_IN_ARRAY } from '../../constants';
+import { EMPTY_STRING, FIRST_ELEMENT_IN_ARRAY } from '../../../constants';
+import { tasksReducer } from '../Todolist';
+import { ActionTodolist } from '../TodolistAction';
+import { TasksStateType } from '../TodolistList';
+import { TodolistDomainType } from '../types';
 
-import { tasksReducer } from './Todolist/Task';
-import { TasksStateType } from './TodolistList';
-import { ActionTodolist, TodolistDomainType, todolistsReducer } from './todolistsReducer';
+import { todolistsReducer } from './todolistsReducer';
 
 test('ids should be equals', () => {
   const startTasksState: TasksStateType = {};
