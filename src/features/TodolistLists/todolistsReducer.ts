@@ -27,7 +27,7 @@ export const todolistsReducer = (
     }
     case todolistEnumReducer.ADD_TODOLIST: {
       return [
-        { ...action.payload.todolist, filter: 'all', entityStatus: 'idle' },
+        { ...action.payload.todolist, filter: 'all', entityStatus: LoadingStatuses.Idle },
         ...state,
       ];
     }
@@ -50,7 +50,7 @@ export const todolistsReducer = (
       return action.payload.todos.map(m => ({
         ...m,
         filter: 'all',
-        entityStatus: 'idle',
+        entityStatus: LoadingStatuses.Idle,
       }));
     }
     default:

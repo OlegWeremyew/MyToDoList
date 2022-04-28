@@ -5,6 +5,7 @@ import { TaskType, TodolistType, UpdateTaskModelType } from '../../../../api/typ
 import { ActionAppTypes, AppAction } from '../../../../App/AppReducer';
 import { AppRootStateType, InferActionTypes } from '../../../../App/store';
 import { ResultCodes, TaskPriorities, TaskStatuses } from '../../../../enums';
+import { LoadingStatuses } from '../../../enums';
 import { TasksStateType } from '../../TodolistList';
 import { ActionTodolistTypes, todolistEnumReducer } from '../../todolistsReducer';
 
@@ -116,33 +117,33 @@ export const taskAction = {
 
 // Thunk===================================================================================
 export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType) => {
-  dispatch(AppAction.setAppStatusAC('loading'));
+  dispatch(AppAction.setAppStatusAC(LoadingStatuses.Loading));
   todolistAPI.getTasks(todolistId).then(res => {
     const tasks = res.data.items;
     dispatch(taskAction.setTasksAC(tasks, todolistId));
-    dispatch(AppAction.setAppStatusAC('succeeded'));
+    dispatch(AppAction.setAppStatusAC(LoadingStatuses.Succeeded));
   });
 };
 
 export const removeTaskTC =
   (taskId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(AppAction.setAppStatusAC('loading'));
+    dispatch(AppAction.setAppStatusAC(LoadingStatuses.Loading));
     todolistAPI.deleteTask(todolistId, taskId).then(() => {
       dispatch(taskAction.removeTaskAC(taskId, todolistId));
-      dispatch(AppAction.setAppStatusAC('succeeded'));
+      dispatch(AppAction.setAppStatusAC(LoadingStatuses.Succeeded));
     });
   };
 
 export const addTaskTC =
   (todolistId: string, title: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(AppAction.setAppStatusAC('loading'));
+    dispatch(AppAction.setAppStatusAC(LoadingStatuses.Loading));
     todolistAPI
       .createTask(todolistId, title)
       .then(res => {
         if (res.data.resultCode === ResultCodes.Success) {
           const task = res.data.data.item;
           dispatch(taskAction.addTaskAC(task));
-          dispatch(AppAction.setAppStatusAC('succeeded'));
+          dispatch(AppAction.setAppStatusAC(LoadingStatuses.Succeeded));
         } else {
           handleServerAppError(res.data, dispatch);
         }

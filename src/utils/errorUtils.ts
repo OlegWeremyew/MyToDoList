@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { ResponseType } from '../api/types';
 import { ActionAppTypes, AppAction } from '../App/AppReducer';
 import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
+import { LoadingStatuses } from '../features/enums';
 
 export const handleServerAppError = <D>(
   data: ResponseType<D>,
@@ -13,7 +14,7 @@ export const handleServerAppError = <D>(
   } else {
     dispatch(AppAction.setAppErrorAC('Some error'));
   }
-  dispatch(AppAction.setAppStatusAC('failed'));
+  dispatch(AppAction.setAppStatusAC(LoadingStatuses.Failed));
 };
 
 export const handleServerNetworkError = (
@@ -21,5 +22,5 @@ export const handleServerNetworkError = (
   dispatch: Dispatch<ActionAppTypes>,
 ): void => {
   dispatch(AppAction.setAppErrorAC(err.message ? err.message : 'Some error'));
-  dispatch(AppAction.setAppStatusAC('failed'));
+  dispatch(AppAction.setAppStatusAC(LoadingStatuses.Failed));
 };

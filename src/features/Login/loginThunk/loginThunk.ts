@@ -5,18 +5,19 @@ import { LoginParamsType } from '../../../api/types';
 import { AppAction } from '../../../App/AppReducer';
 import { ResultCodes } from '../../../enums';
 import { handleServerAppError, handleServerNetworkError } from '../../../utils';
+import { LoadingStatuses } from '../../enums';
 import { authAction } from '../loginActions';
 import { AuthReducerActionsType } from '../types';
 
 export const loginTC =
   (data: LoginParamsType) => (dispatch: Dispatch<AuthReducerActionsType>) => {
-    dispatch(AppAction.setAppStatusAC('loading'));
+    dispatch(AppAction.setAppStatusAC(LoadingStatuses.Loading));
     authAPI
       .login(data)
       .then(res => {
         if (res.data.resultCode === ResultCodes.Success) {
           dispatch(authAction.setIsLoggedInAC(true));
-          dispatch(AppAction.setAppStatusAC('succeeded'));
+          dispatch(AppAction.setAppStatusAC(LoadingStatuses.Succeeded));
         } else {
           handleServerAppError(res.data, dispatch);
         }
@@ -32,7 +33,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     .then(res => {
       if (res.data.resultCode === ResultCodes.Success) {
         dispatch(authAction.setIsLoggedInAC(false));
-        dispatch(AppAction.setAppStatusAC('succeeded'));
+        dispatch(AppAction.setAppStatusAC(LoadingStatuses.Succeeded));
       } else {
         handleServerAppError(res.data, dispatch);
       }
