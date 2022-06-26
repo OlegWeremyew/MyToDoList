@@ -1,5 +1,5 @@
 import { ActionAppTypes } from '../../../App/AppReducer/types';
-import { InferActionTypes } from '../../../App/store';
+import { InferActionTypes } from '../../../App/types';
 import { authAction } from '../loginActions';
 import { initialAuthState } from '../loginReducer/authReducer';
 

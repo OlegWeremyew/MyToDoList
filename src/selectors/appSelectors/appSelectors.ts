@@ -1,5 +1,5 @@
 import { RequestStatusType } from '../../App/AppReducer/types';
-import { AppRootStateType } from '../../App/store';
+import { AppRootStateType } from '../../App/types';
 import { Nullable } from '../../types/Nullable';
 
 export const getIsInitializedSelector = (state: AppRootStateType): boolean =>

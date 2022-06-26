@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FC } from 'react';
 
 import {
   AppBar,
@@ -11,18 +12,15 @@ import {
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RequestStatusType } from '../../App/AppReducer/types';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
-
 import { logoutTC } from 'features/Login';
 import { getStatus } from 'selectors/appSelectors/appSelectors';
 import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
 
-export const ButtonAppBar = (): ReturnComponentType => {
+export const ButtonAppBar: FC = () => {
   const dispatch = useDispatch();
 
-  const status: RequestStatusType = useSelector(getStatus);
-  const isLoggedIn: boolean = useSelector(getIsLoggedInSelector);
+  const status = useSelector(getStatus);
+  const isLoggedIn = useSelector(getIsLoggedInSelector);
 
   const logoutHandler = (): void => {
     dispatch(logoutTC());

@@ -1,24 +1,22 @@
-import { AxiosResponse } from 'axios';
-
 import { instance } from '../apiConfig';
 import {
   GetTasksResponse,
-  TaskType,
   TodolistType,
   UpdateTaskModelType,
   ResponseType,
 } from '../types';
 
+import { CreateTaskType, CreateToDo, TasksPutOrPostType } from './types';
+
 export const todolistAPI = {
-  // todolist =============================
-  getTodos(): Promise<AxiosResponse<TodolistType[]>> {
+  getTodos() {
     const endPoint = `todo-lists/`;
     return instance.get<TodolistType[]>(endPoint);
   },
 
   createTodo(title: string) {
     const endPoint = `todo-lists/`;
-    return instance.post<ResponseType<{ item: TodolistType }>>(endPoint, { title });
+    return instance.post<CreateToDo>(endPoint, { title });
   },
 
   updateTodoTitle(todolistId: string, title: string) {
@@ -31,7 +29,6 @@ export const todolistAPI = {
     return instance.delete<ResponseType>(endPoint);
   },
 
-  // tasks =============================
   getTasks(todolistId: string) {
     const endPoint = `todo-lists/${todolistId}/tasks/`;
     return instance.get<GetTasksResponse>(endPoint);
@@ -44,17 +41,11 @@ export const todolistAPI = {
 
   createTask(todolistId: string, title: string) {
     const endPoint = `todo-lists/${todolistId}/tasks/`;
-    return instance.post<
-      { title: string },
-      AxiosResponse<ResponseType<{ item: TaskType }>>
-    >(endPoint, { title });
+    return instance.post<CreateTaskType, TasksPutOrPostType>(endPoint, { title });
   },
 
   updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
     const endPoint = `todo-lists/${todolistId}/tasks/${taskId}`;
-    return instance.put<
-      UpdateTaskModelType,
-      AxiosResponse<ResponseType<{ item: TaskType }>>
-    >(endPoint, model);
+    return instance.put<UpdateTaskModelType, TasksPutOrPostType>(endPoint, model);
   },
 };

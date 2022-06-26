@@ -1,6 +1,6 @@
 import { TodolistType } from '../../../../../../api/types';
 import { todolistEnumReducer } from '../../../../constants';
-import { TasksStateType } from '../../../../TodolistList';
+import { TasksStateType } from '../../../../types';
 import { taskEnumReducer } from '../constants';
 import { ActionsTaskAllType } from '../types';
 

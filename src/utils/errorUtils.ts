@@ -1,10 +1,11 @@
 import { Dispatch } from 'redux';
 
 import { ResponseType } from '../api/types';
-import { AppAction } from '../App/AppReducer/AppAction/AppAction';
+import { AppAction } from '../App';
 import { ActionAppTypes } from '../App/AppReducer/types';
 import { FIRST_ELEMENT_IN_ARRAY } from '../constants';
-import { LoadingStatuses } from '../features/enums';
+
+import { LoadingStatuses } from 'features/enums';
 
 export const handleServerAppError = <D>(
   data: ResponseType<D>,

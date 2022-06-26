@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { FC, memo, useCallback, useEffect } from 'react';
 
 import { Button, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 
-import { TaskType } from '../../../api/types';
 import { TaskStatuses } from '../../../enums';
 import { LoadingStatuses } from '../../enums';
-import { FilterValuesType, TodolistDomainType } from '../types';
+import { FilterValuesType } from '../types';
 
 import { fetchTasksTC, Task } from './Task';
 import style from './TodolistList.module.css';
+import { PropsType } from './types';
 
 import { AddItemForm } from 'components/AddItemForm/AddItemForm';
 import { EditableSpan } from 'components/EditableSpan/EditableSpan';
 
-export const Todolist: React.FC<PropsType> = React.memo(
+export const Todolist: FC<PropsType> = memo(
   ({
     changeTaskStatus,
     addTaskCallBack,
@@ -127,17 +127,3 @@ export const Todolist: React.FC<PropsType> = React.memo(
     );
   },
 );
-
-// type
-
-type PropsType = {
-  todolist: TodolistDomainType;
-  tasks: Array<TaskType>;
-  removeTask: (taskId: string, todolistId: string) => void;
-  changeFilterCallBack: (value: FilterValuesType, todolistId: string) => void;
-  addTaskCallBack: (title: string, todolistId: string) => void;
-  changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void;
-  removeTodolistCallBack: (id: string) => void;
-  changeTodolistTitleCallBack: (id: string, newTitle: string) => void;
-  changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void;
-};

@@ -4,7 +4,7 @@ import { ActionTodolistTypes, TodolistDomainType } from '../types';
 
 const initialTodoListState: Array<TodolistDomainType> = [];
 
-export const todolistsReducer = (
+export const todoListsReducer = (
   state: Array<TodolistDomainType> = initialTodoListState,
   action: ActionTodolistTypes,
 ): Array<TodolistDomainType> => {

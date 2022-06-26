@@ -1,4 +1,4 @@
-import { LoadingStatuses } from '../../../features/enums';
+import { LoadingStatuses } from '../../../features';
 import { appEnumReducer } from '../constants';
 import { ActionAppTypes, InitialAppStateType, RequestStatusType } from '../types';
 

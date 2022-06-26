@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { APIKeyType } from './types';
+
 export const instance = axios.create({
   withCredentials: true,
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -7,5 +9,3 @@ export const instance = axios.create({
     'API-KEY': process.env.REACT_APP_API_KEY as APIKeyType,
   },
 });
-
-type APIKeyType = string | number | boolean;

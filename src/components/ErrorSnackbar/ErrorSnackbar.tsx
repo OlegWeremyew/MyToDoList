@@ -1,23 +1,22 @@
 import * as React from 'react';
+import { FC, forwardRef } from 'react';
 
 import { AlertProps, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/core/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppAction } from '../../App';
-import { Nullable } from '../../types/Nullable';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { getError } from 'selectors/appSelectors/appSelectors';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
+const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 ));
 
-export const ErrorSnackbar = (): ReturnComponentType => {
+export const ErrorSnackbar: FC = () => {
   const dispatch = useDispatch();
 
-  const error: Nullable<string> = useSelector(getError);
+  const error = useSelector(getError);
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string): void => {
     if (reason === 'clickaway') {

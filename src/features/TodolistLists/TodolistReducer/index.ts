@@ -1,1 +1,1 @@
-export { todolistsReducer } from './todolistsReducer';
+export { todoListsReducer } from './todolistsReducer';

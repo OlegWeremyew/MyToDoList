@@ -1,17 +1,21 @@
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { ChangeEvent, FC, memo, useCallback } from 'react';
 
 import { Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
-import { TaskType } from '../../../../api/types';
+import { EMPTY_STRING } from '../../../../constants';
 import { TaskStatuses } from '../../../../enums';
 
 import style from './Task.module.css';
+import { TaskPropsType } from './types';
 
 import { EditableSpan } from 'components/EditableSpan/EditableSpan';
 
-export const Task: React.FC<TaskPropsType> = React.memo(
+export const Task: FC<TaskPropsType> = memo(
   ({ task, removeTask, todolistId, changeTaskStatus, changeTaskTitle }) => {
+    const containerStyles =
+      task.status === TaskStatuses.Completed ? 'is-done' : EMPTY_STRING;
+
     const onClickHandler = useCallback(() => {
       removeTask(task.id, todolistId);
     }, [task.id, todolistId, removeTask]);
@@ -36,10 +40,7 @@ export const Task: React.FC<TaskPropsType> = React.memo(
     );
 
     return (
-      <div
-        key={task.id}
-        className={task.status === TaskStatuses.Completed ? 'is-done' : ''}
-      >
+      <div key={task.id} className={containerStyles}>
         <div className={style.containerTask}>
           <div className={style.mainBlock}>
             <Checkbox
@@ -57,12 +58,3 @@ export const Task: React.FC<TaskPropsType> = React.memo(
     );
   },
 );
-
-// type
-export type TaskPropsType = {
-  todolistId: string;
-  task: TaskType;
-  removeTask: (taskID: string, todolistID: string) => void;
-  changeTaskStatus: (taskID: string, status: TaskStatuses, todolistId: string) => void;
-  changeTaskTitle: (taskID: string, newValue: string, todolistID: string) => void;
-};

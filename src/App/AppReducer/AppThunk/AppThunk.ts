@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { authAPI } from '../../../api/authAPI/authAPI';
+import { authAPI } from '../../../api';
 import { ResultCodes } from '../../../enums';
 import { authAction } from '../../../features';
 import { AppAction } from '../AppAction';

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { ActionAppTypes } from '../../../../../../App/AppReducer/types';
-import { InferActionTypes } from '../../../../../../App/store';
+import { InferActionTypes } from '../../../../../../App/types';
 import { TaskPriorities, TaskStatuses } from '../../../../../../enums';
 import { ActionTodolistTypes } from '../../../../types';
 import { taskAction } from '../TaskAction';

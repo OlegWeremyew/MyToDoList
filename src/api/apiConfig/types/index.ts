@@ -1,0 +1,1 @@
+export type APIKeyType = string | number | boolean;

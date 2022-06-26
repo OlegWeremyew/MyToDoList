@@ -1,4 +1,4 @@
-import { LoadingStatuses } from '../../features/enums';
+import { LoadingStatuses } from '../../features';
 
 import { AppAction } from './AppAction';
 import { appReducer } from './AppReducer';

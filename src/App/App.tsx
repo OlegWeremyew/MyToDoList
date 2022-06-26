@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { CircularProgress, Container } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { ButtonAppBar, ErrorSnackbar, PageNotFound } from '../components';
 import { PATH } from '../enums';
 import { Login, TodolistList } from '../features';
-import { ReturnComponentType } from '../types/ReturnComponentType';
 
 import style from './App.module.scss';
 import { initializeAppTC } from './AppReducer';
 
-import { ButtonAppBar } from 'components/ButtonAppBar/ButtonAppBar';
-import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
-import { PageNotFound } from 'components/PageNotFound/PageNotFound';
 import { getIsInitializedSelector } from 'selectors/appSelectors/appSelectors';
 
-export const App: React.FC = (): ReturnComponentType => {
+export const App: FC = () => {
   const dispatch = useDispatch();
 
-  const isInitialized: boolean = useSelector(getIsInitializedSelector);
+  const isInitialized = useSelector(getIsInitializedSelector);
 
   useEffect(() => {
     dispatch(initializeAppTC());

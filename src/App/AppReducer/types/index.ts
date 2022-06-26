@@ -1,6 +1,6 @@
-import { LoadingStatuses } from '../../../features/enums';
+import { LoadingStatuses } from '../../../features';
 import { Nullable } from '../../../types/Nullable';
-import { InferActionTypes } from '../../store';
+import { InferActionTypes } from '../../types';
 import { AppAction } from '../AppAction';
 
 export type RequestStatusType =

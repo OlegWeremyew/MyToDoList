@@ -1,7 +1,7 @@
-import { todolistAPI } from '../../../../../../api/todolistAPI/todolistApi';
+import { todolistAPI } from '../../../../../../api';
 import { UpdateTaskModelType } from '../../../../../../api/types';
-import { AppAction } from '../../../../../../App/AppReducer';
-import { AppRootStateType } from '../../../../../../App/store';
+import { AppAction } from '../../../../../../App';
+import { AppRootStateType } from '../../../../../../App/types';
 import { ResultCodes } from '../../../../../../enums';
 import { handleServerAppError, handleServerNetworkError } from '../../../../../../utils';
 import { LoadingStatuses } from '../../../../../enums';

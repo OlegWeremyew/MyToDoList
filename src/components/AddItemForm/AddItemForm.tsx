@@ -1,11 +1,13 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import React, { ChangeEvent, FC, KeyboardEvent, memo, useState } from 'react';
 
 import { IconButton, TextField } from '@material-ui/core';
 import { AddBox } from '@material-ui/icons';
 
 import { EMPTY_STRING } from '../../constants';
 
-export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(
+import { AddItemFormPropsType } from './types';
+
+export const AddItemForm: FC<AddItemFormPropsType> = memo(
   ({ addItem, label, disabled = false }) => {
     const [title, setTitle] = useState<string>(EMPTY_STRING);
     const [error, setError] = useState<boolean>(false);
@@ -49,11 +51,3 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(
     );
   },
 );
-
-// type
-
-type AddItemFormPropsType = {
-  addItem: (title: string) => void;
-  label: string;
-  disabled?: boolean;
-};

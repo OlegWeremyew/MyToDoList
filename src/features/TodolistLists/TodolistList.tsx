@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 
 import { Grid, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { TaskType } from '../../api/types';
 import { PATH, TaskStatuses } from '../../enums';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { addTaskTC, removeTaskTC, Todolist, updateTaskTC } from './Todolist';
 import { ActionTodolist } from './TodolistAction';
@@ -17,19 +15,19 @@ import {
   fetchTodolistsTC,
   removeTodolistTC,
 } from './TodolistThunk';
-import { FilterValuesType, TodolistDomainType } from './types';
+import { FilterValuesType } from './types';
 
 import { AddItemForm } from 'components/AddItemForm/AddItemForm';
 import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
 import { getTaskSelector } from 'selectors/taskSelectors/taskSelectors';
 import { getTodoLists } from 'selectors/todolistSelectors/todolistSelectors';
 
-export const TodolistList = (): ReturnComponentType => {
+export const TodolistList: FC = () => {
   const dispatch = useDispatch();
 
-  const todoLists: TodolistDomainType[] = useSelector(getTodoLists);
-  const tasks: TasksStateType = useSelector(getTaskSelector);
-  const isLoggedIn: boolean = useSelector(getIsLoggedInSelector);
+  const todoLists = useSelector(getTodoLists);
+  const tasks = useSelector(getTaskSelector);
+  const isLoggedIn = useSelector(getIsLoggedInSelector);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -124,10 +122,4 @@ export const TodolistList = (): ReturnComponentType => {
       </Grid>
     </>
   );
-};
-
-// Types
-
-export type TasksStateType = {
-  [key: string]: Array<TaskType>;
 };
