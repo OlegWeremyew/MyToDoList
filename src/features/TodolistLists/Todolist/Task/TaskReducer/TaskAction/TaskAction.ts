@@ -1,6 +1,6 @@
-import { TaskType } from '../../../../../../api/types';
-import { taskEnumReducer } from '../constants';
-import { UpdateDomainTaskModelType } from '../types';
+import { TaskType } from 'api/types';
+import { taskEnumReducer } from 'features/TodolistLists/Todolist/Task/TaskReducer/constants';
+import { UpdateDomainTaskModelType } from 'features/TodolistLists/Todolist/Task/TaskReducer/types';
 
 export const taskAction = {
   removeTaskAC(taskId: string, todolistId: string) {

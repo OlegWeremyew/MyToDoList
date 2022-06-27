@@ -1,8 +1,8 @@
-import { TodolistType } from '../../../../../../api/types';
-import { todolistEnumReducer } from '../../../../constants';
-import { TasksStateType } from '../../../../types';
-import { taskEnumReducer } from '../constants';
-import { ActionsTaskAllType } from '../types';
+import { TodolistType } from 'api/types';
+import { todolistEnumReducer } from 'features/TodolistLists/constants';
+import { taskEnumReducer } from 'features/TodolistLists/Todolist/Task/TaskReducer/constants';
+import { ActionsTaskAllType } from 'features/TodolistLists/Todolist/Task/TaskReducer/types';
+import { TasksStateType } from 'features/TodolistLists/types';
 
 const initialTaskState: TasksStateType = {};
 

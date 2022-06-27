@@ -3,13 +3,12 @@ import React, { ChangeEvent, FC, memo, useCallback } from 'react';
 import { Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
-import { EMPTY_STRING } from '../../../../constants';
-import { TaskStatuses } from '../../../../enums';
-
 import style from './Task.module.css';
 import { TaskPropsType } from './types';
 
 import { EditableSpan } from 'components/EditableSpan/EditableSpan';
+import { EMPTY_STRING } from 'constants/variables';
+import { TaskStatuses } from 'enums';
 
 export const Task: FC<TaskPropsType> = memo(
   ({ task, removeTask, todolistId, changeTaskStatus, changeTaskTitle }) => {

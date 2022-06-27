@@ -1,7 +1,7 @@
-import { TodolistType } from '../../../api/types';
-import { RequestStatusType } from '../../../App/AppReducer/types';
-import { todolistEnumReducer } from '../constants';
-import { FilterValuesType } from '../types';
+import { TodolistType } from 'api/types';
+import { RequestStatusType } from 'App/AppReducer/types';
+import { todolistEnumReducer } from 'features/TodolistLists/constants';
+import { FilterValuesType } from 'features/TodolistLists/types';
 
 export const ActionTodolist = {
   removeTodolistAC(todolistId: string) {

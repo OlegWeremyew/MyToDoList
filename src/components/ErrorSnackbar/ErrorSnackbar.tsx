@@ -5,8 +5,7 @@ import { AlertProps, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/core/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppAction } from '../../App';
-
+import { AppAction } from 'App';
 import { getError } from 'selectors/appSelectors/appSelectors';
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (

@@ -1,10 +1,6 @@
-import { EMPTY_STRING, FIRST_ELEMENT_IN_ARRAY } from '../../../constants';
-import { tasksReducer } from '../Todolist';
-import { ActionTodolist } from '../TodolistAction';
-import { TasksStateType } from '../TodolistList';
-import { TodolistDomainType } from '../types';
-
-import { todolistsReducer } from './todolistsReducer';
+import { EMPTY_STRING, FIRST_ELEMENT_IN_ARRAY } from 'constants/variables';
+import { ActionTodolist, tasksReducer, todoListsReducer } from 'features/TodolistLists';
+import { TasksStateType, TodolistDomainType } from 'features/TodolistLists/types';
 
 test('ids should be equals', () => {
   const startTasksState: TasksStateType = {};
@@ -18,7 +14,7 @@ test('ids should be equals', () => {
   });
 
   const endTasksState = tasksReducer(startTasksState, action);
-  const endToDoListsState = todolistsReducer(startToDoListsState, action);
+  const endToDoListsState = todoListsReducer(startToDoListsState, action);
 
   const keys = Object.keys(endTasksState);
   const idFromTasks = keys[FIRST_ELEMENT_IN_ARRAY];

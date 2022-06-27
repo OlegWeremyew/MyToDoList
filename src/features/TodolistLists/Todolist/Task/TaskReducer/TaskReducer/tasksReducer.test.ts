@@ -3,7 +3,7 @@ import {
   FIRST_ELEMENT_IN_ARRAY,
   SECOND_ELEMENT_IN_ARRAY,
   ZERO_VALUE,
-} from '../../../../../../constants';
+} from 'constants/variables';
 import { TaskPriorities, TaskStatuses } from '../../../../../../enums';
 import { ActionTodolist } from '../../../../TodolistAction';
 import { TasksStateType } from '../../../../TodolistList';

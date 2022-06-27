@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux';
 
-import { TaskType, TodolistType } from '../../../api/types';
-import { ActionAppTypes, RequestStatusType } from '../../../App/AppReducer/types';
-import { InferActionTypes } from '../../../App/types';
 import { ActionTodolist } from '../TodolistAction';
+
+import { TaskType, TodolistType } from 'api/types';
+import { ActionAppTypes, RequestStatusType } from 'App/AppReducer/types';
+import { InferActionTypes } from 'App/types';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 

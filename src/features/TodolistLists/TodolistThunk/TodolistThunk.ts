@@ -1,8 +1,9 @@
-import { todolistAPI } from '../../../api';
-import { AppAction } from '../../../App';
-import { LoadingStatuses } from '../../enums';
 import { ActionTodolist } from '../TodolistAction';
 import { ThunkDispatchType } from '../types';
+
+import { todolistAPI } from 'api';
+import { AppAction } from 'App';
+import { LoadingStatuses } from 'features/enums';
 
 export const fetchTodolistsTC = () => (dispatch: ThunkDispatchType) => {
   dispatch(AppAction.setAppStatusAC(LoadingStatuses.Loading));

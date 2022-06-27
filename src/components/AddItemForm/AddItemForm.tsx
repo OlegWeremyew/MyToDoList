@@ -3,9 +3,9 @@ import React, { ChangeEvent, FC, KeyboardEvent, memo, useState } from 'react';
 import { IconButton, TextField } from '@material-ui/core';
 import { AddBox } from '@material-ui/icons';
 
-import { EMPTY_STRING } from '../../constants';
-
 import { AddItemFormPropsType } from './types';
+
+import { EMPTY_STRING } from 'constants/variables';
 
 export const AddItemForm: FC<AddItemFormPropsType> = memo(
   ({ addItem, label, disabled = false }) => {

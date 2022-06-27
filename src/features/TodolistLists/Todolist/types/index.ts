@@ -1,6 +1,6 @@
-import { TaskType } from '../../../../api/types';
-import { TaskStatuses } from '../../../../enums';
-import { FilterValuesType, TodolistDomainType } from '../../types';
+import { TaskType } from 'api/types';
+import { TaskStatuses } from 'enums/index';
+import { FilterValuesType, TodolistDomainType } from 'features/TodolistLists/types';
 
 export type PropsType = {
   todolist: TodolistDomainType;

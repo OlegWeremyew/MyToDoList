@@ -1,12 +1,15 @@
-import { todolistAPI } from '../../../../../../api';
-import { UpdateTaskModelType } from '../../../../../../api/types';
-import { AppAction } from '../../../../../../App';
-import { AppRootStateType } from '../../../../../../App/types';
-import { ResultCodes } from '../../../../../../enums';
-import { handleServerAppError, handleServerNetworkError } from '../../../../../../utils';
-import { LoadingStatuses } from '../../../../../enums';
-import { taskAction } from '../TaskAction';
-import { ThunkDispatchType, UpdateDomainTaskModelType } from '../types';
+import { todolistAPI } from 'api/todolistAPI';
+import { UpdateTaskModelType } from 'api/types';
+import { AppAction } from 'App/AppReducer';
+import { AppRootStateType } from 'App/types';
+import { ResultCodes } from 'enums/index';
+import { LoadingStatuses } from 'features/enums';
+import { taskAction } from 'features/TodolistLists';
+import {
+  ThunkDispatchType,
+  UpdateDomainTaskModelType,
+} from 'features/TodolistLists/Todolist/Task/TaskReducer/types';
+import { handleServerAppError, handleServerNetworkError } from 'utils/errorUtils';
 
 export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType) => {
   dispatch(AppAction.setAppStatusAC(LoadingStatuses.Loading));

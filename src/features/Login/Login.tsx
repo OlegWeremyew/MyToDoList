@@ -12,14 +12,13 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { LoginParamsType } from '../../api/types';
-import { EMPTY_STRING, MIN_PASSWORD_LENGTH } from '../../constants';
-import { ErrorValues, PATH } from '../../enums';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
-
 import { loginTC } from './loginThunk';
 
+import { LoginParamsType } from 'api/types';
+import { EMPTY_STRING, MIN_PASSWORD_LENGTH } from 'constants/variables';
+import { ErrorValues, PATH } from 'enums';
 import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Login: React.FC = (): ReturnComponentType => {
   const isLoggedIn: boolean = useSelector(getIsLoggedInSelector);

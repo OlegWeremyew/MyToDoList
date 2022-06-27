@@ -4,13 +4,12 @@ import { CircularProgress, Container } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ButtonAppBar, ErrorSnackbar, PageNotFound } from '../components';
-import { PATH } from '../enums';
-import { Login, TodolistList } from '../features';
-
 import style from './App.module.scss';
-import { initializeAppTC } from './AppReducer';
 
+import { initializeAppTC } from 'App/AppReducer';
+import { ButtonAppBar, ErrorSnackbar, PageNotFound } from 'components';
+import { PATH } from 'enums';
+import { Login, TodolistList } from 'features';
 import { getIsInitializedSelector } from 'selectors/appSelectors/appSelectors';
 
 export const App: FC = () => {

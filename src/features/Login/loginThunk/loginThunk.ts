@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux';
 
-import { authAPI } from '../../../api';
-import { LoginParamsType } from '../../../api/types';
-import { AppAction } from '../../../App';
-import { ResultCodes } from '../../../enums';
-import { handleServerAppError, handleServerNetworkError } from '../../../utils';
-import { LoadingStatuses } from '../../enums';
-import { authAction } from '../loginActions';
-import { AuthReducerActionsType } from '../types';
+import { authAPI } from 'api';
+import { LoginParamsType } from 'api/types';
+import { AppAction } from 'App';
+import { ResultCodes } from 'enums/index';
+import { LoadingStatuses } from 'features/enums';
+import { authAction } from 'features/Login';
+import { AuthReducerActionsType } from 'features/Login/types';
+import { handleServerAppError, handleServerNetworkError } from 'utils';
 
 export const loginTC =
   (data: LoginParamsType) => (dispatch: Dispatch<AuthReducerActionsType>) => {

@@ -1,5 +1,5 @@
-import { TaskType } from '../../../../../api/types';
-import { TaskStatuses } from '../../../../../enums';
+import { TaskType } from 'api/types';
+import { TaskStatuses } from 'enums/index';
 
 export type TaskPropsType = {
   todolistId: string;

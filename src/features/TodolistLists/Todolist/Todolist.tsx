@@ -4,16 +4,15 @@ import { Button, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 
-import { TaskStatuses } from '../../../enums';
-import { LoadingStatuses } from '../../enums';
-import { FilterValuesType } from '../types';
-
 import { fetchTasksTC, Task } from './Task';
 import style from './TodolistList.module.css';
 import { PropsType } from './types';
 
 import { AddItemForm } from 'components/AddItemForm/AddItemForm';
 import { EditableSpan } from 'components/EditableSpan/EditableSpan';
+import { TaskStatuses } from 'enums/index';
+import { LoadingStatuses } from 'features/enums';
+import { FilterValuesType } from 'features/TodolistLists/types';
 
 export const Todolist: FC<PropsType> = memo(
   ({
@@ -102,21 +101,21 @@ export const Todolist: FC<PropsType> = memo(
         </div>
         <div style={{ paddingTop: '10px' }}>
           <Button
-            variant={todolist.filter === 'all' ? 'outlined' : 'text'}
+            variant={todolist.filter === 'all' ? 'contained' : 'text'}
             onClick={() => onClickHandler('all')}
             color="success"
           >
             All
           </Button>
           <Button
-            variant={todolist.filter === 'active' ? 'outlined' : 'text'}
+            variant={todolist.filter === 'active' ? 'contained' : 'text'}
             onClick={() => onClickHandler('active')}
             color="primary"
           >
             Active
           </Button>
           <Button
-            variant={todolist.filter === 'completed' ? 'outlined' : 'text'}
+            variant={todolist.filter === 'completed' ? 'contained' : 'text'}
             onClick={() => onClickHandler('completed')}
             color="secondary"
           >

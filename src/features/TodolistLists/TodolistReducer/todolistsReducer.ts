@@ -1,6 +1,6 @@
-import { LoadingStatuses } from '../../enums';
-import { todolistEnumReducer } from '../constants';
-import { ActionTodolistTypes, TodolistDomainType } from '../types';
+import { LoadingStatuses } from 'features/enums';
+import { todolistEnumReducer } from 'features/TodolistLists/constants';
+import { ActionTodolistTypes, TodolistDomainType } from 'features/TodolistLists/types';
 
 const initialTodoListState: Array<TodolistDomainType> = [];
 

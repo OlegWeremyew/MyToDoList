@@ -4,8 +4,6 @@ import { Grid, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { PATH, TaskStatuses } from '../../enums';
-
 import { addTaskTC, removeTaskTC, Todolist, updateTaskTC } from './Todolist';
 import { ActionTodolist } from './TodolistAction';
 import style from './TodolistList.module.scss';
@@ -18,6 +16,7 @@ import {
 import { FilterValuesType } from './types';
 
 import { AddItemForm } from 'components/AddItemForm/AddItemForm';
+import { PATH, TaskStatuses } from 'enums';
 import { getIsLoggedInSelector } from 'selectors/authSelectors/authSelectors';
 import { getTaskSelector } from 'selectors/taskSelectors/taskSelectors';
 import { getTodoLists } from 'selectors/todolistSelectors/todolistSelectors';

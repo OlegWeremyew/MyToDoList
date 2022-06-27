@@ -1,7 +1,7 @@
-import { ActionAppTypes } from '../../../App/AppReducer/types';
-import { InferActionTypes } from '../../../App/types';
-import { authAction } from '../loginActions';
-import { initialAuthState } from '../loginReducer/authReducer';
+import { ActionAppTypes } from 'App/AppReducer/types';
+import { InferActionTypes } from 'App/types';
+import { authAction } from 'features/Login';
+import { initialAuthState } from 'features/Login/loginReducer/authReducer';
 
 export type InitialAuthStateType = typeof initialAuthState;
 
